@@ -7,3 +7,5 @@ iphone/iphone.xcodeproj/project.xcworkspace/xcuserdata/ammeep.xcuserdatad/UserIn
 .DS_Store
 
 iphone/iphone/iphone-Info.plist
+
+*.xcuserstate
