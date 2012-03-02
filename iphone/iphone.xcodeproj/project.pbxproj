@@ -36,6 +36,7 @@
 		EB16F77F150099D900886595 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB16F77E150099D900886595 /* MainViewController.m */; };
 		EB16F781150099D900886595 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB16F780150099D900886595 /* MainViewController.xib */; };
 		EB16F78A15009B9800886595 /* www in Resources */ = {isa = PBXBuildFile; fileRef = EB16F78915009B9800886595 /* www */; };
+		ED9FB6151500AF0600C71314 /* sharestory.html in Resources */ = {isa = PBXBuildFile; fileRef = ED9FB6141500AF0600C71314 /* sharestory.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		EB16F780150099D900886595 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		EB16F783150099D900886595 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		EB16F78915009B9800886595 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		ED9FB6141500AF0600C71314 /* sharestory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = sharestory.html; path = www/views/sharestory.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		EB16F729150099D600886595 = {
 			isa = PBXGroup;
 			children = (
+				ED9FB6141500AF0600C71314 /* sharestory.html */,
 				EB16F78915009B9800886595 /* www */,
 				EB16F755150099D800886595 /* iphone */,
 				EB16F73A150099D800886595 /* Frameworks */,
@@ -304,6 +307,7 @@
 				EB16F778150099D900886595 /* PhoneGap.plist in Resources */,
 				EB16F781150099D900886595 /* MainViewController.xib in Resources */,
 				EB16F78A15009B9800886595 /* www in Resources */,
+				ED9FB6151500AF0600C71314 /* sharestory.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +495,7 @@
 				EB16F788150099D900886595 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
