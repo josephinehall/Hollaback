@@ -1,9 +1,12 @@
-var applicationViewModel ={
-	
-	function showSplashScreen(){ 
-		alert("showing splash screen");
-	}
-	
-	
-	
-}
+var yourNamespace = {
+
+    foo: function() {
+    	alert("foo");
+    },
+
+    bar: function() {
+    }
+};
+
+
+
