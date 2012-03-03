@@ -18,6 +18,7 @@ var viewModel = {
 			password = window.localStorage.getItem(passwordStorageKey);
 			email = window.localStorage.getItem(emailStorageKey);
 			location = window.localStorage.getItem(locationStorageKey);
+            
 		};
 		
 		this.save = function(){
@@ -29,9 +30,11 @@ var viewModel = {
             
 		};
 		
-		this.hasUserData = function(){
+		this.isSignedIn = function(){
+            this.read()
 			alert("Checking if we have user data");
-			if(userName && password && emailAddress && location){
+            alert(window.localStorage.getItem(userNameStorageKey));
+			if(userName){
 				return true;
 			}else{
 				return false;
@@ -43,8 +46,20 @@ var viewModel = {
             window.localStorage.removeItem(passwordStorageKey);
             window.localStorage.removeItem(emailStorageKey);
             window.localStorage.removeItem(locationStorageKey);
-            self.read();
+            this.read();
         };
+        
+        this.signUp = function(){
+            var signUpUrl = "http://testbackend.ihollaback.com/signup/";
+            $.ajax({
+                   type: 'POST',
+                   url: signUpUrl,
+                   data: data,
+                   success: function(data){alert("hello" + data);},
+                   error: function(data){alert("pooo" + data);},
+                   dataType: dataType
+                   });
+        }
         
         
 		
@@ -64,8 +79,10 @@ var viewModel = {
 		
 		self.signin = function() {
 			self.model.save();
+            
+            alert(self.model.isSignedIn());
             //if all is well...
-            $.mobile.changePage("views/menu.html");
+            //$.mobile.changePage("views/menu.html");
             
         };
       
