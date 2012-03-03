@@ -1,8 +1,8 @@
-var model = {
+var viewModel = {
 
     userInformation: function() {
     	
-    	var userName;
+        self.userName = ko.observable();
     	var password;
     	var emailAddress;
     	var location;
@@ -11,24 +11,17 @@ var model = {
         var passwordStorageKey = "passwordKey";
         var emailStorageKey = "emailKey";
         var locationStorageKey = "locationKey";
-        
-    	this.getUserName = function(){
-    		return userName;
-    	};
-    	
-    	this.setUserName = function(newUserName){
-    		alert(newUserName);
-    		userName = newUserName;
-    	}
-    	
+          	
     	this.read = function(){
+        
 			userName = window.localStorage.getItem(userNameStorageKey);
 			password = window.localStorage.getItem(passwordStorageKey);
 			email = window.localStorage.getItem(emailStorageKey);
-			location = window.localStorage.getItem(locationStorageKey);;
+			location = window.localStorage.getItem(locationStorageKey);
 		};
 		
 		this.save = function(){
+            alert(self.userName);
             window.localStorage.setItem(userNameStorageKey, userName);
             window.localStorage.setItem(passwordStorageKey, password);
             window.localStorage.setItem(emailStorageKey, emailAddress);
@@ -50,6 +43,7 @@ var model = {
             window.localStorage.removeItem(passwordStorageKey);
             window.localStorage.removeItem(emailStorageKey);
             window.localStorage.removeItem(locationStorageKey);
+            self.read();
         };
         
         
@@ -59,22 +53,26 @@ var model = {
     userLocation: function() {
     
     	this.getAvalibleLocations = function(){};
-    }
-};
-
-var viewModel ={
+    },
 
 	loginViewModel: function(userModel){
 	
 		self.model = userModel;
-		self.userName = ko.observable(userModel.getUserName());
+		self.userName = userModel.userName;
+        self.password = ko.observable(userModel.password);
+        self.emailAddress = ko.observable(userModel.emailAddress);
 		
-		self.submitUserInformation = function() {
-			alert("validate before submit");
-			self.model.setUserName(self.userName());
+		self.signin = function() {
 			self.model.save();
+            //if all is well...
+            $.mobile.changePage("views/menu.html");
+            
         };
-
+      
+        self.signout = function() {
+            alert("signout");
+            self.model.removeCredentials();
+        };
 		
 	},
 	
