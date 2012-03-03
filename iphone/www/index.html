@@ -17,11 +17,10 @@
 	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
           
     <script src="scripts/jquery-1.6.4.js" type="text/javascript"></script>
-    <script src="scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script>        
+    <script src="scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
+    <script src="scripts/knockout.debug.js" type="text/javascript"></script>       
     <script src="main.js" charset="utf-8" type="text/javascript"></script>
     <script src="viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
-
-
         
   </head>
     
@@ -37,9 +36,12 @@
               
               <div data-role="content">	
                   <ul data-role="listview" data-inset="true">
-                      <li><a href="views/menu.html" data-transition="fade">Main Menu</a></li>
+                      <li><a href="views/menu.html" rel="external" data-transition="fade">Main Menu</a></li>
                   </ul>	
                   
+                 <lable>User Name </lable> 
+                 <input data-bind='value: userName' />
+                 <button data-bind='click: submitUserInformation'>Submit</button>
               </div><!-- /content -->
               
 
