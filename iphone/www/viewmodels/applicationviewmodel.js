@@ -1,8 +1,9 @@
 var viewModel = {
 
-    userInformation: function() {
+    userInformation: function(configuration) {
     	
         self.userName = ko.observable();
+        self.urlConfig = configuration;
     	var password;
     	var emailAddress;
     	var location;
@@ -12,8 +13,7 @@ var viewModel = {
         var emailStorageKey = "emailKey";
         var locationStorageKey = "locationKey";
           	
-    	this.read = function(){
-        
+    	this.read = function(){      
 			userName = window.localStorage.getItem(userNameStorageKey);
 			password = window.localStorage.getItem(passwordStorageKey);
 			email = window.localStorage.getItem(emailStorageKey);
@@ -22,7 +22,6 @@ var viewModel = {
 		};
 		
 		this.save = function(){
-            alert(self.userName);
             window.localStorage.setItem(userNameStorageKey, userName);
             window.localStorage.setItem(passwordStorageKey, password);
             window.localStorage.setItem(emailStorageKey, emailAddress);
@@ -32,8 +31,6 @@ var viewModel = {
 		
 		this.isSignedIn = function(){
             this.read()
-			alert("Checking if we have user data");
-            alert(window.localStorage.getItem(userNameStorageKey));
 			if(userName){
 				return true;
 			}else{
@@ -49,17 +46,22 @@ var viewModel = {
             this.read();
         };
         
-        this.signUp = function(){
-            var signUpUrl = "http://testbackend.ihollaback.com/signup/";
-            $.ajax({
-                   type: 'POST',
-                   url: signUpUrl,
-                   data: data,
-                   success: function(data){alert("hello" + data);},
-                   error: function(data){alert("pooo" + data);},
-                   dataType: dataType
-                   });
-        }
+        this.signUp = function(callback){
+            var signuprequest = "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n<hollaback_signup>\n<username>amytest</username>\n<password>password</password>\n<email>test@test.com</email>\n</hollaback_signup>\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
+      
+  
+			 var signUpUrl = "testbackend.ihollaback.com/signup/";
+			 $.ajax({
+			         type: 'POST',
+			         url: urlConfig.getSignupUrl(),
+			         data:signuprequest,
+			         dataType: 'xml text',
+			         contentType:urlConfig.getSignupContentType(),
+			         success: function(data){alert("hello" + data);callback("winning");},
+			         error: function(xhr, status, error){callback("There was an error");},
+			         });
+			
+			    };
         
         
 		
@@ -74,13 +76,17 @@ var viewModel = {
 	
 		self.model = userModel;
 		self.userName = userModel.userName;
+		self.statusText;
         self.password = ko.observable(userModel.password);
         self.emailAddress = ko.observable(userModel.emailAddress);
+        self.responseText = ko.observable();
 		
 		self.signin = function() {
-			self.model.save();
-            
-            alert(self.model.isSignedIn());
+			//self.model.save();
+			self.responseText ="Signing In";
+
+           // self.model.signUp(function(responseMessage){alert(responseMessage);self.responseText = responseMessage;});
+            //alert(self.model.isSignedIn());
             //if all is well...
             //$.mobile.changePage("views/menu.html");
             
