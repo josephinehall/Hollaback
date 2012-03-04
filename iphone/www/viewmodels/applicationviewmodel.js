@@ -7,6 +7,10 @@ var viewModel = {
     	var password;
     	var emailAddress;
     	var location;
+    	var availableLocations;
+    	var selectedLocation;
+    	//var locationSelected;
+    	
     	
         var userNameStorageKey = "userNameKey";
         var passwordStorageKey = "passwordKey";
@@ -18,7 +22,7 @@ var viewModel = {
 			password = window.localStorage.getItem(passwordStorageKey);
 			email = window.localStorage.getItem(emailStorageKey);
 			location = window.localStorage.getItem(locationStorageKey);
-            
+
 		};
 		
 		this.save = function(){
@@ -26,6 +30,7 @@ var viewModel = {
             window.localStorage.setItem(passwordStorageKey, password);
             window.localStorage.setItem(emailStorageKey, emailAddress);
             window.localStorage.setItem(locationStorageKey, location);
+            //window.localStorage.setItem(locationSelectedStorageKey, locationSelected);
             
 		};
 		
@@ -34,8 +39,11 @@ var viewModel = {
 			if(userName){
 				return true;
 			}else{
+				alert("No user data");
 				return false;
+				
 			}
+			
 		};
         
         this.removeCredentials = function(){
@@ -67,9 +75,30 @@ var viewModel = {
 		
     },
 
+
+	//Sets up the location options
     userLocation: function() {
+    	//create a dummy array for the moment
+    	self.availableLocations = ko.observableArray([
+            new viewModel.location("UK", 65000000),
+            new viewModel.location("USA", 320000000),
+            new viewModel.location("Sweden", 29000000)
+        ]);
+        self.selectedLocation = ko.observable(); // Nothing selected by default
+		    
+/*
+    	this.getAvalibleLocations = function(){
+    		alert("Got locations");
+    		//here is where you want to use jquery to get the json from the server and store it internally to this obj
+    		self.locations ="hi i am the result";
+    	};
+*/
+    },
     
-    	this.getAvalibleLocations = function(){};
+    //Location Object
+    location : function(name, population) {
+        this.locationName = name;
+        this.locationPopulation = population;    
     },
 
 	loginViewModel: function(userModel){
@@ -99,6 +128,5 @@ var viewModel = {
 		
 	},
 	
-
 };
 
