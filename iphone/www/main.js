@@ -6,23 +6,25 @@ function onBodyLoad()
 
 //document ready wins
 $(document).ready(function(){
-	var userInformation = new viewModel.userInformation();
-	userInformation.read();
-//	userInformation.hasUserData();
-//	
-//	
-	ko.applyBindings(new viewModel.loginViewModel(userInformation));
-
+	applyBindings();
 });
-
 
 // PhoneGap is ready seconds
 function onDeviceReady() {
+	applyBindings();
+}
 
-   	var userInformation = new viewModel.userInformation();
+function applyBindings(){
+	var userInformation = new viewModel.userInformation();
 	userInformation.read();
 	userInformation.hasUserData();
+	//var userLocation = new viewModel.userLocation();
     
+    ko.applyBindings(new viewModel.userLocation);
 	ko.applyBindings(new viewModel.loginViewModel(userInformation));
+	//ko.applyBindings(new viewModel.setLocationViewModel(userLocation));
+	
+	//ko.applyBindings (new viewModel.availableCountries);
 }
+
 
