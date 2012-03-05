@@ -11,7 +11,8 @@ $(document).ready(function(){
 	var urlConfig = new config.urlConfiguration();
 
 	var userInformation = new viewModel.userInformation(urlConfig);
-	userInformation.read();
+	//userInformation.read();
+
 	ko.validation.rules.pattern.message = 'Invalid.';
     
 
@@ -23,14 +24,22 @@ $(document).ready(function(){
 		messageTemplate: null
 	});
 
-	
+	//ko.applyBindings(new viewModel.userLocation);
 	ko.applyBindings(new viewModel.loginViewModel(userInformation));
-
 
 });
 
-
 // PhoneGap is ready seconds
 function onDeviceReady() {
+
+  	var urlConfig = new config.urlConfiguration();
+
+	var userInformation = new viewModel.userInformation(config);
+	userInformation.read();
+	userInformation.hasUserData();
+	ko.applyBindings(new viewModel.userLocation);
+	ko.applyBindings(new viewModel.loginViewModel(userInformation));
+
 };
+
 

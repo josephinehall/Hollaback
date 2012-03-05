@@ -1,5 +1,5 @@
 var viewModel = {
-	
+
   	userInformation: function(configuration) {
     	var self = this; 	
     	var urlConfig = configuration;                 	
@@ -13,6 +13,8 @@ var viewModel = {
     	self.password;
     	self.emailAddress;
     	self.userLocation;
+    	self.availableLocations;
+    	self.selectedLocation;
     	self.hasAuthenticated;
 
 		self.read = function(){      			  
@@ -22,7 +24,7 @@ var viewModel = {
 			userLocation = window.localStorage.getItem(locationStorageKey);
 			hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
 		};
-		
+    
 		self.save = function(){
             window.localStorage.setItem(userNameStorageKey, userName);
             window.localStorage.setItem(passwordStorageKey, password);
@@ -33,8 +35,10 @@ var viewModel = {
 		
 		self.isSignedIn = function(){
             return self.hasAuthenticated;
+            window.localStorage.setItem(locationStorageKey, location);
+            
 		};
-        
+		        
         self.removeCredentials = function(){
             window.localStorage.removeItem(userNameStorageKey);
             window.localStorage.removeItem(passwordStorageKey);
@@ -90,8 +94,20 @@ var viewModel = {
 		
     }, //  -- end userInformation
 
-    userLocation: function() {    
-    	this.getAvalibleLocations = function(){};
+
+    userLocation: function() {
+    	self.availableLocations = ko.observableArray([
+            new viewModel.location("UK", 65000000),
+            new viewModel.location("USA", 320000000),
+            new viewModel.location("Sweden", 29000000)
+        ]);
+        self.selectedLocation = ko.observable(); // Nothing selected by default
+		    
+    },
+    
+    location : function(name, population) {
+        this.locationName = name;
+        this.locationPopulation = population;    
     },
 
 	loginViewModel: function(userModel){
@@ -106,7 +122,6 @@ var viewModel = {
 		self.signin = function() {		
 			var isValid = validateLoginCredentials();	
 			if(isValid){
-				//self.model.setUserInformation(self.userName,self.password, self.emailAddress);
 				self.responseText("Signing In");
 		        self.model.signUp(self.userName,self.password, self.emailAddress,function(message){userSignedIn(message)});
             }
@@ -139,3 +154,4 @@ var viewModel = {
 	},
 
 };
+
