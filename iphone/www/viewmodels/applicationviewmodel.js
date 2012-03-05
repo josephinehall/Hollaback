@@ -1,52 +1,51 @@
 var viewModel = {
-
-    userInformation: function(configuration) {
-    	
-        self.userName = ko.observable();
-        self.urlConfig = configuration;
-    	var password;
-    	var emailAddress;
-    	var location;
-    	
-        var userNameStorageKey = "userNameKey";
+	
+  	userInformation: function(configuration) {
+    	var self = this; 	
+    	var urlConfig = configuration;                 	
+    	var userNameStorageKey = "userNameKey";
         var passwordStorageKey = "passwordKey";
         var emailStorageKey = "emailKey";
         var locationStorageKey = "locationKey";
-          	
-    	this.read = function(){      
-			userName = window.localStorage.getItem(userNameStorageKey);
-			password = window.localStorage.getItem(passwordStorageKey);
-			email = window.localStorage.getItem(emailStorageKey);
-			location = window.localStorage.getItem(locationStorageKey);
-            
+        var hasAuthenticatedStorageKey = "isAuthenticatedKey";
+        
+        self.userName;
+    	self.password;
+    	self.emailAddress;
+    	self.userLocation;
+    	self.hasAuthenticated;
+
+		self.read = function(){      			  
+			userName = window.localStorage.getItem(userNameStorageKey);			
+			password = window.localStorage.getItem(passwordStorageKey);			
+			emailAddress = window.localStorage.getItem(emailStorageKey);		
+			userLocation = window.localStorage.getItem(locationStorageKey);
+			hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
 		};
 		
-		this.save = function(){
+		self.save = function(){
             window.localStorage.setItem(userNameStorageKey, userName);
             window.localStorage.setItem(passwordStorageKey, password);
             window.localStorage.setItem(emailStorageKey, emailAddress);
-            window.localStorage.setItem(locationStorageKey, location);
-            
+            window.localStorage.setItem(locationStorageKey, location); 
+            window.localStorage.setItem(hasAuthenticatedStorageKey,hasAuthenticated)          
 		};
 		
-		this.isSignedIn = function(){
-            this.read()
-			if(userName){
-				return true;
-			}else{
-				return false;
-			}
+		self.isSignedIn = function(){
+            return self.hasAuthenticated;
 		};
         
-        this.removeCredentials = function(){
+        self.removeCredentials = function(){
             window.localStorage.removeItem(userNameStorageKey);
             window.localStorage.removeItem(passwordStorageKey);
             window.localStorage.removeItem(emailStorageKey);
-            window.localStorage.removeItem(locationStorageKey);
-            this.read();
+            window.localStorage.removeItem(locationStorageKey);           
+            window.localStorage.removeItem(hasAuthenticatedStorageKey);
+            self.read();
         };
         
-        this.signUp = function(callback){
+        self.signUp = function(userNameToSet,passwordToSet,emailToSet,callback){
+        
             var signuprequest = "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n<hollaback_signup>\n<username>amytest</username>\n<password>password</password>\n<email>test@test.com</email>\n</hollaback_signup>\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
       
   
@@ -55,50 +54,88 @@ var viewModel = {
 			         type: 'POST',
 			         url: urlConfig.getSignupUrl(),
 			         data:signuprequest,
-			         dataType: 'xml text',
+			         dataType: 'xml',
 			         contentType:urlConfig.getSignupContentType(),
-			         success: function(data){alert("hello" + data);callback("winning");},
+			         success: function(response){			         
+							         		 var status = $(response).find('status').text();
+											 var message = $(response).find('msg').text();
+											 if(status == 'error')
+											 {
+											  	callback(message);
+											 }
+											 else
+											 {
+											  	setAuthenticationSuccessful();  	
+							         			setUserInformation(userNameToSet,passwordToSet,emailToSet);
+											  	callback("Sign Up Successful");
+											 }						         		
+			         		},
 			         error: function(xhr, status, error){callback("There was an error");},
 			         });
 			
-			    };
-        
-        
+		};
 		
-    },
+		function setUserInformation (userNameToSet,passwordToSet,emailToSet){
+			self.userName = userNameToSet;
+			self.password = passwordToSet;
+			self.emailAddress = emailToSet;
+			self.save();
+		};
+				    	
+    	function setAuthenticationSuccessful(){
+			 self.hasAuthenticated = true;
+			 window.localStorage.setItem(hasAuthenticatedStorageKey,hasAuthenticated)   
+		};
+		
+		
+    }, //  -- end userInformation
 
-    userLocation: function() {
-    
+    userLocation: function() {    
     	this.getAvalibleLocations = function(){};
     },
 
 	loginViewModel: function(userModel){
-	
+		var self = this; 	
 		self.model = userModel;
-		self.userName = userModel.userName;
-		self.statusText;
-        self.password = ko.observable(userModel.password);
-        self.emailAddress = ko.observable(userModel.emailAddress);
-        self.responseText = ko.observable();
+		self.userName = ko.observable(userModel.userName).extend({ required: true });
+    	self.password = ko.observable(userModel.password).extend({ required: true });
+    	self.emailAddress = ko.observable(userModel.emailAddress).extend({ required: true });
+        self.responseText = ko.observable();    
+    	self.errors = ko.validation.group(self);
 		
-		self.signin = function() {
-			//self.model.save();
-			self.responseText ="Signing In";
-
-           // self.model.signUp(function(responseMessage){alert(responseMessage);self.responseText = responseMessage;});
-            //alert(self.model.isSignedIn());
-            //if all is well...
-            //$.mobile.changePage("views/menu.html");
-            
+		self.signin = function() {		
+			var isValid = validateLoginCredentials();	
+			if(isValid){
+				//self.model.setUserInformation(self.userName,self.password, self.emailAddress);
+				self.responseText("Signing In");
+		        self.model.signUp(self.userName,self.password, self.emailAddress,function(message){userSignedIn(message)});
+            }
         };
       
         self.signout = function() {
-            alert("signout");
             self.model.removeCredentials();
         };
+        
+        function userSignedIn(message){
+        	self.responseText(message);
+        	if(self.model.isSignedIn()){
+        		$.mobile.changePage("views/menu.html");
+        	}
+        }
+       
+        
+        function validateLoginCredentials(){     	
+        	var isValid = modelIsValid();
+        	if (!isValid) {
+            	self.errors.showAllMessages();
+        	}
+			return isValid;
+        }
+        
+        function modelIsValid(){
+        	return self.errors().length == 0;
+        }
 		
 	},
-	
 
 };
-
