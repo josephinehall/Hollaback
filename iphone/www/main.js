@@ -55,7 +55,7 @@ var hollabackApplication ={
 		var self = this; 
 		
 		self.navigateToSignupPage = function(){			
-			$.mobile.changePage("views/login.html");
+			$.mobile.changePage("views/signup.html");
 		};
 		
 		self.navigateToMainMenu = function(){
