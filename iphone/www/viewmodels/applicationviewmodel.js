@@ -34,9 +34,7 @@ var viewModel = {
 		};
 		
 		self.isSignedIn = function(){
-            return self.hasAuthenticated;
-            window.localStorage.setItem(locationStorageKey, location);
-            
+            return self.hasAuthenticated != undefined && self.hasAuthenticated;           
 		};
 		        
         self.removeCredentials = function(){

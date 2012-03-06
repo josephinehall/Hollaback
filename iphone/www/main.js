@@ -7,11 +7,18 @@ function onBodyLoad()
 
 //document ready wins
 $(document).ready(function(){
-		
+	var pageNavigator = new hollabackApplication.pageNavigator();	
 	var urlConfig = new config.urlConfiguration();
-
 	var userInformation = new viewModel.userInformation(urlConfig);
-	//userInformation.read();
+	userInformation.read();
+	if(userInformation.isSignedIn())
+	{
+		pageNavigator.navigateToMainMenu();
+	}
+	else
+	{
+		pageNavigator.navigateToSignupPage();
+	}
 
 	ko.validation.rules.pattern.message = 'Invalid.';
     
@@ -40,6 +47,21 @@ function onDeviceReady() {
 	ko.applyBindings(new viewModel.userLocation);
 	ko.applyBindings(new viewModel.loginViewModel(userInformation));
 
+};
+
+var hollabackApplication ={
+
+	pageNavigator: function(){	
+		var self = this; 
+		
+		self.navigateToSignupPage = function(){			
+			$.mobile.changePage("views/login.html");
+		};
+		
+		self.navigateToMainMenu = function(){
+			$.mobile.changePage("views/menu.html");
+		};		
+	},
 };
 
 
