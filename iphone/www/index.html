@@ -14,46 +14,20 @@
 	-->
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
         
-	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
-          
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
     <script src="scripts/jquery-1.6.4.js" type="text/javascript"></script>
     <script src="scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
-    <script src="scripts/knockout.debug.js" type="text/javascript"></script>       
+    <script src="scripts/knockout.debug.js" type="text/javascript"></script>     
+    <script src="scripts/knockout.validation.js" type="text/javascript"></script>     
     <script src="viewmodels/config.js" charset="utf-8" type="text/javascript"></script>
-    <script src="main.js" type="text/javascript"></script>
+  	<script src="main.js" type="text/javascript"></script>
     <script src="viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
-        
+   
   </head>
     
     
   <body onload="onBodyLoad()">
-
-      <div data-role="page" id="homepage" data-theme="b" data-content-theme="b">
-
-              <div data-role="header">
-                  
-                  <h1>Log in screen</h1>
-              </div><!-- /header -->
-              
-              <div data-role="content">	
-                  
-                 <lable>User Name </lable> 
-                 <input data-bind='value: userName' />
-                  
-                  <lable>Password </lable> 
-                  <input data-bind='value: password' />
-                  
-                  <lable>Email Address</lable> 
-                  <input data-bind='value: emailAddress' />
-                  
-                 <button data-bind='click: signin'>Sign In</button>
-                 <button data-bind='click: signout'>Sign Out</button>
-                 
-                 <p data-bind='text: responseText'></p>
-              </div><!-- /content -->
-              
-
-        </div><!-- /page -->
-	
+     	<h2>Loading</h2>
+     	<p>Do something cool here</p>
   </body>
 </html>

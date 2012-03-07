@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />-->
+	
+        
+    <link rel="stylesheet" href="../content/hollaback.css" />      
+    <link rel="stylesheet" href="../content/jquery.mobile.structure-1.0.1.css"/>
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+        
+	<script src="../phonegap-1.4.1.js" type="text/javascript" charset="utf-8" ></script>         
+    <script src="../scripts/jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
+    <script src="../scripts/knockout.debug.js" type="text/javascript"></script>     
+    <script src="../scripts/knockout.validation.js" type="text/javascript"></script>     
+    <script src="../viewmodels/config.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
+    <script type="text/javascript">
+    
+		var urlConfig = new config.urlConfiguration();
+		var userInformation = new viewModel.userInformation(urlConfig);
+		userInformation.read();
+		
+		$("#locationPage").live("pageinit",function(event){
+ 			ko.applyBindings(new viewModel.userLocation());
+ 			 	
+		});
+		
+		$("#signupPage").live("pageinit",function(event){
+			ko.validation.rules.pattern.message = 'Invalid.';
+			ko.validation.configure({
+				registerExtenders: true,
+				messagesOnModified: true,
+				insertMessages: true,
+				parseInputAttributes: true,
+				messageTemplate: null
+			});
+
+			ko.applyBindings(new viewModel.loginViewModel(userInformation));
+			
+		});
+
+    </script>
+   
+  </head>
+    
+    
+  <body>
+
+		<div data-role="page" id="locationPage" data-theme="a" data-content-theme="a">
+            
+              <div data-role="header">
+                <h1>Location Page</h1>
+            </div><!-- /header -->
+            
+            <div data-role="content">	
+                
+
+			<a href="../index.html" data-direction="reverse" data-role="button" data-theme="b">Back to Home</a>
+                
+                <p>Location:
+<!--                 <select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select></p> -->
+                
+                
+                <ul data-bind="foreach: availableLocations" data-role="listview" data-filter="true" data-inset="true">
+					<li>
+						<a><span data-bind="text: locationName"> </span></a>
+					</li>
+				</ul>
+                
+                <div data-bind="visible: selectedLocation"> <!-- Appears when you select something -->
+    				You have selected: 
+   					<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
+				</div>
+
+				<a href="#signupPage">Next</a>
+
+                
+            </div><!-- /content -->                         
+  
+        </div><!-- /page -->
+
+
+
+
+      <div data-role="page" id="signupPage" data-theme="b" data-content-theme="b">
+
+              <div data-role="header">
+                  <h1>Log in screen</h1>
+              </div><!-- /header -->
+              
+              <div data-role="content">	            	
+              
+									 
+				<lable>User Name </lable> 
+<!--
+						             <input data-bind='value: userName' required />
+						              
+						             <lable>Password </lable> 
+						             <input data-bind='value: password' />
+						              
+						             <lable>Email Address</lable> 
+						             <input data-bind='value: emailAddress' required pattern="@" />
+				
+									  <p data-bind='text: responseText'></p>
+									 <a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+						             <a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
+-->>
+								
+
+          	 </div><!-- /content -->
+              
+
+        </div><!-- /page -->
+	
+  </body>
+</html>
