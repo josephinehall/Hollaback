@@ -26,10 +26,13 @@
 		var urlConfig = new config.urlConfiguration();
 		var userInformation = new viewModel.userInformation(urlConfig);
 		userInformation.read();
-		
-		$("#locationPage").live("pageinit",function(event){
+	
+		$("#locationPage").live("pageinit",function(event){	
+			alert("sdf");
+			$.mobile.loadPage("userInformation");
  			//ko.applyBindings(new viewModel.userLocation()); 	
 		});
+
 		
 		$("#signupPage").live("pageinit",function(event){
 			ko.validation.rules.pattern.message = 'Invalid.';
@@ -52,7 +55,7 @@
     
   <body>
 
-		<div data-role="page" id="locationPage" data-theme="a" data-content-theme="a">
+		<div data-role="page" id="locationPage">
             
             <div data-role="header">
                 <h1>Choose your location</h1>
@@ -61,17 +64,9 @@
             <div data-role="content">	
             
             	<p>Select your local Hollaback to submit your stories</p>
-                <p>Location:
-	            <select>
-	            </select>
-	            </p>
-	            
-	            <div> <!-- Appears when you select something -->
-					You have selected: 
-					<span></span>
-				</div>
+             
 				
-				<a href="#signupPage" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b">Next</a>
+				<a href="#userInformation" data-prefetch>Next</a>
 				
             </div><!-- /content -->                     
   
@@ -80,7 +75,7 @@
 
 
 
-      <div data-role="page" id="signupPage" data-theme="b" data-content-theme="b">
+      <div data-role="page" id="userInformation">
 
               <div data-role="header">
                   <h1>Log in screen</h1>
@@ -104,7 +99,7 @@
           	 </div><!-- /content -->
               
 
-        </div><!-- /page -->
+      </div><!-- /page -->
 	
   </body>
 </html>
