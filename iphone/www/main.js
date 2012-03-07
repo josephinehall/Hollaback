@@ -37,7 +37,7 @@ var hollabackApplication ={
 			}
 			else
 			{
-				pageNavigator.navigateToSignupPage();
+				pageNavigator.navigateToLocationSignUp();
 			}
 		};
 	},
@@ -45,6 +45,10 @@ var hollabackApplication ={
 	pageNavigator: function(){	
 		var self = this; 
 		
+		self.navigateToLocationSignUp = function(){
+			$.mobile.changePage("views/location.html");
+		};
+				
 		self.navigateToSignupPage = function(){			
 			$.mobile.changePage("views/signup.html");
 		};

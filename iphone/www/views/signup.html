@@ -54,64 +54,33 @@
     
   <body>
 
-		<div data-role="page" id="locationPage">
-            
-              <div data-role="header">
-                <h1>Location Page</h1>
-            </div><!-- /header -->
-            
-            <div data-role="content">	
+      <div data-role="page" id="signupPage">
 
-            	<p>Select your local Hollaback to submit your stories</p>
-             
-			            
-                <ul data-bind="foreach: availableLocations" data-role="listview" data-filter="true" data-inset="true">
-					<li>
-						<a><span data-bind="text: locationName"> </span></a>
-					</li>
-				</ul>
-                
-                <div data-bind="visible: selectedLocation"> <!-- Appears when you select something -->
-    				You have selected: 
-   					<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
-				</div>
+          <div data-role="header">
+              <h1>Log in screen</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	            	
+          
+								 
+			<lable>User Name </lable> 
 
-				<a href="#signupPage">Next</a>
-
-                
-            </div><!-- /content -->                 
-        </div><!-- /page -->
-
-
-
-
-      <div data-role="page" id="userInformation">
-
-              <div data-role="header">
-                  <h1>Log in screen</h1>
-              </div><!-- /header -->
+			<input data-bind='value: userName' required />
+					              
+             <lable>Password </lable> 
+             <input data-bind='value: password' />
               
-              <div data-role="content">	            	
-              
-									 
-				<lable>User Name </lable> 
-<!--
-						             <input data-bind='value: userName' required />
-						              
-						             <lable>Password </lable> 
-						             <input data-bind='value: password' />
-						              
-						             <lable>Email Address</lable> 
-						             <input data-bind='value: emailAddress' required pattern="@" />
-				
-									  <p data-bind='text: responseText'></p>
-									 <a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
-						             <a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
--->>
-								
+             <lable>Email Address</lable> 
+             <input data-bind='value: emailAddress' required pattern="@" />
+			
+			 <p data-bind='text: responseText'></p>
+			<a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
 
-          	 </div><!-- /content -->
-              
+							
+
+      	 </div><!-- /content -->
+          
 
       </div><!-- /page -->
 	
