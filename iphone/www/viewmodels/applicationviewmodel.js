@@ -76,6 +76,7 @@ var viewModel = {
 			         });
 			
 		};
+
 		
 		function setUserInformation (userNameToSet,passwordToSet,emailToSet){
 			self.userName = userNameToSet;
@@ -93,14 +94,24 @@ var viewModel = {
     }, //  -- end userInformation
 
 
-    userLocation: function() {
-    	self.availableLocations = ko.observableArray([
-            new viewModel.location("UK", 65000000),
-            new viewModel.location("USA", 320000000),
-            new viewModel.location("Sweden", 29000000)
-        ]);
+
+	//Sets up the location options
+    userLocation: function() {   
+    	var self = this;
+    	self.availableLocations = ko.observableArray();
+    	$.ajax({
+    		url: 'http://testbackend.ihollaback.com/localiPhone/',
+			dataType: 'jsonp',
+			success: function(data){
+				var jsonText = JSON.stringify(data);
+				var array = jQuery.parseJSON(jsonText);
+				for(key in array) {
+					self.availableLocations.push(new viewModel.location(key,0));
+				}
+				}
+    	});
+    	
         self.selectedLocation = ko.observable(); // Nothing selected by default
-		    
     },
     
     location : function(name, population) {
