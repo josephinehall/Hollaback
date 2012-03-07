@@ -60,16 +60,16 @@ var viewModel = {
   
 			 var signUpUrl = "testbackend.ihollaback.com/signup/";
 			 $.ajax({
-			         type: 'POST',
-			         url: urlConfig.getSignupUrl(),
-			         data:signuprequest,
-			         dataType: 'xml text',
-			         contentType:urlConfig.getSignupContentType(),
-			         success: function(data){alert("hello" + data);callback("winning");},
-			         error: function(xhr, status, error){callback("There was an error");},
-			         });
-			
-			    };
+		         type: 'POST',
+		         url: urlConfig.getSignupUrl(),
+		         data:signuprequest,
+		         dataType: 'xml text',
+		         contentType:urlConfig.getSignupContentType(),
+		         success: function(data){alert("hello" + data);callback("winning");},
+		         error: function(xhr, status, error){callback("There was an error");}
+		         });
+		
+		    };
         
         
 		
@@ -77,22 +77,23 @@ var viewModel = {
 
 
 	//Sets up the location options
-    userLocation: function() {
-    	//create a dummy array for the moment
-    	self.availableLocations = ko.observableArray([
-            new viewModel.location("UK", 65000000),
-            new viewModel.location("USA", 320000000),
-            new viewModel.location("Sweden", 29000000)
-        ]);
+    userLocation: function() {   
+    	var self = this;
+    	self.availableLocations = ko.observableArray();
+    	$.ajax({
+    		url: 'http://testbackend.ihollaback.com/localiPhone/',
+			dataType: 'jsonp',
+			success: function(data){
+				var jsonText = JSON.stringify(data);
+				var array = jQuery.parseJSON(jsonText);
+				for(key in array) {
+					self.availableLocations.push(new viewModel.location(key,0));
+				}
+				}
+    	});
+    	
         self.selectedLocation = ko.observable(); // Nothing selected by default
-		    
-/*
-    	this.getAvalibleLocations = function(){
-    		alert("Got locations");
-    		//here is where you want to use jquery to get the json from the server and store it internally to this obj
-    		self.locations ="hi i am the result";
-    	};
-*/
+
     },
     
     //Location Object

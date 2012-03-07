@@ -3,7 +3,7 @@
     <head>
         <title></title>
         
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta charset="utf-8">
             
                 
@@ -57,13 +57,14 @@
             <script src="../scripts/knockout.debug.js" type="text/javascript"></script>       
    			<script src="../main.js" charset="utf-8" type="text/javascript"></script>
     		<script src="../viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
+    		<script src="../viewmodels/config.js" charset="utf-8" type="text/javascript"></script>
             
             </head>
     
     
     <body onload="onBodyLoad()">
         
-        <div data-role="page" id="locationpage" data-theme="a" data-content-theme="a">
+        <div data-role="page" id="locationpage" data-theme="b" data-content-theme="b">
             
             <div data-role="header">
                 <h1>Location Page</h1>
@@ -72,10 +73,17 @@
             <div data-role="content">	
                 
 
-<a href="#homepage" data-direction="reverse" data-role="button" data-theme="b">Back to Home</a>
+			<a href="../index.html" data-direction="reverse" data-role="button" data-theme="b">Back to Home</a>
                 
                 <p>Location:
-                <select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select></p>
+<!--                 <select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select></p> -->
+                
+                
+                <ul data-bind="foreach: availableLocations" data-role="listview" data-filter="true" data-inset="true">
+					<li>
+						<a><span data-bind="text: locationName"> </span></a>
+					</li>
+				</ul>
                 
                 <div data-bind="visible: selectedLocation"> <!-- Appears when you select something -->
     				You have selected: 
