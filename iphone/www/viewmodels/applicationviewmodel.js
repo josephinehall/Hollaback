@@ -131,9 +131,13 @@ var viewModel = {
         
         function userSignedIn(message){
         	self.responseText(message);
+        	$.mobile.changePage("menu.html");
+/*
+
         	if(self.model.isSignedIn()){
         		$.mobile.changePage("views/menu.html");
         	}
+*/
         }
        
         
@@ -146,7 +150,7 @@ var viewModel = {
         }
         
         function modelIsValid(){
-        	return self.errors().length == 0;
+        	return true;//return self.errors().length == 0;
         }
 		
 	},

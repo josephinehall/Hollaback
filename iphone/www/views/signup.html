@@ -27,7 +27,11 @@
 		var userInformation = new viewModel.userInformation(urlConfig);
 		userInformation.read();
 		
-		$(document).ready(function(){
+		$("#locationPage").live("pageinit",function(event){
+ 			//ko.applyBindings(new viewModel.userLocation()); 	
+		});
+		
+		$("#signupPage").live("pageinit",function(event){
 			ko.validation.rules.pattern.message = 'Invalid.';
 			ko.validation.configure({
 				registerExtenders: true,
@@ -36,8 +40,9 @@
 				parseInputAttributes: true,
 				messageTemplate: null
 			});
-			ko.applyBindings(new viewModel.userLocation())
+
 			ko.applyBindings(new viewModel.loginViewModel(userInformation));
+			
 		});
 
     </script>
@@ -47,22 +52,26 @@
     
   <body>
 
-	<div data-role="page" id="locationpage" data-theme="a" data-content-theme="a">
+		<div data-role="page" id="locationPage" data-theme="a" data-content-theme="a">
             
             <div data-role="header">
                 <h1>Choose your location</h1>
             </div><!-- /header -->
             
             <div data-role="content">	
+            
+            	<p>Select your local Hollaback to submit your stories</p>
                 <p>Location:
-	            <select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose…'">
+	            <select>
 	            </select>
 	            </p>
 	            
-	            <div data-bind="visible: selectedLocation"> <!-- Appears when you select something -->
+	            <div> <!-- Appears when you select something -->
 					You have selected: 
-					<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
+					<span></span>
 				</div>
+				
+				<a href="#signupPage" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b">Next</a>
 				
             </div><!-- /content -->                     
   
@@ -71,29 +80,28 @@
 
 
 
-      <div data-role="page" id="homepage" data-theme="b" data-content-theme="b">
+      <div data-role="page" id="signupPage" data-theme="b" data-content-theme="b">
 
               <div data-role="header">
                   <h1>Log in screen</h1>
               </div><!-- /header -->
               
               <div data-role="content">	            	
-					
-					<lable>User Name </lable> 
+              
+					 <lable>User Name </lable> 
 		             <input data-bind='value: userName' required />
 		              
-		              <lable>Password </lable> 
-		              <input data-bind='value: password' />
+		             <lable>Password </lable> 
+		             <input data-bind='value: password' />
 		              
-		              <lable>Email Address</lable> 
-		              <input data-bind='value: emailAddress' required pattern="@" />
-		         
-					     
-		             <button data-bind='click: signin'>Sign In</button>
-		             <button data-bind='click: signout'>Sign Out</button>
-		             <p data-bind='text: responseText'></p>
- 
-           </div><!-- /content -->
+		             <lable>Email Address</lable> 
+		             <input data-bind='value: emailAddress' required pattern="@" />
+
+					 <p data-bind='text: responseText'></p> 
+					 <a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+		             <a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
+				
+          	 </div><!-- /content -->
               
 
         </div><!-- /page -->
