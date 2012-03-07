@@ -26,19 +26,11 @@
 		var urlConfig = new config.urlConfiguration();
 		var userInformation = new viewModel.userInformation(urlConfig);
 		userInformation.read();
-<<<<<<< HEAD
+
 	
-		$("#locationPage").live("pageinit",function(event){	
-			alert("sdf");
-			$.mobile.loadPage("userInformation");
- 			//ko.applyBindings(new viewModel.userLocation()); 	
-=======
-		
 		$("#locationPage").live("pageinit",function(event){
- 			ko.applyBindings(new viewModel.userLocation());
- 			 	
->>>>>>> 56d82fb49ff488a26cef8d504c22331da992daf7
-		});
+ 			ko.applyBindings(new viewModel.userLocation());			 	
+ 		  });
 
 		
 		$("#signupPage").live("pageinit",function(event){
