@@ -15,7 +15,6 @@ $(document).ready(function(){
 
 // PhoneGap is ready seconds
 function onDeviceReady() {
-
 	var boostrapper = new hollabackApplication.bootstrapper();
 	boostrapper.run();
 	
