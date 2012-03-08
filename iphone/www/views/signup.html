@@ -8,6 +8,11 @@
         
     <link rel="stylesheet" href="../content/hollaback.css" />      
     <link rel="stylesheet" href="../content/jquery.mobile.structure-1.0.1.css"/>
+    <style type='text/css'>
+   .error {  color: red; }
+   .error input { border: 1px solid red; }
+	</style>
+    
 	<!-- iPad/iPhone specific css below, add after your main css >
 	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
 	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
@@ -38,7 +43,7 @@
 			ko.validation.configure({
 				registerExtenders: true,
 				messagesOnModified: true,
-				insertMessages: true,
+				insertMessages: false,
 				parseInputAttributes: true,
 				messageTemplate: null
 			});
@@ -57,23 +62,18 @@
       <div data-role="page" id="signupPage">
 
           <div data-role="header">
-              <h1>Log in screen</h1>
+              <h1>Sign Up</h1>
           </div><!-- /header -->
           
           <div data-role="content">	            	
-          
-								 
-			<lable>User Name </lable> 
 
-			<input data-bind='value: userName' required />
-					              
-             <lable>Password </lable> 
-             <input data-bind='value: password' />
-              
-             <lable>Email Address</lable> 
-             <input data-bind='value: emailAddress' required pattern="@" />
+			<input data-bind='value: userName, valueUpdate: "afterkeydown"' required placeholder="User Name" data-bind="css: { error: isValid }"/>					              
+            <input data-bind='value: password' required placeholder="Password"/>
+            <input data-bind='value: password' required placeholder="Confirm Password"/>
+            <input data-bind='value: emailAddress' required pattern="@" placeholder="Email"/>           
+            <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
 			
-			 <p data-bind='text: responseText'></p>
+			<p data-bind='text: responseText'></p>
 			<a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
 			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
 
