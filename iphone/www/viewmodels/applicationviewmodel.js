@@ -48,7 +48,9 @@ var viewModel = {
         
         self.signUp = function(userNameToSet,passwordToSet,emailToSet,callback){
         
-            var signuprequest = "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n<hollaback_signup>\n<username>amytest</username>\n<password>password</password>\n<email>test@test.com</email>\n</hollaback_signup>\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
+        	// note: this xml body is formatted as such because the server is expects this exact format. This 
+        	//shoud be in future a json request over ssl. 
+            var signuprequest = "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n<hollaback_signup>\n<username>"+userNameToSet+"</username>\n<password>"+passwordToSet+"</password>\n<email>"+emailToSet+"</email>\n</hollaback_signup>\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
       
   
 			 var signUpUrl = "testbackend.ihollaback.com/signup/";
@@ -132,7 +134,7 @@ var viewModel = {
 			var isValid = validateLoginCredentials();	
 			if(isValid){
 				self.responseText("Signing In");
-		        self.model.signUp(self.userName,self.password, self.emailAddress,function(message){userSignedIn(message)});
+		        self.model.signUp(self.userName(),self.password(), self.emailAddress(),function(message){userSignedIn(message)});
             }
         };
       
@@ -143,12 +145,11 @@ var viewModel = {
         function userSignedIn(message){
         	self.responseText(message);
         	$.mobile.changePage("menu.html");
-/*
 
         	if(self.model.isSignedIn()){
         		$.mobile.changePage("views/menu.html");
         	}
-*/
+
         }
        
         
@@ -161,7 +162,7 @@ var viewModel = {
         }
         
         function modelIsValid(){
-        	return true;//return self.errors().length == 0;
+        	return self.errors().length == 0;
         }
 		
 	},
