@@ -2,7 +2,7 @@ var viewModel = {
 
   	userInformation: function(configuration) {
     	var self = this; 	
-    	var urlConfig = configuration;                 	
+    	var urlConfig = configuration;                	
     	var userNameStorageKey = "userNameKey";
         var passwordStorageKey = "passwordKey";
         var emailStorageKey = "emailKey";
@@ -12,8 +12,6 @@ var viewModel = {
         self.userName;
     	self.password;
     	self.emailAddress;
-    	self.userLocation;
-    	self.availableLocations;
     	self.selectedLocation;
     	self.hasAuthenticated;
 
@@ -29,9 +27,14 @@ var viewModel = {
             window.localStorage.setItem(userNameStorageKey, userName);
             window.localStorage.setItem(passwordStorageKey, password);
             window.localStorage.setItem(emailStorageKey, emailAddress);
-            window.localStorage.setItem(locationStorageKey, location); 
+            window.localStorage.setItem(locationStorageKey, selectedLocation); 
             window.localStorage.setItem(hasAuthenticatedStorageKey,hasAuthenticated)          
 		};
+		
+		self.setLocation = function(locationName){
+			self.selectedLocation = locationName;
+			window.localStorage.setItem(locationStorageKey, self.selectedLocation);
+		}
 		
 		self.isSignedIn = function(){
             return self.hasAuthenticated != undefined && self.hasAuthenticated;           
@@ -96,8 +99,9 @@ var viewModel = {
 
 
 	//Sets up the location options
-    userLocation: function() {   
+    userLocationViewModel: function(userInformation) {   
     	var self = this;
+    	var userInformation = userInformation;
     	self.availableLocations = ko.observableArray();
     	$.ajax({
     		url: 'http://testbackend.ihollaback.com/localiPhone/',
@@ -106,17 +110,20 @@ var viewModel = {
 				var jsonText = JSON.stringify(data);
 				var array = jQuery.parseJSON(jsonText);
 				for(key in array) {
-					self.availableLocations.push(new viewModel.location(key,0));
+					self.availableLocations.push(new viewModel.location(key));
 				}
 				}
     	});
     	
         self.selectedLocation = ko.observable(); // Nothing selected by default
+        
+        self.setLocation = ko.computed(function(){
+        	userInformation.setLocation(self.selectedLocation());
+        });
     },
     
-    location : function(name, population) {
-        this.locationName = name;
-        this.locationPopulation = population;    
+    location : function(name) {
+        this.locationName = name;    
     },
 
 	loginViewModel: function(userModel){
