@@ -12,18 +12,16 @@
                      
             <script src="../scripts/jquery-1.6.4.js" type="text/javascript"></script>
             <script src="../scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script>
-            <script src="../scripts/knockout.debug.js" type="text/javascript"></script>       
-   		<!--
-	<script src="../main.js" charset="utf-8" type="text/javascript"></script>
-    		    		<script src="../viewmodels/config.js" charset="utf-8" type="text/javascript"></script>
--->
-    	<!--
-	
--->
+            <script src="../scripts/knockout.debug.js" type="text/javascript"></script>     
+            <script src="../viewmodels/config.js" charset="utf-8" type="text/javascript"></script>  
+
    <script src="../viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
    <script type="text/javascript">
 		$(document).ready(function(){
-			ko.applyBindings(new viewModel.userLocation());		
+			var urlConfig = new config.urlConfiguration();
+			var userInformation = new viewModel.userInformation(urlConfig);
+			
+			ko.applyBindings(new viewModel.userLocationViewModel(userInformation));
 		});
    </script>	
     		
@@ -41,13 +39,12 @@
             <div data-role="content">	
 
             
-				<p>Select your local Hollaback to submit your stories</p>
-                      
-                <ul data-bind="foreach: availableLocations" data-role="listview" data-filter="true" data-inset="true">
-					<li>
-						<a><span data-bind="text: locationName"> </span></a>
-					</li>
-				</ul>
+				<p>Select your local Hollaback to submit your stories:</p>
+                      			
+				<div data-role="fieldcontain">
+					<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
+				</div>
+				
                 
                 <div data-bind="visible: selectedLocation">  		
 					<label>You have selected:</label>
@@ -55,7 +52,7 @@
 				</div>
 
 
-			   <a href="signup.html" rel="external">Next</a>
+			   <a href="signup.html" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Next</a>
 
                 
             </div><!-- /content -->                 
