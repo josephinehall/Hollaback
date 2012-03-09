@@ -4,7 +4,6 @@ var userViewModels = {
     userLocationViewModel: function(userInformation) {   
     	var self = this;
     	var userInformation = userInformation;
-        alert('h');
     	self.availableLocations = ko.observableArray();
     	$.ajax({
     		url: 'http://testbackend.ihollaback.com/localiPhone/',
