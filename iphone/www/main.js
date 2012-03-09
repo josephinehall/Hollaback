@@ -35,9 +35,8 @@ var hollabackApplication ={
 			running = true;
 			var pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
-			var userInformation = new viewModel.userInformation(urlConfig);
+			var userInformation = new user.userInformation(urlConfig);
 			userInformation.read();
-			alert('setup running');
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
@@ -65,6 +64,9 @@ var hollabackApplication ={
 		
 		self.navigateToLocationSignUp = function(){
 			$.mobile.changePage("views/location.html");
+            var urlConfig = new config.urlConfiguration();
+            var userInformation = new user.userInformation(urlConfig);
+            ko.applyBindings(new userViewModels.userLocationViewModel(userInformation));
 		};
 				
 		self.navigateToSignupPage = function(){			
