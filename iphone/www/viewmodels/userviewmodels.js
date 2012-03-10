@@ -47,10 +47,10 @@ var userViewModels = {
         
         function userSignedIn(message){
         	self.responseText(message);
-        	$.mobile.changePage("menu.html");
 
         	if(self.model.isSignedIn()){
-        		$.mobile.changePage("views/menu.html");
+			$.mobile.changePage("menu.html");
+
         	}
 
         }

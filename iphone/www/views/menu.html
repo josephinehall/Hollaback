@@ -24,14 +24,14 @@
     
   <body>
       
-      <div data-role="page" id="menu">
+      <div data-role="page" id="menuPage">
           
           <div data-role="header">
               <h1>Main Page</h1>
           </div><!-- /header -->
           
           <div data-role="content">	
-              <h3>Welcome <span> user</span></h3>
+              <h3>Welcome <span data-bind="text: loggedInUserName"></span></h3>
               <ul data-role="listview" data-inset="true">
                   <li><a href="share.html">Share your story</a></li>
                   <li><a href="donate.html">Donate</a></li>
