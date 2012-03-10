@@ -61,6 +61,7 @@
  */
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {    
+
     NSURL* url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if (url && [url isKindOfClass:[NSURL class]]) {
         self.invokeString = [url absoluteString];

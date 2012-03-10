@@ -4,7 +4,6 @@ var userViewModels = {
     userLocationViewModel: function(userInformation) {   
     	var self = this;
     	var userInformation = userInformation;
-        alert('h');
     	self.availableLocations = ko.observableArray();
     	$.ajax({
     		url: 'http://testbackend.ihollaback.com/localiPhone/',
@@ -25,7 +24,7 @@ var userViewModels = {
         });
     },
     
-	loginViewModel: function(userModel){
+	signUpViewModel: function(userModel){
 		var self = this; 	
 		self.model = userModel;
 		self.userName = ko.observable(userModel.userName).extend({ required: true });

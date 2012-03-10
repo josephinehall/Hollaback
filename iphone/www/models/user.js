@@ -16,19 +16,19 @@ var user = {
     	self.hasAuthenticated;
 
 		self.read = function(){      			  
-			userName = window.localStorage.getItem(userNameStorageKey);			
-			password = window.localStorage.getItem(passwordStorageKey);			
-			emailAddress = window.localStorage.getItem(emailStorageKey);		
-			userLocation = window.localStorage.getItem(locationStorageKey);
-			hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
+			self.userName = window.localStorage.getItem(userNameStorageKey);			
+			self.password = window.localStorage.getItem(passwordStorageKey);			
+			self.emailAddress = window.localStorage.getItem(emailStorageKey);		
+			self.userLocation = window.localStorage.getItem(locationStorageKey);
+			self.hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
 		};
     
 		self.save = function(){
-            window.localStorage.setItem(userNameStorageKey, userName);
-            window.localStorage.setItem(passwordStorageKey, password);
-            window.localStorage.setItem(emailStorageKey, emailAddress);
-            window.localStorage.setItem(locationStorageKey, selectedLocation); 
-            window.localStorage.setItem(hasAuthenticatedStorageKey,hasAuthenticated)          
+            window.localStorage.setItem(userNameStorageKey, self.userName);
+            window.localStorage.setItem(passwordStorageKey, self.password);
+            window.localStorage.setItem(emailStorageKey, self.emailAddress);
+            window.localStorage.setItem(locationStorageKey, self.selectedLocation); 
+            window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated)          
 		};
 		
 		self.setLocation = function(locationName){
@@ -92,7 +92,7 @@ var user = {
 				    	
     	function setAuthenticationSuccessful(){
 			 self.hasAuthenticated = true;
-			 window.localStorage.setItem(hasAuthenticatedStorageKey,hasAuthenticated)   
+			 window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated)   
 		};
 		
 		
