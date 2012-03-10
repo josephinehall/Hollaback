@@ -20,7 +20,7 @@ var user = {
 			self.password = window.localStorage.getItem(passwordStorageKey);			
 			self.emailAddress = window.localStorage.getItem(emailStorageKey);		
 			self.userLocation = window.localStorage.getItem(locationStorageKey);
-			selfhasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
+			self.hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
 		};
     
 		self.save = function(){

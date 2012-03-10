@@ -8,6 +8,7 @@ function hollabackStartup(){
 	hollabackApplication.bootstrapper.run();
 };
 
+
 $('#indexPage').live('pageinit',function(event,ui){
 	 	hollabackStartup();		 
 });
