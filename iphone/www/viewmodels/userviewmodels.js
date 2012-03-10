@@ -24,7 +24,7 @@ var userViewModels = {
         });
     },
     
-	loginViewModel: function(userModel){
+	signUpViewModel: function(userModel){
 		var self = this; 	
 		self.model = userModel;
 		self.userName = ko.observable(userModel.userName).extend({ required: true });

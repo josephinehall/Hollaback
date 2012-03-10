@@ -8,10 +8,6 @@
         
     <link rel="stylesheet" href="../content/hollaback.css" />      
     <link rel="stylesheet" href="../content/jquery.mobile.structure-1.0.1.css"/>
-    <style type='text/css'>
-   .error {  color: red; }
-   .error input { border: 1px solid red; }
-	</style>
     
 	<!-- iPad/iPhone specific css below, add after your main css >
 	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
@@ -22,38 +18,8 @@
 	<script src="../phonegap-1.4.1.js" type="text/javascript" charset="utf-8" ></script>         
     <script src="../scripts/jquery-1.6.4.js" type="text/javascript"></script>
     <script src="../scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
-    <script src="../scripts/knockout.debug.js" type="text/javascript"></script>     
-    <script src="../scripts/knockout.validation.js" type="text/javascript"></script>     
-    <script src="../viewmodels/config.js" charset="utf-8" type="text/javascript"></script>
-    <script src="../viewmodels/applicationviewmodel.js" charset="utf-8" type="text/javascript"></script>
-    <script type="text/javascript">
     
-		var urlConfig = new config.urlConfiguration();
-		var userInformation = new viewModel.userInformation(urlConfig);
-		userInformation.read();
-
-	
-		$("#locationPage").live("pageinit",function(event){
- 			ko.applyBindings(new viewModel.userLocation());			 	
- 		  });
-
-		
-		$("#signupPage").live("pageinit",function(event){
-			ko.validation.rules.pattern.message = 'Invalid.';
-			ko.validation.configure({
-				registerExtenders: true,
-				messagesOnModified: true,
-				insertMessages: false,
-				parseInputAttributes: true,
-				messageTemplate: null
-			});
-
-			ko.applyBindings(new viewModel.loginViewModel(userInformation));
-			
-		});
-
-    </script>
-   
+ 
   </head>
     
     
