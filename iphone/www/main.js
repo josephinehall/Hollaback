@@ -8,14 +8,21 @@ function hollabackStartup(){
 	hollabackApplication.bootstrapper.run();
 };
 
-//document ready wins
-$(document).ready(function(){
-    hollabackStartup();	
-});
+$('#indexPage').live('pageinit',function(event,ui){
+	 	hollabackStartup();		 
+	});
+
+ $('#locationPage').live('pageinit', function(event, ui){
+        var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+        var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
+       	ko.applyBindings(locationPageViewModel,this);
+  	});
+
 
 // PhoneGap is ready seconds
 function onDeviceReady() {
-    hollabackStartup();	
+    //hollabackStartup();	
 };
 
 
@@ -64,9 +71,6 @@ var hollabackApplication ={
 		
 		self.navigateToLocationSignUp = function(){
 			$.mobile.changePage("views/location.html");
-            var urlConfig = new config.urlConfiguration();
-            var userInformation = new user.userInformation(urlConfig);
-            ko.applyBindings(new userViewModels.userLocationViewModel(userInformation));
 		};
 				
 		self.navigateToSignupPage = function(){			
