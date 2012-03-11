@@ -51,6 +51,7 @@ var userViewModels = {
     	function userLoggedIn(message){
     		self.statusText(message);
     		if(self.userModel.isSignedIn()){
+                alert("sdf");
 				$.mobile.changePage("views/menu.html");
         	}
     	};
