@@ -14,7 +14,7 @@ var user = {
     	self.emailAddress;
     	self.selectedLocation;
     	self.hasAuthenticated;
-
+			
 		self.read = function(){      			  
 			self.userName = window.localStorage.getItem(userNameStorageKey);			
 			self.password = window.localStorage.getItem(passwordStorageKey);			
@@ -149,6 +149,7 @@ var user = {
 			 window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated)   
 		};
 		
+		self.read();
 		
     }, //  -- end userInformation
 

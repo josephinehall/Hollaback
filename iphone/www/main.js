@@ -86,7 +86,6 @@ var hollabackApplication ={
 			pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
 			var userInformation = new user.userInformation(urlConfig);
-			userInformation.read();
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
