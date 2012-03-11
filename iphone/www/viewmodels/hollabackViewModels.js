@@ -6,7 +6,8 @@ var hollabackViewModels = {
     	self.loggedInUserName = userInformation.userName;
         
         self.signout = function(){
-            alert("sigingin out");
+           self.userInformation.removeCredentials();
+		   $.mobile.changePage("../index.html");   
         };
     },
     

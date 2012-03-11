@@ -19,13 +19,19 @@ $('#indexPage').live('pageinit',function(event,ui){
 			messageTemplate: null
 		});
 
+	
+	 		 
+});
+
+$('#indexPage').live('pagebeforeshow',function(event,ui){
 		var urlConfig = new config.urlConfiguration();
         var userInformation = new user.userInformation(urlConfig);
 		var loginViewModel = new userViewModels.loginViewModel(userInformation);
 	 	ko.applyBindings(loginViewModel,this);	
-		hollabackStartup();
-	 		 
+		hollabackStartup();	 		 
 });
+
+
 
  $('#locationPage').live('pageinit', function(event, ui){
         var urlConfig = new config.urlConfiguration();
