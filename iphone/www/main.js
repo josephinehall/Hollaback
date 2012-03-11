@@ -18,17 +18,21 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
-
+		var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+		var loginViewModel = new userViewModels.loginViewModel(userInformation);
+	 	ko.applyBindings(loginViewModel,this);	
+		hollabackStartup();	 
 	
 	 		 
 });
 
 $('#indexPage').live('pagebeforeshow',function(event,ui){
-		var urlConfig = new config.urlConfiguration();
-        var userInformation = new user.userInformation(urlConfig);
-		var loginViewModel = new userViewModels.loginViewModel(userInformation);
-	 	ko.applyBindings(loginViewModel,this);	
-		hollabackStartup();	 		 
+	//	var urlConfig = new config.urlConfiguration();
+    //    var userInformation = new user.userInformation(urlConfig);
+	//	var loginViewModel = new userViewModels.loginViewModel(userInformation);
+	// 	ko.applyBindings(loginViewModel,this);	
+	//	hollabackStartup();	 		 
 });
 
 
