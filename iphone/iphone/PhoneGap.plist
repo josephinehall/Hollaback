@@ -20,7 +20,9 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>*.formstack.com</string>
 		<string>testbackend.ihollaback.com</string>
+		<string>*</string>
 	</array>
 	<key>Plugins</key>
 	<dict>

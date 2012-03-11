@@ -93,6 +93,7 @@ var user = {
     	function setAuthenticationSuccessful(){
 			 self.hasAuthenticated = true;
 			 window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated)   
+			 alert("hi");
 		};
 		
 		
