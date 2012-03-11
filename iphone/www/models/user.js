@@ -41,12 +41,7 @@ var user = {
 		};
 		        
         self.removeCredentials = function(){
-            window.localStorage.removeItem(userNameStorageKey);
-            window.localStorage.removeItem(passwordStorageKey);
-            window.localStorage.removeItem(emailStorageKey);
-            window.localStorage.removeItem(locationStorageKey);           
-            window.localStorage.removeItem(hasAuthenticatedStorageKey);
-            self.read();
+           window.localStorage.clear();
         };
         
         self.signUp = function(userNameToSet,passwordToSet,emailToSet,callback){
