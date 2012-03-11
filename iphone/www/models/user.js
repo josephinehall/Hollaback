@@ -81,6 +81,38 @@ var user = {
 			         });
 			
 		};
+        
+        self.login = function(userName,password,callback){
+                        
+            // note: this xml body is formatted as such because the server is expects this exact format. This 
+        	//shoud be in future a json request over ssl. 
+            var loginRequest = +urlConfig.getLoginStartRequestBoundary() +"<hollaback_aut>\n<username>"+userName+"</username>\n<password>"+password+"</password>\n</hollaback_aut>" + urlConfig.getLoginEndRequestBoundary();
+            
+            $.ajax({
+                   type: 'POST',
+                   url: urlConfig.getLoginUrl(),
+                   data:loginRequest,
+                   dataType: 'xml',
+                   contentType:urlConfig.getLogInContentType(),
+                   success: function(response){			         
+                   var status = $(response).find('status').text();
+                   var message = $(response).find('msg').text();
+                   if(status == 'error')
+                   {
+                   callback(message);
+                   }
+                   else
+                   {
+                   setAuthenticationSuccessful();  	
+                   setUserInformation(userNameToSet,passwordToSet,emailToSet);
+                   callback("Log In Successful");
+                   }						         		
+                   },
+                   error: function(xhr, status, error){callback("There was an error");},
+                   });
+
+            
+        };
 
 		
 		function setUserInformation (userNameToSet,passwordToSet,emailToSet){

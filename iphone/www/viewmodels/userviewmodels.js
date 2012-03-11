@@ -24,6 +24,32 @@ var userViewModels = {
         });
     },
     
+    loginViewModel: function(userModel){
+    	var self = this;
+    	self.userModel = userModel;
+       	self.userName = ko.observable(userModel.userName).extend({ required: true });
+    	self.password = ko.observable(userModel.password).extend({ required: true });
+    	self.statusText = ko.observable();
+    	
+    	self.login = function(){
+    		self.statusText("Logging in");
+    		self.userModel.login(self.userName,self.password,function(message){userLoggedIn(message)});
+    	};
+    	
+    	self.forgotPassword = function(){
+    		alert("forgot password");
+    	};
+    	
+    	self.signup = function(){	
+			$.mobile.changePage("views/signup.html");
+    	};
+    	
+    	function userLoggedIn(message){
+    		self.statusText(message);
+    	};
+    	
+    },
+    
 	signUpViewModel: function(userModel){
 		var self = this; 	
 		self.model = userModel;
@@ -49,8 +75,7 @@ var userViewModels = {
         	self.responseText(message);
 
         	if(self.model.isSignedIn()){
-			$.mobile.changePage("menu.html");
-
+				$.mobile.changePage("menu.html");
         	}
 
         }

@@ -10,7 +10,12 @@ function hollabackStartup(){
 
 
 $('#indexPage').live('pageinit',function(event,ui){
-	 	hollabackStartup();		 
+var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+		var loginViewModel = new userViewModels.loginViewModel(userInformation);
+	 	ko.applyBindings(loginViewModel,this);	
+		hollabackStartup();
+	 		 
 });
 
  $('#locationPage').live('pageinit', function(event, ui){
@@ -74,10 +79,6 @@ var hollabackApplication ={
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
-			}
-			else
-			{
-				pageNavigator.navigateToLocationSignUp();
 			}
 		}
 		
