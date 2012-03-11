@@ -1,8 +1,9 @@
 var hollabackViewModels = {
 	
-    menuPageViewModel: function() {   
+    menuPageViewModel: function(userInfromation) {   
     	var self = this; 	
-    	self.loggedInUserName = ko.observable('Amy');
+    	self.userInformation = userInformation;
+    	self.loggedInUserName = userInfromation.userName;
         
         self.signout = function(){
             alert("sigingin out");

@@ -43,7 +43,9 @@ $("#signupPage").live("pageinit",function(event){
 });
 
  $('#menuPage').live('pageinit', function(event, ui){  
-        var menuPageViewModel = new hollabackViewModels.menuPageViewModel();
+ 		var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+        var menuPageViewModel = new hollabackViewModels.menuPageViewModel(userInformation);
        	ko.applyBindings(menuPageViewModel,this);
 });
 
