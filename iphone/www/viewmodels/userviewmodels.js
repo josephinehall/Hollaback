@@ -29,11 +29,15 @@ var userViewModels = {
     	self.userModel = userModel;
        	self.userName = ko.observable(userModel.userName).extend({ required: true });
     	self.password = ko.observable(userModel.password).extend({ required: true });
-    	self.statusText = ko.observable();
+    	self.statusText = ko.observable();  	
+    	self.errors = ko.validation.group(self);
     	
     	self.login = function(){
-    		self.statusText("Logging in");
-    		self.userModel.login(self.userName(),self.password(),function(message){userLoggedIn(message)});
+    		var isValid = validateLoginCredentials();	
+    		if(isValid){
+				self.statusText("Logging in");
+				self.userModel.login(self.userName(),self.password(),function(message){userLoggedIn(message)});
+    		}
     	};
     	
     	self.forgotPassword = function(){
@@ -46,7 +50,22 @@ var userViewModels = {
     	
     	function userLoggedIn(message){
     		self.statusText(message);
+    		if(self.userModel.isSignedIn()){
+				$.mobile.changePage("views/menu.html");
+        	}
     	};
+    	    	
+    	function validateLoginCredentials(){     	
+        	var isValid = modelIsValid();
+        	if (!isValid) {
+            	self.errors.showAllMessages();
+        	}
+			return isValid;
+        }
+        
+        function modelIsValid(){
+        	return self.errors().length == 0;
+        }
     	
     },
     
@@ -77,7 +96,6 @@ var userViewModels = {
         	if(self.model.isSignedIn()){
 				$.mobile.changePage("menu.html");
         	}
-
         }
        
         

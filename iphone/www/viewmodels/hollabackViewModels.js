@@ -1,9 +1,9 @@
 var hollabackViewModels = {
 	
-    menuPageViewModel: function(userInfromation) {   
+    menuPageViewModel: function(userInformation) {   
     	var self = this; 	
     	self.userInformation = userInformation;
-    	self.loggedInUserName = userInfromation.userName;
+    	self.loggedInUserName = userInformation.userName;
         
         self.signout = function(){
             alert("sigingin out");

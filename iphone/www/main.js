@@ -10,7 +10,16 @@ function hollabackStartup(){
 
 
 $('#indexPage').live('pageinit',function(event,ui){
-var urlConfig = new config.urlConfiguration();
+		ko.validation.rules.pattern.message = 'Invalid.';
+		ko.validation.configure({
+			registerExtenders: true,
+			messagesOnModified: true,
+			insertMessages: true,
+			parseInputAttributes: true,
+			messageTemplate: null
+		});
+
+		var urlConfig = new config.urlConfiguration();
         var userInformation = new user.userInformation(urlConfig);
 		var loginViewModel = new userViewModels.loginViewModel(userInformation);
 	 	ko.applyBindings(loginViewModel,this);	
