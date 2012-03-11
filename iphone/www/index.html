@@ -14,17 +14,30 @@
     <script src="scripts/knockout.validation.js" type="text/javascript"></script>     
     <script src="models/config.js" charset="utf-8" type="text/javascript"></script>
     <script src="models/user.js" charset="utf-8" type="text/javascript"></script>
-    <script src="viewmodels/userviewmodels.js" charset="utf-8" type="text/javascript"></script>
-  	<script src="main.js" type="text/javascript"></script>   	
+    <script src="viewmodels/userviewmodels.js" charset="utf-8" type="text/javascript"></script>  
+    <script src="viewmodels/hollabackviewmodels.js" charset="utf-8" type="text/javascript"></script>  
+    <script src="main.js" type="text/javascript"></script>   	
     <script src="scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
   </head>
     
     
   <body onload="onBodyLoad()">
-  	<div data-role="page" id="indexPage" data-theme="a" data-content-theme="a">
+  	<div data-role="page" id="indexPage">
+      <div data-role="header">
+          <h1>Log in</h1>
+      </div><!-- /header -->
+      
+      <div data-role="content">	
+		<input data-bind='value: userName' required placeholder="User Name"/>					              
+		<input data-bind='value: password' required placeholder="Password"/>
 		
-     	<h2>Loading</h2>
-     	<p>Do something cool here</p>
-    <div>
+		<p data-bind='text: statusText'></p>
+		<a data-bind='click: forgotPassword' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Forgot Password</a>
+		<a data-bind='click: login' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Log In</a>
+		<a data-bind='click: signup' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
+           
+      </div><!-- /content -->
+          
+      </div><!-- /page -->
   </body>
 </html>

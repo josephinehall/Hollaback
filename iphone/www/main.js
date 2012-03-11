@@ -10,8 +10,28 @@ function hollabackStartup(){
 
 
 $('#indexPage').live('pageinit',function(event,ui){
-	 	hollabackStartup();		 
+		ko.validation.rules.pattern.message = 'Invalid.';
+		ko.validation.configure({
+			registerExtenders: true,
+			messagesOnModified: true,
+			insertMessages: true,
+			parseInputAttributes: true,
+			messageTemplate: null
+		});
+
+	
+	 		 
 });
+
+$('#indexPage').live('pagebeforeshow',function(event,ui){
+		var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+		var loginViewModel = new userViewModels.loginViewModel(userInformation);
+	 	ko.applyBindings(loginViewModel,this);	
+		hollabackStartup();	 		 
+});
+
+
 
  $('#locationPage').live('pageinit', function(event, ui){
         var urlConfig = new config.urlConfiguration();
@@ -37,6 +57,15 @@ $("#signupPage").live("pageinit",function(event){
 		
 });
 
+ $('#menuPage').live('pageinit', function(event, ui){  
+ 		var urlConfig = new config.urlConfiguration();
+        var userInformation = new user.userInformation(urlConfig);
+        var menuPageViewModel = new hollabackViewModels.menuPageViewModel(userInformation);
+       	ko.applyBindings(menuPageViewModel,this);
+});
+
+
+
 
 // PhoneGap is ready seconds
 function onDeviceReady() {
@@ -52,23 +81,20 @@ var hollabackApplication ={
 		
 		var running = false;
 		var bootstrapper; 
+		var pageNavigator;
+		
 		function isRunning(){
             return running;
 		}
 		
 		function run(){
 			running = true;
-			var pageNavigator = new hollabackApplication.pageNavigator();	
+			pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
 			var userInformation = new user.userInformation(urlConfig);
-			userInformation.read();
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
-			}
-			else
-			{
-				pageNavigator.navigateToLocationSignUp();
 			}
 		}
 		
@@ -79,6 +105,10 @@ var hollabackApplication ={
 					run();
 				}
 			},
+			
+			getPageNavigator:function(){
+				return pageNavigator;
+			}
 		}
 		})(),
 	

@@ -14,7 +14,7 @@ var user = {
     	self.emailAddress;
     	self.selectedLocation;
     	self.hasAuthenticated;
-
+			
 		self.read = function(){      			  
 			self.userName = window.localStorage.getItem(userNameStorageKey);			
 			self.password = window.localStorage.getItem(passwordStorageKey);			
@@ -41,12 +41,7 @@ var user = {
 		};
 		        
         self.removeCredentials = function(){
-            window.localStorage.removeItem(userNameStorageKey);
-            window.localStorage.removeItem(passwordStorageKey);
-            window.localStorage.removeItem(emailStorageKey);
-            window.localStorage.removeItem(locationStorageKey);           
-            window.localStorage.removeItem(hasAuthenticatedStorageKey);
-            self.read();
+           window.localStorage.clear();
         };
         
         self.signUp = function(userNameToSet,passwordToSet,emailToSet,callback){
@@ -81,6 +76,60 @@ var user = {
 			         });
 			
 		};
+        
+        self.login = function(username,password,callback){
+                        
+            // note: this xml body is formatted as such because the server is expects this exact format. This 
+        	//shoud be in future a json request over ssl. 
+            var loginRequest = urlConfig.getLoginStartRequestBoundary() +"<hollaback_aut>\n<username>"+username+"</username>\n<password>"+password+"</password>\n</hollaback_aut>" + urlConfig.getLoginEndRequestBoundary();
+            
+            $.ajax({
+                   type: 'POST',
+                   url: urlConfig.getLoginUrl(),
+                   data:loginRequest,
+                   dataType: 'text',
+                   contentType:urlConfig.getLogInContentType(),
+                   success: function(response){			         
+		                  parseLoginResponse(response,username,password,callback);		         		
+	                   },
+                   error: function(xhr, status, error){parseLoginResponse(xhr.responseText,callback);},
+                   });
+        };
+        
+        
+        //this function exists because the back end server does not respect http response headers and 
+        //real world content types. Jquery fails to parse the response because it has no root node, and 
+        //is not wellformed xml
+        //so  check to see if this is actually a response.
+        function parseLoginResponse(response,username,password, callback){
+        	if(response)
+        	{
+        		
+        	   var trimmedResponse = $.trim(response);
+        	   var realXml = "<response>"+trimmedResponse+"</response>";//wrap to make well formed xml
+        	   xmlDoc = $.parseXML(realXml);
+           	   var status = $(xmlDoc).find('status').text();
+	           var message = $(xmlDoc).find('msg').text();
+	           if(status == 'error')
+	           {
+	               callback(message);
+	           }
+	           else if(status == 'okay')
+	           {
+	               setAuthenticationSuccessful();
+                   setUserInformation(username,password,"");
+	               callback("Log In Successful");
+	           }
+	           else
+	           {
+	           		callback("There was an error");
+	           }
+	         }
+	         else
+	         {
+	         	callback("There was an error");
+	         }
+        };
 
 		
 		function setUserInformation (userNameToSet,passwordToSet,emailToSet){
@@ -96,6 +145,7 @@ var user = {
 			 alert("hi");
 		};
 		
+		self.read();
 		
     }, //  -- end userInformation
 

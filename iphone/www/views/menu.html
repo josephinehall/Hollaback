@@ -24,20 +24,20 @@
     
   <body>
       
-      <div data-role="page" id="menu">
+      <div data-role="page" id="menuPage">
           
           <div data-role="header">
               <h1>Main Page</h1>
           </div><!-- /header -->
           
           <div data-role="content">	
-              <h3>Welcome <span> user</span></h3>
+              <h3>Welcome <span data-bind="text: loggedInUserName"></span></h3>
               <ul data-role="listview" data-inset="true">
                   <li><a href="share.html">Share your story</a></li>
                   <li><a href="https://www.formstack.com/m/?1144863-2j69z3xvkc">Donate</a></li>
                   <li><a href="map.html">Map</a></li>
                   <li><a href="about.html">About</a></li>                
-                  <li><a href="signout.html">Sign Out</a></li>
+                  <li><a data-bind="click: signout">Sign Out</a></li>
               </ul>	
               
           </div><!-- /content -->

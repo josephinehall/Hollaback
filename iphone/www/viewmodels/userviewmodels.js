@@ -24,6 +24,51 @@ var userViewModels = {
         });
     },
     
+    loginViewModel: function(userModel){
+    	var self = this;
+    	self.userModel = userModel;
+       	self.userName = ko.observable(userModel.userName).extend({ required: true });
+    	self.password = ko.observable(userModel.password).extend({ required: true });
+    	self.statusText = ko.observable();  	
+    	self.errors = ko.validation.group(self);
+    	
+    	self.login = function(){
+    		var isValid = validateLoginCredentials();	
+    		if(isValid){
+				self.statusText("Logging in");
+				self.userModel.login(self.userName(),self.password(),function(message){userLoggedIn(message)});
+    		}
+    	};
+    	
+    	self.forgotPassword = function(){
+    		alert("forgot password");
+    	};
+    	
+    	self.signup = function(){	
+			$.mobile.changePage("views/signup.html");
+    	};
+    	
+    	function userLoggedIn(message){
+    		self.statusText(message);
+    		if(self.userModel.isSignedIn()){
+				$.mobile.changePage("views/menu.html");
+        	}
+    	};
+    	    	
+    	function validateLoginCredentials(){     	
+        	var isValid = modelIsValid();
+        	if (!isValid) {
+            	self.errors.showAllMessages();
+        	}
+			return isValid;
+        }
+        
+        function modelIsValid(){
+        	return self.errors().length == 0;
+        }
+    	
+    },
+    
 	signUpViewModel: function(userModel){
 		var self = this; 	
 		self.model = userModel;
@@ -47,12 +92,10 @@ var userViewModels = {
         
         function userSignedIn(message){
         	self.responseText(message);
-        	$.mobile.changePage("menu.html");
 
         	if(self.model.isSignedIn()){
-        		$.mobile.changePage("views/menu.html");
+				$.mobile.changePage("menu.html");
         	}
-
         }
        
         
