@@ -33,7 +33,7 @@ var userViewModels = {
     	
     	self.login = function(){
     		self.statusText("Logging in");
-    		self.userModel.login(self.userName,self.password,function(message){userLoggedIn(message)});
+    		self.userModel.login(self.userName(),self.password(),function(message){userLoggedIn(message)});
     	};
     	
     	self.forgotPassword = function(){
