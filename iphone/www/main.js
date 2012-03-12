@@ -25,13 +25,13 @@ $('#indexPage').live('pagebeforeshow',function(event,ui){
 });
 
 $('#locationPage').live('pageinit', function(event, ui){
-       var userInformation = hollabackApplication.bootstrapper.getUserInformation()
+       var userInformation = hollabackApplication.bootstrapper.getUserInformation();
        var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
        ko.applyBindings(locationPageViewModel,this);
 });
 
 $("#signupPage").live("pageinit",function(event){
-		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
+		var userInformation = hollabackApplication.bootstrapper.getUserInformation();
         var userSignUpPage = new userViewModels.signUpViewModel(userInformation);
         ko.applyBindings(userSignUpPage,this);
 
@@ -39,9 +39,12 @@ $("#signupPage").live("pageinit",function(event){
 });
 
  $('#menuPage').live('pageinit', function(event, ui){  
-		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
-        var menuPageViewModel = new hollabackViewModels.menuPageViewModel(userInformation);
+        var menuPageViewModel = hollabackApplication.bootstrapper.getMenuPageViewModel();	
        	ko.applyBindings(menuPageViewModel,this);
+});
+
+ $('#menuPage').live('pagebeforeshow', function(event, ui){  
+		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
 
@@ -54,8 +57,9 @@ var hollabackApplication ={
 		var running = false;
 		var bootstrapper; 
 		var pageNavigator;
-		var userInformation;;
-		var userLoginViewModel
+		var userInformation;
+		var userLoginViewModel;
+		var menuPageViewModel;
 		
 		function isRunning(){
             return running;
@@ -66,7 +70,8 @@ var hollabackApplication ={
 			pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
 			userInformation = new user.userInformation(urlConfig);
-			userLoginViewModel = new userViewModels.loginViewModel(userInformation);	
+			userLoginViewModel = new userViewModels.loginViewModel(userInformation);
+			menuPageViewModel =	new hollabackViewModels.menuPageViewModel(userInformation);
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
@@ -96,6 +101,15 @@ var hollabackApplication ={
 			
 			resetLoginViewModel:function(){
 				userLoginViewModel.reset();
+			},
+			
+			getMenuPageViewModel:function(){
+				return menuPageViewModel;
+			},
+
+			
+			resetMenuPageViewModel:function(){
+				menuPageViewModel.reset();
 			},
 		}
 		})(),
