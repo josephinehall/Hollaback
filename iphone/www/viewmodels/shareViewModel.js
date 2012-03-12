@@ -3,6 +3,7 @@ var shareViewModels = {
 		var self = this;     
         self.bystanderFlag = ko.observable("firstPerson");
         self.harassmentTypes = ko.observableArray(["verbal","stalking","homophobic","transphobic","assault","groping","racist","other"]);
+        self.useGPS = ko.observable(true);
 	 }
     }
      
