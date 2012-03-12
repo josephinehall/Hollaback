@@ -2,7 +2,7 @@ var shareViewModels = {
 	shareStoryViewModel: function(){
 		var self = this;     
         self.bystanderFlag = ko.observable("firstPerson");
-        self.harassmentTypes = ko.observableArray(["verbal","stalking","homophobic","transphobic","assault","Groping","Racist","Other"]);
+        self.harassmentTypes = ko.observableArray(["verbal","stalking","homophobic","transphobic","assault","groping","racist","other"]);
 	 }
     }
      

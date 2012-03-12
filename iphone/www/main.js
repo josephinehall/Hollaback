@@ -6,7 +6,8 @@ function hollabackStartup(){
 $( document ).bind( "mobileinit", function() {
     // Make your jQuery Mobile framework configuration changes here!
     $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
+    //$.mobile.pushStateEnabled = false;
+    //$.mobile.ajaxEnabled = false;
 });
 
 
