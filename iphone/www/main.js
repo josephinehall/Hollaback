@@ -3,13 +3,6 @@ function hollabackStartup(){
 	hollabackApplication.bootstrapper.run();
 };
 
-$( document ).bind( "mobileinit", function() {
-    // Make your jQuery Mobile framework configuration changes here!
-    $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
-});
-
-
 
 $('#indexPage').live('pageinit',function(event,ui){
 
@@ -31,39 +24,24 @@ $('#indexPage').live('pagebeforeshow',function(event,ui){
        	hollabackApplication.bootstrapper.resetLoginViewModel();			 
 });
 
-
-
- $('#locationPage').live('pageinit', function(event, ui){
-       //var userInformation = hollabackApplication.bootstrapper.getUserInformation()
-       // var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
-       //	ko.applyBindings(locationPageViewModel,this);
+$('#locationPage').live('pageinit', function(event, ui){
+       var userInformation = hollabackApplication.bootstrapper.getUserInformation()
+       var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
+       ko.applyBindings(locationPageViewModel,this);
 });
 
 $("#signupPage").live("pageinit",function(event){
-	/*
-	ko.validation.rules.pattern.message = 'Invalid.';
-		ko.validation.configure({
-			registerExtenders: true,
-			messagesOnModified: true,
-			insertMessages: true,
-			parseInputAttributes: true,
-			messageTemplate: null
-		});
-
 		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
         var userSignUpPage = new userViewModels.signUpViewModel(userInformation);
         ko.applyBindings(userSignUpPage,this);
-*/
+
 		
 });
 
  $('#menuPage').live('pageinit', function(event, ui){  
-/*
- 		var urlConfig = new config.urlConfiguration();
-        var userInformation = new user.userInformation(urlConfig);
+		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
         var menuPageViewModel = new hollabackViewModels.menuPageViewModel(userInformation);
        	ko.applyBindings(menuPageViewModel,this);
-*/
 });
 
 

@@ -45,7 +45,7 @@ var userViewModels = {
     	};
     	
     	self.signup = function(){	
-			$.mobile.changePage("#signupPage");
+			$.mobile.changePage("#locationPage");
     	};
     	
     	self.reset = function(){
@@ -60,8 +60,8 @@ var userViewModels = {
     	function userLoggedIn(message){
     		self.statusText(message);
     		if(self.userModel.isSignedIn()){
-                alert("sdf");
-				$.mobile.changePage("views/menu.html");
+    			$.mobile.loadPage("#menuPage");
+				$.mobile.changePage("#menuPage");
         	}
     	};
     	    	
@@ -104,7 +104,7 @@ var userViewModels = {
         	self.responseText(message);
 
         	if(self.model.isSignedIn()){
-				$.mobile.changePage("menu.html");
+				$.mobile.changePage("#menuPage");
         	}
         }
        

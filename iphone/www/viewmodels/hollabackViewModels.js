@@ -7,7 +7,7 @@ var hollabackViewModels = {
         
         self.signout = function(){
            self.userInformation.removeCredentials();
-		   $.mobile.changePage("../index.html");   
+		   $.mobile.changePage("#indexPage");   
         };
     },
     
