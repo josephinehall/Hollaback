@@ -3,7 +3,7 @@
     <head>
         <title></title>
         
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta charset="utf-8">
 	    
 	    <link rel="stylesheet" href="../content/hollaback.css" />      
@@ -28,17 +28,29 @@
 		
 			<div data-role="header">
 				<h1>Map Page</h1>
+				<a href="menu.html" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
 			</div><!-- /header -->
 			
 			<div data-role="content" class="ui-mobile" style="padding:0; margin: 0;">				
 			
-				<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+				<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true">
+				alert("got the api");
+				</script>
+				
+				
 				<script type="text/javascript">				
 					$(document).ready(function() {
-						var myLatlng = new google.maps.LatLng(-41.2924945, 174.7732353);
+						//alert("Loading the page");
+												
+						var myLatlng = new google.maps.LatLng(-41.2924945, 174.7732353);					
+						
 						var map = new google.maps.Map(document.getElementById('map_canvas'), {
-							center: myLatlng, zoom: 13,
-							mapTypeId: google.maps.MapTypeId.ROADMAP
+							center: myLatlng, 
+							zoom: 13,
+							mapTypeId: google.maps.MapTypeId.ROADMAP,
+							key: 'ABQIAAAAwKDTDkhucqHv_wpXKXZrxSM3jwuDZFWueHXkEvbQnmOGW1gUhSHFE07YUT0JMwuC9RjSS4Z9fyATQ',
+							sensor: true
+							
 						});
 						
 						var tableid = 426994;
@@ -47,7 +59,6 @@
 					});
 				</script>
 				
-				<!-- Google map to here -->
 				<div id="map_canvas" style="width:100%; height:100%; position: absolute; margin: 0; padding: 0;">
 			
 			

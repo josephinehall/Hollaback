@@ -24,6 +24,7 @@ $('#indexPage').live('pageinit',function(event,ui){
 		var loginViewModel = new userViewModels.loginViewModel(userInformation);
 	 	ko.applyBindings(loginViewModel,this);	
 		hollabackStartup();	 
+
 	 		 
 });
 
