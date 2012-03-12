@@ -22,6 +22,7 @@
     
     
   <body>
+  
   	<div data-role="page" id="indexPage">
       <div data-role="header">
           <h1>Log in</h1>
@@ -38,6 +39,28 @@
            
       </div><!-- /content -->
           
-      </div><!-- /page -->
+     </div><!-- /index page -->  
+      
+      <div data-role="page" id="signupPage">
+			
+          <div data-role="header">
+              <h1>Sign Up</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	            	
+
+			<input data-bind='value: userName, valueUpdate: "afterkeydown"' required placeholder="User Name"/>					              
+            <input data-bind='value: password' required placeholder="Password"/>
+            <input data-bind='value: password' required placeholder="Confirm Password"/>
+            <input data-bind='value: emailAddress' required pattern="@" placeholder="Email"/>           
+            <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
+			
+			<p data-bind='text: responseText'></p>
+			<a href="location.html" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
+
+      	 </div><!-- /content -->
+     </div><!-- /sign up page -->    
+     
   </body>
 </html>

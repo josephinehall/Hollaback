@@ -34,13 +34,14 @@ $('#indexPage').live('pagebeforeshow',function(event,ui){
 
 
  $('#locationPage').live('pageinit', function(event, ui){
-       	var userInformation = hollabackApplication.bootstrapper.getUserInformation()
-        var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
-       	ko.applyBindings(locationPageViewModel,this);
+       //var userInformation = hollabackApplication.bootstrapper.getUserInformation()
+       // var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
+       //	ko.applyBindings(locationPageViewModel,this);
 });
 
 $("#signupPage").live("pageinit",function(event){
-		ko.validation.rules.pattern.message = 'Invalid.';
+	/*
+	ko.validation.rules.pattern.message = 'Invalid.';
 		ko.validation.configure({
 			registerExtenders: true,
 			messagesOnModified: true,
@@ -52,14 +53,17 @@ $("#signupPage").live("pageinit",function(event){
 		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
         var userSignUpPage = new userViewModels.signUpViewModel(userInformation);
         ko.applyBindings(userSignUpPage,this);
+*/
 		
 });
 
  $('#menuPage').live('pageinit', function(event, ui){  
+/*
  		var urlConfig = new config.urlConfiguration();
         var userInformation = new user.userInformation(urlConfig);
         var menuPageViewModel = new hollabackViewModels.menuPageViewModel(userInformation);
        	ko.applyBindings(menuPageViewModel,this);
+*/
 });
 
 
