@@ -38,9 +38,36 @@
 		<a data-bind='click: signup' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
            
       </div><!-- /content -->
-          
-     </div><!-- /index page -->  
+     </div><!-- /index page --> 
+           
+     <div data-role="page" id="locationPage">
+        
+          <div data-role="header">
+            <h1>Choose Location</h1>
+        </div><!-- /header -->
+        
+        <div data-role="content">	
+
+        
+			<p>Select your local Hollaback to submit your stories:</p>
+		          			
+			<div data-role="fieldcontain">
+				<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
+			</div>
+			
+		    
+		    <div data-bind="visible: selectedLocation">  		
+				<label>You have selected:</label>
+				<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
+			</div>
+		
+		   <a href="#signupPage" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Next</a>
+		
+            
+        </div><!-- /content -->                 
+     </div><!-- /location page --> 
       
+          
       <div data-role="page" id="signupPage">
 			
           <div data-role="header">
@@ -56,11 +83,77 @@
             <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
 			
 			<p data-bind='text: responseText'></p>
-			<a href="location.html" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
-			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a
+			<a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
 
       	 </div><!-- /content -->
-     </div><!-- /sign up page -->    
+     </div><!-- /sign up page -->   
+     
+     <div data-role="page" id="menuPage">
+          
+          <div data-role="header">
+              <h1>Main Page</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+              <h3>Welcome <span data-bind="text: loggedInUserName"></span></h3>
+              <ul data-role="listview" data-inset="true">
+                  <li><a href="#shareStoryPage">Share your story</a></li>
+                  <li><a href="https://www.formstack.com/m/?1144863-2j69z3xvkc">Donate</a></li>
+                  <li><a href="#mapPage">Map</a></li>
+                  <li><a href="#aboutPage">About</a></li>                
+                  <li><a data-bind="click: signout">Sign Out</a></li>
+              </ul>	
+              
+          </div><!-- /content -->
+          
+     </div><!-- /menu page -->
+      
+      
+      
+     <div data-role="page" id="mapPage">
+          
+          <div data-role="header">
+              <h1>Map Page</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+            <h3>insert map shit here</h3>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /map page -->
+      
+      
+      <div data-role="page" id="shareStoryPage">
+          
+          <div data-role="header">
+              <h1>share Page</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+            <h3>insert sharing here</h3>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /share story page -->
+      
+       
+      <div data-role="page" id="aboutPage">
+          
+          <div data-role="header">
+              <h1>about Page</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+            <h3>COOOOL</h3>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /about page -->
+
+      
+
      
   </body>
 </html>
