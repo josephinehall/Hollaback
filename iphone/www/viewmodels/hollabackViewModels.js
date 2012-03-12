@@ -9,14 +9,6 @@ var hollabackViewModels = {
            self.userInformation.removeCredentials();
 		   $.mobile.changePage("../index.html");   
         };
-    },
-    
-    aboutPageViewModel: function(){
-    
-    },
-    
-    donatePageViewModel: function(){
-    
-    },
+    }
     
 }
