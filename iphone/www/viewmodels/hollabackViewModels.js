@@ -1,7 +1,7 @@
 var hollabackViewModels = {
 	
     menuPageViewModel: function(userInformation) {   
-    	var self = this; 	
+        var self = this; 	
     	self.userInformation = userInformation;
     	self.loggedInUserName = userInformation.userName;
         
