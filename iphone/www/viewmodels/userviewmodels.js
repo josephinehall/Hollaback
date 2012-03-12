@@ -45,13 +45,14 @@ var userViewModels = {
     	};
     	
     	self.signup = function(){	
-			$.mobile.changePage("views/signup.html");
+			$.mobile.changePage("#signupPage");
     	};
     	
     	self.reset = function(){
     		self.userModel.read();
     		self.statusText(null);
-    		self.errors = ko.validation.group(self);    	
+    		self.errors = ko.validation.group(self);
+    	
     		self.userName(self.userModel.userName);
     		self.password(self.userModel.password);
     	};
