@@ -1,16 +1,12 @@
 
-function onBodyLoad()
-{		
-    document.addEventListener("deviceready", onDeviceReady, false);
-};
-
 function hollabackStartup(){    		
 	hollabackApplication.bootstrapper.run();
 };
 
 
 $('#indexPage').live('pageinit',function(event,ui){
-		ko.validation.rules.pattern.message = 'Invalid.';
+
+	ko.validation.rules.pattern.message = 'Invalid.';
 		ko.validation.configure({
 			registerExtenders: true,
 			messagesOnModified: true,
@@ -18,29 +14,20 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
-
-		var urlConfig = new config.urlConfiguration();
-        var userInformation = new user.userInformation(urlConfig);
-		var loginViewModel = new userViewModels.loginViewModel(userInformation);
-	 	ko.applyBindings(loginViewModel,this);	
-		hollabackStartup();	 
-
+		hollabackStartup();	 	 	
+		var loginViewModel = hollabackApplication.bootstrapper.getLoginViewModel();	
+	 	ko.applyBindings(loginViewModel,this);
 	 		 
 });
 
 $('#indexPage').live('pagebeforeshow',function(event,ui){
-	//	var urlConfig = new config.urlConfiguration();
-    //    var userInformation = new user.userInformation(urlConfig);
-	//	var loginViewModel = new userViewModels.loginViewModel(userInformation);
-	// 	ko.applyBindings(loginViewModel,this);	
-	//	hollabackStartup();	 		 
+       	hollabackApplication.bootstrapper.resetLoginViewModel();			 
 });
 
 
 
  $('#locationPage').live('pageinit', function(event, ui){
-        var urlConfig = new config.urlConfiguration();
-        var userInformation = new user.userInformation(urlConfig);
+       	var userInformation = hollabackApplication.bootstrapper.getUserInformation()
         var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
        	ko.applyBindings(locationPageViewModel,this);
 });
@@ -55,8 +42,7 @@ $("#signupPage").live("pageinit",function(event){
 			messageTemplate: null
 		});
 
-		var urlConfig = new config.urlConfiguration();
-        var userInformation = new user.userInformation(urlConfig);
+		var userInformation = hollabackApplication.bootstrapper.getUserInformation()
         var userSignUpPage = new userViewModels.signUpViewModel(userInformation);
         ko.applyBindings(userSignUpPage,this);
 		
@@ -70,14 +56,6 @@ $("#signupPage").live("pageinit",function(event){
 });
 
 
-
-
-// PhoneGap is ready seconds
-function onDeviceReady() {
-    //hollabackStartup();	
-};
-
-
 var hollabackApplication ={
 		
 		bootstrapper: (function(){
@@ -87,6 +65,8 @@ var hollabackApplication ={
 		var running = false;
 		var bootstrapper; 
 		var pageNavigator;
+		var userInformation;;
+		var userLoginViewModel
 		
 		function isRunning(){
             return running;
@@ -96,7 +76,8 @@ var hollabackApplication ={
 			running = true;
 			pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
-			var userInformation = new user.userInformation(urlConfig);
+			userInformation = new user.userInformation(urlConfig);
+			userLoginViewModel = new userViewModels.loginViewModel(userInformation);	
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
@@ -113,7 +94,20 @@ var hollabackApplication ={
 			
 			getPageNavigator:function(){
 				return pageNavigator;
-			}
+			},
+			
+			getUserInformation:function(){
+				userInformation.read();
+				return userInformation;
+			},
+			
+			getLoginViewModel:function(){
+				return userLoginViewModel;
+			},
+			
+			resetLoginViewModel:function(){
+				userLoginViewModel.reset();
+			},
 		}
 		})(),
 	

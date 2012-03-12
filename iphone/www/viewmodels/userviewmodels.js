@@ -48,6 +48,14 @@ var userViewModels = {
 			$.mobile.changePage("views/signup.html");
     	};
     	
+    	self.reset = function(){
+    		self.userModel.read();
+    		self.statusText(null);
+    		self.errors = ko.validation.group(self);    	
+    		self.userName(self.userModel.userName);
+    		self.password(self.userModel.password);
+    	};
+    	
     	function userLoggedIn(message){
     		self.statusText(message);
     		if(self.userModel.isSignedIn()){

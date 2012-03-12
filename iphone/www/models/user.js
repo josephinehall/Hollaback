@@ -13,7 +13,7 @@ var user = {
     	self.password;
     	self.emailAddress;
     	self.selectedLocation;
-    	self.hasAuthenticated;
+    	self.hasAuthenticated;	
 			
 		self.read = function(){      			  
 			self.userName = window.localStorage.getItem(userNameStorageKey);			
