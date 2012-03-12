@@ -3,6 +3,13 @@ function hollabackStartup(){
 	hollabackApplication.bootstrapper.run();
 };
 
+$( document ).bind( "mobileinit", function() {
+    // Make your jQuery Mobile framework configuration changes here!
+    $.mobile.allowCrossDomainPages = true;
+    $.mobile.pushStateEnabled = false;
+});
+
+
 
 $('#indexPage').live('pageinit',function(event,ui){
 
