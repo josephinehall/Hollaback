@@ -47,6 +47,12 @@ $("#signupPage").live("pageinit",function(event){
 		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
+ $('#shareStoryPage').live('pageinit', function(event, ui){
+ 		alert("PENIS");
+ 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel();
+ 		ko.applyBindings(shareStoryViewModel, this);
+ });
+
 
 var hollabackApplication ={
 		

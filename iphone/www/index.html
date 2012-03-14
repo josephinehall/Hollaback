@@ -16,6 +16,7 @@
     <script src="models/user.js" charset="utf-8" type="text/javascript"></script>
     <script src="viewmodels/userviewmodels.js" charset="utf-8" type="text/javascript"></script>  
     <script src="viewmodels/hollabackviewmodels.js" charset="utf-8" type="text/javascript"></script>  
+    <script src="viewmodels/shareviewmodel.js" charset="utf-8" type="text/javascript"></script>  
     <script src="main.js" type="text/javascript"></script>   	
     <script src="scripts/jquery.mobile-1.0.1.js" type="text/javascript"></script> 
   </head>
@@ -113,15 +114,43 @@
       
      <div data-role="page" id="mapPage">
           
-          <div data-role="header">
-              <h1>Map Page</h1>
-          </div><!-- /header -->
-          
-          <div data-role="content">	
-            <h3>insert map shit here</h3>
-              
-          </div><!-- /content -->
-          
+		    <div data-role="header">
+				<h1>Map Page</h1>
+				<a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
+			</div><!-- /header -->
+			
+			<div data-role="content" class="ui-mobile" style="padding:0; margin: 0;">				
+			
+				<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+						
+				<script type="text/javascript">				
+					$(document).ready(function() {
+						//alert("Loading the page");
+												
+						var myLatlng = new google.maps.LatLng(-41.2924945, 174.7732353);					
+						
+						var map = new google.maps.Map(document.getElementById('map_canvas'), {
+							center: myLatlng, 
+							zoom: 13,
+							mapTypeId: google.maps.MapTypeId.ROADMAP,
+							key: 'ABQIAAAAwKDTDkhucqHv_wpXKXZrxSM3jwuDZFWueHXkEvbQnmOGW1gUhSHFE07YUT0JMwuC9RjSS4Z9fyATQ',
+							sensor: true
+							
+						});
+						
+						var tableid = 426994;
+						var layer = new google.maps.FusionTablesLayer(tableid);
+						layer.setMap(map);
+					});
+				</script>-->
+				
+				<div id="map_canvas" style="width:100%; height:100%; position: absolute; margin: 0; padding: 0;">
+			
+				</div>			
+			
+			
+			</div><!-- /content -->                     
+
       </div><!-- /map page -->
       
       
@@ -129,21 +158,22 @@
           
           <div data-role="header">
               <h1>Share your story</h1>
-              <a href="menu.html" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
+              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
           </div><!-- /header -->
           
           <div data-role="content">	
           
            	<div data-role="fieldcontain">
-				<fieldset data-role="controlgroup">
-					<legend></legend>
-				     	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" value="firstPerson" data-bind="checked: bystanderFlag" />
-				     	<label for="radio-choice-1">I experienced this</label>
-				
-				     	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2" value="secondPerson" data-bind="checked: bystanderFlag" />
-				     	<label for="radio-choice-2">I saw this happen</label>
+           		<input type="text" data-bind="value: bystander"/>
+           		<fieldset data-role="controlgroup">
+					<legend>Bystander:</legend>
+					 	<input type="checkbox" name="bystanderchoice" id="experience" value="false" data-bind="checked: bystander"/>
+					 	<label for="experience">Cat</label>
+					
+					 	<input type="checkbox" name="bystanderchoice" id="bystander" value="true" data-bind="checked: bystander" />
+					 	<label for="bystander">Dog</label>
 				</fieldset>
-				</div>
+			</div>
 				
 				<div data-role="fieldcontain">
 				 	<fieldset data-role="controlgroup">
@@ -181,14 +211,14 @@
 						
 				    </fieldset>
 				 
-				 <a href="" data-role="button" data-inline="true" data-theme="b">Upload Photo</a>     
+				 	<a href="" data-role="button" data-inline="true" data-theme="b">Upload Photo</a>     
 				    
 				 <div data-role="fieldcontain">
 					<label for="textarea">Story (optional)</label>
 					<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
-				</div>   
+				 </div>   
 				    
-				 <a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b">Submit</a>   
+				 	<a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b">Submit</a>   
 				</div>
          
           </div><!-- /content -->
@@ -199,17 +229,40 @@
       <div data-role="page" id="aboutPage">
           
           <div data-role="header">
-              <h1>about Page</h1>
+              <h1>About</h1>
+              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
           </div><!-- /header -->
           
           <div data-role="content">	
-            <h3>COOOOL</h3>
-              
+           	<h2>About Hollaback!</h2> 
+           	<p>Hollaback is a movement to end street harassment.  We believe that everyone has the right to feel safe, confident, and sexy when they walk down the street.</p>
+
+			<p>By holla'ing back, you bring attention to street harassment and make a powerful case for why it must end.  When the time comes to hollaback, you will have a choice to hollaback with or without a picture.  The picture helps to tell a story, and can include anything from the turd himself, to your shoes or the street scene. If you don't feel safe, don't take one. The next step is to identify from a list the type of harassment. Set your location and enter your story details. Then, viola! Your hollaback has been submitted. If you hollaback'ed when you were not online, your hollaback will be queued up to be sent when your connection goes back up.</p> 
+
+			<p>Once submitted you will receive an email asking you to tell the rest of your story.  If you submitted your hollaback in error, this is the time to tell us. Your full story will be reviewed and mapped on our site (ihollaback.org), where it will inspire the world to take action and end street harassment.</p>
+
+			<p>Don't just walk on... Hollaback!</p>
+                        
+			<p>This app was developed in partnership Hollaback International by Amy Palamountain and Josephine Hall. Any problems with this app should be sent to <a href="mailto:info@ihollaback.org">info@ihollaback.org</a></p>          
           </div><!-- /content -->
+
           
       </div><!-- /about page -->
 
-      
+      <div data-role="page" id="congratsPage">
+          
+          <div data-role="header">
+              <h1>Congrats!</h1>
+              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Menu</a>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+           	<h2>Thanks!</h2> 
+           	<img src="content/images/congrats.png" />
+           	<p>Now we are one step closer to ending street harassment. An email will be sent to you so you can tell us the rest of the story.  If you are not online, your hollaback will be sent the next time you are.</p>        
+          </div><!-- /content -->
+          
+      </div><!-- /Congrats page -->
 
      
   </body>
