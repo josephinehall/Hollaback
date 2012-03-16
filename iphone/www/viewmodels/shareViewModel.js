@@ -8,12 +8,25 @@ var shareViewModels = {
         
         self.harassmentTypes = ko.observableArray(["verbal","stalking","homophobic","transphobic","assault","groping","racist","other"]);
         
-        self.useGPS = ko.observable("useGPS");
+        self.useGPS = ko.observable(false);
+        
+        self.gpsLocation = ko.computed(function() {
+			return self.useGPS();
+   		}, self);
+   		
+        
+		self.manualLocation = ko.computed(function() {
+			return !self.useGPS();   	
+   		}, self);
+
         
         self.manualAddress = ko.observable();
+        self.gpsAddress = ko.observable();
         self.verifyAddress = ko.observable();
-        self.uploadPhoto = ko.obserable();
+        
+        self.uploadPhoto = ko.observable();
         self.story = ko.observable();
+        self.submit = ko.observable();
 	 },
 }
      

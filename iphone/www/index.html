@@ -4,8 +4,8 @@
   <title></title>
   
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-	<link rel="stylesheet" href="content/hollastyles.css"/>
-    <link rel="stylesheet" href="content/hollatheme.min.css" /> 
+
+    <link rel="stylesheet" href="content/hollaback.css" /> 
     <link rel="stylesheet" href="content/jquery.mobile.structure-1.0.1.css"/>
        
     <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
@@ -24,26 +24,20 @@
     
   <body>
   
-  	<div data-role="page" id="indexPage" >
-      <div data-role="header" data-theme="c">
-          <h1>Hollaback!</h1>
+  	<div data-role="page" id="indexPage">
+      <div data-role="header">
+          <h1>Log in</h1>
       </div><!-- /header -->
       
       <div data-role="content">	
-      
-      	<div class="loginbox">
-      		<h2>Log In</h2>
-      		<input data-bind='value: userName' required placeholder="User Name"/>					              
-			<input data-bind='value: password' required placeholder="Password"/>
+		<input data-bind='value: userName' required placeholder="User Name"/>					              
+		<input data-bind='value: password' required placeholder="Password"/>
 		
-			<p data-bind='text: statusText'></p>
-			<a data-bind='click: forgotPassword'class="ui-link" data-theme="b">Forgot Password</a>
-			<div>
-				<a data-bind='click: signup' data-role="button">Sign Up</a>
-				<a data-bind='click: login' data-role="button">Log In</a>
-			</div>	
-        </div>
-
+		<p data-bind='text: statusText'></p>
+		<a data-bind='click: forgotPassword' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Forgot Password</a>
+		<a data-bind='click: login' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Log In</a>
+		<a data-bind='click: signup' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
+           
       </div><!-- /content -->
      </div><!-- /index page --> 
            
@@ -210,14 +204,17 @@
 						<legend>Location</legend>
 						<label for="gps">Use GPS</label>
 						<input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
+					</fieldset>	
+						<div data-bind="visible: gpsLocation">
+							<p>Your current location is: <span data-bind="text: gpsAddress"></span></p> 
+						</div>
 						
-						
-						
-						<label for="name">Or Enter Manually</label>
-    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
-    					
-						<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
-				    </fieldset>
+						<div data-bind="visible: manualLocation">
+							<label for="name">Or Enter Manually</label>
+	    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
+	    					
+							<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
+				    	</div>
 				</div>    
 				 
 			    <a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: uploadPhoto">Upload Photo</a>     
@@ -273,21 +270,6 @@
           
       </div><!-- /Congrats page -->
 
-
-	<div data-role="dialog" id="validationDialog">
-		  <div data-role="header">
-              <h1>Opps - there were errors</h1>
-          </div><!-- /header -->
-          <div data-role="content">	
-          		<p>Please correct your errors</p>
-          		<ul id="errorsList">
-          			<li>Error</li>    			
-          			<li>Error</li>
-          		</ul>
-          		<a data-role="button" data-rel="back">Alright, lets try again</a>
-          </div>
-
-	</div><!-- /Validation page -->
      
   </body>
 </html>

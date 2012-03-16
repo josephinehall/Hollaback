@@ -48,7 +48,6 @@ $("#signupPage").live("pageinit",function(event){
 });
 
  $('#shareStoryPage').live('pageinit', function(event, ui){
- 		alert("PENIS");
  		var shareStoryViewModel = new shareViewModels.shareStoryViewModel();
  		ko.applyBindings(shareStoryViewModel, this);
  });
