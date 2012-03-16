@@ -68,7 +68,8 @@ var userViewModels = {
     	function validateLoginCredentials(){     	
         	var isValid = modelIsValid();
         	if (!isValid) {
-            	self.errors.showAllMessages();
+        		$.mobile.changePage('#validationDialog', {transition: 'pop', role: 'dialog'});  
+            	//self.errors.showAllMessages();
         	}
 			return isValid;
         }
@@ -111,7 +112,7 @@ var userViewModels = {
         
         function validateLoginCredentials(){     	
         	var isValid = modelIsValid();
-        	if (!isValid) {
+        	if (!isValid) {    		 
             	self.errors.showAllMessages();
         	}
 			return isValid;
