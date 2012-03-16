@@ -10,7 +10,7 @@ $('#indexPage').live('pageinit',function(event,ui){
 		ko.validation.configure({
 			registerExtenders: true,
 			messagesOnModified: true,
-			insertMessages: true,
+			insertMessages: false,
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
@@ -48,7 +48,6 @@ $("#signupPage").live("pageinit",function(event){
 });
 
  $('#shareStoryPage').live('pageinit', function(event, ui){
- 		alert("PENIS");
  		var shareStoryViewModel = new shareViewModels.shareStoryViewModel();
  		ko.applyBindings(shareStoryViewModel, this);
  });

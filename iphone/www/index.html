@@ -29,21 +29,23 @@
       		<h1> </h1>
       </div><!-- /header -->
       
-      <div data-role="content">	
-      
-      	<div class="loginbox">
-      		<h2>Log In</h2>
-      		<input data-bind='value: userName' required placeholder="User Name"/>					              
-			<input data-bind='value: password' required placeholder="Password"/>
-		
-			<p data-bind='text: statusText'></p>
-			<a data-bind='click: forgotPassword'class="ui-link-b">Forgot Password</a>
-			<div>
-				<a data-bind='click: signup' data-role="button">Sign Up</a>
-				<a data-bind='click: login' data-role="button">Log In</a>
-			</div>	
-        </div>
-
+      <div data-role="content" class="hollabacklogobackground">	
+		<div>
+		  	<div class="loginbox">
+		  		<h2>Log In</h2>
+		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
+				<input data-bind='value: password' required placeholder="Password" type="password"/>
+			
+				<a data-bind='click: forgotPassword'class="ui-link-b">Forgot Password</a>
+				<div class="loginButtonBox">
+					<a data-bind='click: signup' data-inline="true" class="signupLink">Sign Up</a>
+					<a data-bind='click: login' data-role="button" data-mini="true" data-inline="true" 
+					   data-icon="arrow-r" data-iconpos="right" class="loginButton">
+						Log In
+					</a>
+				</div>	
+		    </div>
+		</div>
       </div><!-- /content -->
      </div><!-- /index page --> 
            
@@ -274,20 +276,6 @@
       </div><!-- /Congrats page -->
 
 
-	<div data-role="dialog" id="validationDialog">
-		  <div data-role="header">
-              <h1>Opps - there were errors</h1>
-          </div><!-- /header -->
-          <div data-role="content">	
-          		<p>Please correct your errors</p>
-          		<ul id="errorsList">
-          			<li>Error</li>    			
-          			<li>Error</li>
-          		</ul>
-          		<a data-role="button" data-rel="back">Alright, lets try again</a>
-          </div>
-
-	</div><!-- /Validation page -->
-     
+	     
   </body>
 </html>
