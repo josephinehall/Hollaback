@@ -4,17 +4,17 @@
 	
 }
 
-.loginbox{
+.contentbox{
 	padding-top: 80px;
 	margin: 10px;
 }
 
-.loginbox input{
+.contentbox input{
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
 
-.loginbox h2{
+.contentbox h2{
 	margin-bottom: 5px;
 }
 
@@ -28,6 +28,10 @@
 
 
 .loginButton{
+	float: right;
+}
+
+.nextButton{
 	float: right;
 }
 

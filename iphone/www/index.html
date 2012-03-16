@@ -31,7 +31,7 @@
       
       <div data-role="content" class="hollabacklogobackground">	
 		<div>
-		  	<div class="loginbox">
+		  	<div class="contentbox">
 		  		<h2>Log In</h2>
 		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
 				<input data-bind='value: password' required placeholder="Password" type="password"/>
@@ -51,27 +51,25 @@
            
      <div data-role="page" id="locationPage">
         
-          <div data-role="header">
+          <div data-role="header"  data-theme="c">
             <h1>Choose Location</h1>
         </div><!-- /header -->
         
-        <div data-role="content">	
-
-        
-			<p>Select your local Hollaback to submit your stories:</p>
-		          			
-			<div data-role="fieldcontain">
-				<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
-			</div>
+        <div data-role="content" class="hollabacklogobackground">	
+			<div class="contentbox">
 			
-		    
-		    <div data-bind="visible: selectedLocation">  		
-				<label>You have selected:</label>
-				<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
+				<h2>Your local Hollaback:</h2>
+			          			
+				<div data-role="fieldcontain">
+					<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
+				</div>
+				
+			
+			   <a href="#indexPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>		
+			   <a href="#signupPage" data-role="button" data-mini="true" data-inline="true" 
+					   data-icon="arrow-r" data-iconpos="right" class="nextButton">Next</a>
 			</div>
-		
-		   <a href="#signupPage" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Next</a>
-		
+
             
         </div><!-- /content -->                 
      </div><!-- /location page --> 
