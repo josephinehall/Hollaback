@@ -4,8 +4,9 @@
   <title></title>
   
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-	<link rel="stylesheet" href="content/hollastyles.css"/>
-    <link rel="stylesheet" href="content/hollatheme.min.css" /> 
+    
+    <link rel="stylesheet" href="content/hollastyles.css" /> 
+    <link rel="stylesheet" href="content/hollatheme.css" /> 
     <link rel="stylesheet" href="content/jquery.mobile.structure-1.0.1.css"/>
        
     <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
@@ -24,6 +25,7 @@
     
   <body>
   
+
   	<div data-role="page" id="indexPage" >
       <div data-role="header" data-theme="c">
       		<h1> </h1>
@@ -46,9 +48,10 @@
 				</div>	
 		    </div>
 		</div>
-      </div><!-- /content -->
-     </div><!-- /index page --> 
-           
+	  </div>
+	</div><!-- /Index page -->
+		
+
      <div data-role="page" id="locationPage">
         
           <div data-role="header"  data-theme="c">
@@ -210,14 +213,17 @@
 						<legend>Location</legend>
 						<label for="gps">Use GPS</label>
 						<input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
+					</fieldset>	
+						<div data-bind="visible: gpsLocation">
+							<p>Your current location is: <span data-bind="text: gpsAddress"></span></p> 
+						</div>
 						
-						
-						
-						<label for="name">Or Enter Manually</label>
-    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
-    					
-						<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
-				    </fieldset>
+						<div data-bind="visible: manualLocation">
+							<label for="name">Or Enter Manually</label>
+	    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
+	    					
+							<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
+				    	</div>
 				</div>    
 				 
 			    <a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: uploadPhoto">Upload Photo</a>     
@@ -273,7 +279,5 @@
           
       </div><!-- /Congrats page -->
 
-
-	     
   </body>
 </html>
