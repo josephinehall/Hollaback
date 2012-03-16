@@ -27,8 +27,32 @@ var userViewModels = {
     loginViewModel: function(userModel){
     	var self = this;
     	self.userModel = userModel;
-       	self.userName = ko.observable(userModel.userName).extend({ required: true });
-    	self.password = ko.observable(userModel.password).extend({ required: true });
+       	self.userName = ko.observable(userModel.userName).extend({required: { message: 'Please supply your user name.' }})
+														 .extend({validation: {
+														        validator: function (val, min) {
+														            return val.length >= min;
+														        },
+														        message: 'User name must be at least 5 characters.',
+														        params: 5
+														    	}
+															})
+														  .extend({validation: {
+														        validator: function (val, max) {
+														            return val.length < max;
+														        },
+														        message: 'User name must be less than 15 characters.',
+														        params: 15
+														    	}
+															});
+    	self.password = ko.observable(userModel.password).extend({required: { message: 'Please supply your password.' }})
+														 .extend({validation: {
+														        validator: function (val, min) {
+														            return val.length >= min;
+														        },
+														        message: 'Password must be at least 6 characters.',
+														        params: 6
+														    	}
+															});
     	self.statusText = ko.observable();  	
     	self.errors = ko.validation.group(self);
     	
@@ -68,15 +92,34 @@ var userViewModels = {
     	function validateLoginCredentials(){     	
         	var isValid = modelIsValid();
         	if (!isValid) {
-        		$.mobile.changePage('#validationDialog', {transition: 'pop', role: 'dialog'});  
-            	//self.errors.showAllMessages();
+        		showErrors();
         	}
 			return isValid;
-        }
+        };
         
         function modelIsValid(){
         	return self.errors().length == 0;
+        };
+        
+        function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
         }
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };
     	
     },
     

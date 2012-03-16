@@ -10,7 +10,7 @@ $('#indexPage').live('pageinit',function(event,ui){
 		ko.validation.configure({
 			registerExtenders: true,
 			messagesOnModified: true,
-			insertMessages: true,
+			insertMessages: false,
 			parseInputAttributes: true,
 			messageTemplate: null
 		});

@@ -4,8 +4,9 @@
   <title></title>
   
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-
-    <link rel="stylesheet" href="content/hollaback.css" /> 
+    
+    <link rel="stylesheet" href="content/hollastyles.css" /> 
+    <link rel="stylesheet" href="content/hollatheme.css" /> 
     <link rel="stylesheet" href="content/jquery.mobile.structure-1.0.1.css"/>
        
     <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
@@ -24,46 +25,54 @@
     
   <body>
   
-  	<div data-role="page" id="indexPage">
-      <div data-role="header">
-          <h1>Log in</h1>
+
+  	<div data-role="page" id="indexPage" >
+      <div data-role="header" data-theme="c">
+      		<h1> </h1>
       </div><!-- /header -->
       
-      <div data-role="content">	
-		<input data-bind='value: userName' required placeholder="User Name"/>					              
-		<input data-bind='value: password' required placeholder="Password"/>
+      <div data-role="content" class="hollabacklogobackground">	
+		<div>
+		  	<div class="contentbox">
+		  		<h2>Log In</h2>
+		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
+				<input data-bind='value: password' required placeholder="Password" type="password"/>
+			
+				<a data-bind='click: forgotPassword'class="ui-link-b">Forgot Password</a>
+				<div class="loginButtonBox">
+					<a data-bind='click: signup' data-inline="true" class="signupLink">Sign Up</a>
+					<a data-bind='click: login' data-role="button" data-mini="true" data-inline="true" 
+					   data-icon="arrow-r" data-iconpos="right" class="loginButton">
+						Log In
+					</a>
+				</div>	
+		    </div>
+		</div>
+	  </div>
+	</div><!-- /Index page -->
 		
-		<p data-bind='text: statusText'></p>
-		<a data-bind='click: forgotPassword' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Forgot Password</a>
-		<a data-bind='click: login' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Log In</a>
-		<a data-bind='click: signup' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
-           
-      </div><!-- /content -->
-     </div><!-- /index page --> 
-           
+
      <div data-role="page" id="locationPage">
         
-          <div data-role="header">
+          <div data-role="header"  data-theme="c">
             <h1>Choose Location</h1>
         </div><!-- /header -->
         
-        <div data-role="content">	
-
-        
-			<p>Select your local Hollaback to submit your stories:</p>
-		          			
-			<div data-role="fieldcontain">
-				<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
-			</div>
+        <div data-role="content" class="hollabacklogobackground">	
+			<div class="contentbox">
 			
-		    
-		    <div data-bind="visible: selectedLocation">  		
-				<label>You have selected:</label>
-				<span data-bind="text: selectedLocation() ? selectedLocation().locationName : 'unknown'"></span>
+				<h2>Your local Hollaback:</h2>
+			          			
+				<div data-role="fieldcontain">
+					<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
+				</div>
+				
+			
+			   <a href="#indexPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>		
+			   <a href="#signupPage" data-role="button" data-mini="true" data-inline="true" 
+					   data-icon="arrow-r" data-iconpos="right" class="nextButton">Next</a>
 			</div>
-		
-		   <a href="#signupPage" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Next</a>
-		
+
             
         </div><!-- /content -->                 
      </div><!-- /location page --> 
@@ -270,6 +279,5 @@
           
       </div><!-- /Congrats page -->
 
-     
   </body>
 </html>
