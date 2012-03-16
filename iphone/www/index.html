@@ -169,63 +169,66 @@
           
           <div data-role="content">	
           
-           	<div data-role="fieldcontain">
-           		<input type="text" data-bind="value: bystander"/>
-           		<fieldset data-role="controlgroup">
-					<legend>Bystander:</legend>
-					 	<input type="checkbox" name="bystanderchoice" id="experience" value="false" data-bind="checked: bystander"/>
-					 	<label for="experience">Cat</label>
-					
-					 	<input type="checkbox" name="bystanderchoice" id="bystander" value="true" data-bind="checked: bystander" />
-					 	<label for="bystander">Dog</label>
-				</fieldset>
-			</div>
+		       	<div data-role="fieldcontain">
+		       		<fieldset data-role="controlgroup">
+						<legend>Bystander:</legend>
+						 	<input type="radio" id="experience" name="bystanderchoice" value="experience" data-bind="checked: bystander" />
+						 	<label for="experience">I experienced this</label>
+						
+						 	<input type="radio" id="bystander" name="bystanderchoice" value="bystander" data-bind="checked: bystander" />
+						 	<label for="bystander">I saw this happen</label>
+					</fieldset>
+				</div>
 				
 				<div data-role="fieldcontain">
 				 	<fieldset data-role="controlgroup">
 						<legend>Harassment Types:</legend>
-						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" value="verbal" data-bind="checked: harassmentTypes" />
-						<label for="checkbox-1">Verbal</label>
-						<input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" value="stalking" data-bind="checked: harassmentTypes" />
-						<label for="checkbox-2">Stalking</label>						
-						<input type="checkbox" name="checkbox-3" id="checkbox-3" class="custom" value="homophobic" data-bind="checked: harassmentTypes" />
-						<label for="checkbox-3">Homophobic</label>
+						<input type="checkbox" name="verbal" id="verbal" class="custom" value="verbal" data-bind="checked: harassmentTypes" />
+						<label for="verbal">Verbal</label>
+						<input type="checkbox" name="stalking" id="stalking" class="custom" value="stalking" data-bind="checked: harassmentTypes" />
+						<label for="stalking">Stalking</label>						
+						<input type="checkbox" name="homophobic" id="homophobic" class="custom" value="homophobic" data-bind="checked: harassmentTypes" />
+						<label for="homophobic">Homophobic</label>
 						
-						<input type="checkbox" name="checkbox-4" id="checkbox-4" class="custom" value="transphobic" data-bind="checked: harassmentTypes"  />
-						<label for="checkbox-4">Transphobic</label>
+						<input type="checkbox" name="transphobic" id="transphobic" class="custom" value="transphobic" data-bind="checked: harassmentTypes"  />
+						<label for="transphobic">Transphobic</label>
 						
-						<input type="checkbox" name="checkbox-5" id="checkbox-5" class="custom" value="assault" data-bind="checked: harassmentTypes"  />
-						<label for="checkbox-5">Assault</label>
+						<input type="checkbox" name="assault" id="assault" class="custom" value="assault" data-bind="checked: harassmentTypes"  />
+						<label for="assault">Assault</label>
 						
-						<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" value="groping" data-bind="checked: harassmentTypes"  />
-						<label for="checkbox-6">Groping</label>
-						<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" value="racist" data-bind="checked: harassmentTypes"  />
-						<label for="checkbox-7">Racist</label>
-						<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" value="other" data-bind="checked: harassmentTypes"  />
-						<label for="checkbox-8">Other</label>
+						<input type="checkbox" name="groping" id="groping" class="custom" value="groping" data-bind="checked: harassmentTypes"  />
+						<label for="groping">Groping</label>
+						<input type="checkbox" name="racist" id="racist" class="custom" value="racist" data-bind="checked: harassmentTypes"  />
+						<label for="racist">Racist</label>
+						<input type="checkbox" name="other" id="other" class="custom" value="other" data-bind="checked: harassmentTypes"  />
+						<label for="other">Other</label>
 				    </fieldset>
 				</div>
 				
 				<div data-role="fieldcontain">
 				 	<fieldset data-role="controlgroup">
 						<legend>Location</legend>
-						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" data-bind="checked: useGPS" />
-						<label for="checkbox-1">Use GPS</label>
+						<label for="gps">Use GPS</label>
+						<input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
+						
+						
 						
 						<label for="name">Or Enter Manually</label>
-    					<input type="text" name="address" id="address" value=""  />
-						
+    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
+    					
+						<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
 				    </fieldset>
+				</div>    
 				 
-				 	<a href="" data-role="button" data-inline="true" data-theme="b">Upload Photo</a>     
+			    <a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: uploadPhoto">Upload Photo</a>     
 				    
 				 <div data-role="fieldcontain">
 					<label for="textarea">Story (optional)</label>
-					<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+					<textarea cols="40" rows="8" name="textarea" id="textarea" data-bind="value: story"></textarea>
 				 </div>   
 				    
-				 	<a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b">Submit</a>   
-				</div>
+				 	<a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b" data-bind="click: submit">Submit</a>   
+			</div>
          
           </div><!-- /content -->
           
