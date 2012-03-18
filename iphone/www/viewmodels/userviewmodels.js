@@ -65,7 +65,7 @@ var userViewModels = {
     	};
     	
     	self.forgotPassword = function(){
-    		alert("forgot password");
+    		$.mobile.changePage("#forgotPasswordPage");
     	};
     	
     	self.signup = function(){	
@@ -150,8 +150,7 @@ var userViewModels = {
         	if(self.model.isSignedIn()){
 				$.mobile.changePage("#menuPage");
         	}
-        }
-       
+        }   
         
         function validateLoginCredentials(){     	
         	var isValid = modelIsValid();
@@ -165,6 +164,16 @@ var userViewModels = {
         	return self.errors().length == 0;
         }
 		
+	},
+	
+	forgotPasswordViewModel: function(userModel){
+		var self = this; 	
+		self.model = userModel;
+		
+		self.sendEmail = function() {	
+			self.model.sendPasswordResetRequest();
+        };
+
 	},
 
 };
