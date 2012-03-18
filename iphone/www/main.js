@@ -52,7 +52,8 @@ $("#forgotPasswordPage").live("pageinit",function(event){
 });
 
  $('#shareStoryPage').live('pageinit', function(event, ui){
- 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel();
+		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
+ 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
  		ko.applyBindings(shareStoryViewModel, this);
  });
 
@@ -69,6 +70,7 @@ var hollabackApplication ={
 		var userInformation;
 		var userLoginViewModel;
 		var menuPageViewModel;
+		var storyInformation;
 		
 		function isRunning(){
             return running;
@@ -81,6 +83,7 @@ var hollabackApplication ={
 			userInformation = new user.userInformation(urlConfig);
 			userLoginViewModel = new userViewModels.loginViewModel(userInformation);
 			menuPageViewModel =	new hollabackViewModels.menuPageViewModel(userInformation);
+			storyInformation = new story.storyInformation(urlConfig,userInformation);
 			if(userInformation.isSignedIn())
 			{
 				pageNavigator.navigateToMainMenu();
@@ -119,6 +122,11 @@ var hollabackApplication ={
 			
 			resetMenuPageViewModel:function(){
 				menuPageViewModel.reset();
+			},
+			
+			getStoryInformation:function(){
+				storyInformation.read();
+				return storyInformation;
 			},
 		}
 		})(),

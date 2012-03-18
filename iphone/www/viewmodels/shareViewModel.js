@@ -1,8 +1,8 @@
 var shareViewModels = {
 
-	shareStoryViewModel: function(){
+	shareStoryViewModel: function(storyInformation){
 		var self = this;    
-   
+   		self.storyInformation = storyInformation;
 		 
         self.bystander = ko.observable("bystander");
         
@@ -26,9 +26,8 @@ var shareViewModels = {
         
         self.uploadPhoto = ko.observable();
         self.story = ko.observable();
-        self.submit = ko.observable();
+        self.submit = function(){};
 	 },
 }
      
-    // ... then later ...
-    //shareStoryViewModel.bystander; will contain the value that is selected by the user
+   

@@ -28,6 +28,15 @@ var config = {
         this.getLoginEndRequestBoundary = function(){
             return "\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
         };
+        
+                
+        this.getStoryUrl = function(){
+            return backendPrefix + "incoming/";
+        };
+        
+        this.getStoryContentType = function(){
+        	return "multipart/form-data" + boundary;
+        };
 	},
 
 };
