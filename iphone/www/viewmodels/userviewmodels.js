@@ -1,10 +1,11 @@
 var userViewModels = {
 
-	//Sets up the location options
     userLocationViewModel: function(userInformation) {   
     	var self = this;
-    	var userInformation = userInformation;
-    	self.availableLocations = ko.observableArray();
+    	self.userInformation = userInformation;  
+        self.selectedLocation = ko.observable().extend({required: { message: 'Please select your location.' }});        
+    	self.availableLocations = ko.observableArray();	
+    	self.errors = ko.validation.group(self);
     	$.ajax({
     		url: 'http://testbackend.ihollaback.com/localiPhone/',
 			dataType: 'jsonp',
@@ -17,11 +18,42 @@ var userViewModels = {
 				}
     	});
     	
-        self.selectedLocation = ko.observable(); // Nothing selected by default
+           self.setLocation = function(){
+        	var isValid = modelIsValid();
+        	if(isValid)
+        	{      		
+        		userInformation.setLocation(self.selectedLocation());
+        		$.mobile.changePage("#signupPage");
+        	}else
+        	{
+        		showErrors();
+        	}
+        };
         
-        self.setLocation = ko.computed(function(){
-        	userInformation.setLocation(self.selectedLocation());
-        });
+      	function modelIsValid(){
+        	return self.errors().length == 0;
+        };
+        
+        function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
+        }
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };
+
     },
     
     loginViewModel: function(userModel){
