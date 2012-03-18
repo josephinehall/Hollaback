@@ -55,8 +55,10 @@
 
      <div data-role="page" id="locationPage">
         
-          <div data-role="header"  data-theme="c">
+          <div data-role="header"  data-theme="c">          
+			<a href="#indexPage" data-role="button" data-direction="reverse" data-mini="true" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>	
             <h1>Choose Location</h1>
+		    <a href="#signupPage" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right" class="nextButton">Next</a>
         </div><!-- /header -->
         
         <div data-role="content" class="hollabacklogobackground">	
@@ -67,43 +69,39 @@
 				<div data-role="fieldcontain">
 					<select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedLocation, optionsCaption: 'Choose...'"></select>
 				</div>
-				
-			
-			   <a href="#indexPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>		
-			   <a href="#signupPage" data-role="button" data-mini="true" data-inline="true" 
-					   data-icon="arrow-r" data-iconpos="right" class="nextButton">Next</a>
-			</div>
-
-            
+			</div>          
         </div><!-- /content -->                 
      </div><!-- /location page --> 
       
           
       <div data-role="page" id="signupPage">
 			
-          <div data-role="header">
+          <div data-role="header" data-theme="c">
+          	<a href="#locationPage" data-role="button" data-direction="reverse" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
               <h1>Sign Up</h1>
           </div><!-- /header -->
           
-          <div data-role="content">	            	
-
-			<input data-bind='value: userName, valueUpdate: "afterkeydown"' required placeholder="User Name"/>					              
-            <input data-bind='value: password' required placeholder="Password"/>
-            <input data-bind='value: password' required placeholder="Confirm Password"/>
-            <input data-bind='value: emailAddress' required pattern="@" placeholder="Email"/>           
-            <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
+        <div data-role="content" class="hollabacklogobackground">	
+			<div class="contentbox">
 			
-			<p data-bind='text: responseText'></p>
-			<a href="#locationPage" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
-			<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Sign Up</a>
-
+				<input data-bind='value: userName, valueUpdate: "afterkeydown"' required placeholder="User Name"/>					              
+		        <input data-bind='value: password' required placeholder="Password"/>
+		        <input data-bind='value: password' required placeholder="Confirm Password"/>
+		        <input data-bind='value: emailAddress' required pattern="@" placeholder="Email"/>           
+		        <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
+				
+				<p data-bind='text: responseText'></p>
+			
+				<a data-bind='click: signin' data-role="button" data-icon="arrow-r" data-iconpos="right" >Sign Up</a>
+			</div>
       	 </div><!-- /content -->
      </div><!-- /sign up page -->   
      
      
       <div data-role="page" id="forgotPasswordPage">
         
-          <div data-role="header"  data-theme="c">
+        <div data-role="header"  data-theme="c">
+        	<a data-role="button"data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
             <h1>Forgot password?</h1>
         </div><!-- /header -->
         
@@ -115,7 +113,7 @@
 					We are sorry, but we don't have the ability to reset passwords right now.
 					<br/>
 				 	<strong>But the Hollaback team can reset your password for you</strong>
-				 	click bellow, to send an email to the team.			 	
+				 	,click below to send an email to the team.			 	
 				</p>
 				
 				<a data-role="button" data-bind="click: sendEmail">Send Email</a>
