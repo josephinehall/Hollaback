@@ -45,32 +45,27 @@ var user = {
         };
         
         self.signUp = function(userNameToSet,passwordToSet,emailToSet,callback){
-        
-        	// note: this xml body is formatted as such because the server is expects this exact format. This 
-        	//shoud be in future a json request over ssl. 
-            var signuprequest = "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n<hollaback_signup>\n<username>"+userNameToSet+"</username>\n<password>"+passwordToSet+"</password>\n<email>"+emailToSet+"</email>\n</hollaback_signup>\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
-      
-  
-			 var signUpUrl = "testbackend.ihollaback.com/signup/";
+              		
+      		var signupMessage = new Object();
+      		signupMessage.username = userNameToSet;
+      		signupMessage.password = passwordToSet;
+      		signupMessage.email = emailToSet;
+      		var message = jQuery.param(signupMessage);
 			 $.ajax({
 			         type: 'POST',
 			         url: urlConfig.getSignupUrl(),
-			         data:signuprequest,
-			         dataType: 'xml',
-			         contentType:urlConfig.getSignupContentType(),
-			         success: function(response){			         
-							         		 var status = $(response).find('status').text();
-											 var message = $(response).find('msg').text();
-											 if(status == 'error')
-											 {
-											  	callback(message);
-											 }
-											 else
-											 {
-											  	setAuthenticationSuccessful();  	
-							         			setUserInformation(userNameToSet,passwordToSet,emailToSet);
-											  	callback("Sign Up Successful");
-											 }						         		
+			         data: message,
+			         success: function(response){	
+								 if(response == 'OK')
+								 {
+								  	setAuthenticationSuccessful();  	
+				         			setUserInformation(userNameToSet,passwordToSet,emailToSet);
+								  	callback("Sign Up Successful");
+								 }
+								 else
+								 {
+								  	callback(response);
+								 }						         		
 			         		},
 			         error: function(xhr, status, error){callback("There was an error");},
 			         });
