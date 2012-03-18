@@ -34,8 +34,12 @@ $("#signupPage").live("pageinit",function(event){
 		var userInformation = hollabackApplication.bootstrapper.getUserInformation();
         var userSignUpPage = new userViewModels.signUpViewModel(userInformation);
         ko.applyBindings(userSignUpPage,this);
+});
 
-		
+$("#forgotPasswordPage").live("pageinit",function(event){
+		var userInformation = hollabackApplication.bootstrapper.getUserInformation();
+        var forgotPasswordViewModel = new userViewModels.forgotPasswordViewModel(userInformation);
+        ko.applyBindings(forgotPasswordViewModel,this);
 });
 
  $('#menuPage').live('pageinit', function(event, ui){  
