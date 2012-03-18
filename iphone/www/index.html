@@ -84,11 +84,11 @@
         <div data-role="content" class="hollabacklogobackground">	
 			<div class="contentbox">
 			
-				<input data-bind='value: userName, valueUpdate: "afterkeydown"' required placeholder="User Name"/>					              
-		        <input data-bind='value: password' required placeholder="Password"/>
-		        <input data-bind='value: password' required placeholder="Confirm Password"/>
-		        <input data-bind='value: emailAddress' required pattern="@" placeholder="Email"/>           
-		        <input data-bind='value: emailAddress' required pattern="@" placeholder="Confirm Password"/>
+				<input data-bind='value: userName' required placeholder="User Name" error-invalid="Enter a user name"/>					              
+		        <input data-bind='value: password' type="password" required placeholder="Password" error-invalid="Enter a password"/>
+		        <input data-bind='value: confirmPassword' type="password" placeholder="Confirm Password" />
+		        <input data-bind='value: emailAddress' type="email" required pattern="@" placeholder="Email" error-invalid="Enter a valid email address"/>           
+		        <input data-bind='value: confirmEmail' type="email" placeholder="Confirm Email"/>
 				
 				<p data-bind='text: responseText'></p>
 			
