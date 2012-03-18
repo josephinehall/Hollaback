@@ -28,7 +28,7 @@ var user = {
             window.localStorage.setItem(passwordStorageKey, self.password);
             window.localStorage.setItem(emailStorageKey, self.emailAddress);
             window.localStorage.setItem(locationStorageKey, self.selectedLocation); 
-            window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated)          
+            window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated);          
 		};
 		
 		self.setLocation = function(locationName){
