@@ -26,8 +26,9 @@ $('#indexPage').live('pagebeforeshow',function(event,ui){
 });
 
 $('#locationPage').live('pageinit', function(event, ui){
-       var userInformation = hollabackApplication.bootstrapper.getUserInformation();
-       var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
+       var userInformation = hollabackApplication.bootstrapper.getUserInformation();  
+	   var hollbackchapters = hollabackApplication.bootstrapper.getHollabackChapers();
+       var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation,hollbackchapters);
        ko.applyBindings(locationPageViewModel,this);
 });
 

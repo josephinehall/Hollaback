@@ -3,25 +3,40 @@ var hollabackLocation = {
 
 	hollabackChapters: function(urlConfig){
 		var self = this;
+		self.chapters = [];
 		self.urlConfig = urlConfig;
 		
 		self.getAllChapters = function(callback){		
-			$.ajax({
-    		url: self.urlConfig.getHollabackChaptersUrl(),
-			dataType: 'jsonp',
-			success: function(data){
-				var chapters =[];
-				var jsonText = JSON.stringify(data);
-				var array = jQuery.parseJSON(jsonText);
-				for(key in array) {
-					chapters.push(new user.location(key));
-				}
-				callback(chapters);
+			if(self.chapters.length == 0){
+				$.ajax({
+					url: self.urlConfig.getHollabackChaptersUrl(),
+					dataType: 'jsonp',
+					success: function(data){
+						var jsonText = JSON.stringify(data);
+						var array = jQuery.parseJSON(jsonText);
+						for(key in array) {
+							var location = array[key];
+							self.chapters.push(new hollabackLocation.hollabackLocation(location.latitude,location.longitude,location.subdomain,location.name));
+						}
+						callback(self.chapters);
+					}
+				});
+			}else
+			{
+				callback(self.chapters);
 			}
-    		});
+			
 		};
 		
 	},	
+	
+	hollabackLocation: function(latitude,longitude,subdomain,name){
+		var self = this;
+		self.latitude = latitude;
+		self.longitude = longitude;
+		self.subdomain = subdomain;
+		self.name = name;
+	},
 	
 	usersLocation: function(){
 		var self = this;

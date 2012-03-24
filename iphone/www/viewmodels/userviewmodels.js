@@ -1,24 +1,17 @@
 var userViewModels = {
 
-    userLocationViewModel: function(userInformation) {   
+    userLocationViewModel: function(userInformation, hollabackChapters) {   
     	var self = this;
     	self.userInformation = userInformation;  
-        self.selectedLocation = ko.observable().extend({required: { message: 'Please select your location.' }});        
+        self.selectedLocation = ko.observable().extend({required: { message: 'Please select your local hollaback.' }});        
     	self.availableLocations = ko.observableArray();	
     	self.errors = ko.validation.group(self);
-    	$.ajax({
-    		url: 'http://testbackend.ihollaback.com/localiPhone/',
-			dataType: 'jsonp',
-			success: function(data){
-				var jsonText = JSON.stringify(data);
-				var array = jQuery.parseJSON(jsonText);
-				for(key in array) {
-					self.availableLocations.push(new user.location(key));
-				}
-				}
+    	
+    	hollabackChapters.getAllChapters(function(chapters){
+    		self.availableLocations(chapters)
     	});
     	
-           self.setLocation = function(){
+        self.setLocation = function(){
         	var isValid = modelIsValid();
         	if(isValid)
         	{      		
