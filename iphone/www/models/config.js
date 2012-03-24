@@ -6,11 +6,15 @@ var config = {
 		self.boundary ="boundary=0xKhTmLbOuNdArY";
 	
 		this.getSignupUrl = function(){		
-			return backendPrefix +"signup/";         
+			return backendPrefix +"signupv2/";         
 		};
 		
         this.getLoginUrl = function(){
-            return backendPrefix + "authenticate/";
+            return backendPrefix + "authenticatev2/";
+        };
+        
+        this.getHollabackChaptersUrl = function(){
+        	return backendPrefix + "localiPhone/";
         };
         
 		this.getSignupContentType = function(){

@@ -34,7 +34,11 @@ var user = {
 		self.setLocation = function(locationName){
 			self.selectedLocation = locationName;
 			window.localStorage.setItem(locationStorageKey, self.selectedLocation);
-		}
+		};
+		
+		self.hasLocation = function(){
+			return self.selectedLocation != undefined && self.selectedLocation;
+		};
 		
 		self.isSignedIn = function(){
             return self.hasAuthenticated != undefined && self.hasAuthenticated;           
