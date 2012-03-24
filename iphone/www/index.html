@@ -154,19 +154,17 @@
           
 		    <div data-role="header" data-theme="c">	    
 				<a href="#menuPage" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-theme="b">Back</a>
-				<h1>Hollamap</h1>
+                <h1>Hollamaps</h1>
 			</div><!-- /header -->
 			
 			<div data-role="content">
-                <div data-bind="ifnot: hasLocation">
-                    <h2>Choose your local Hollaback:</h2>
-                    <div data-role="fieldcontain">
-                        <select data-bind="options: availableLocations, optionsText: 'locationName', value: selectedHollabackLocation, optionsCaption: 'Choose...'"></select>
-                    </div>
-                </div>
-                <div data-bind="if: hasLocation">
+                <div>
+                     <select data-mini="true"  data-bind="options: availableLocations, optionsText: 'name', value: selectedHollabackLocation,optionsCaption: 'Choose...'"></select>
+						
                     <div id="map_canvas"></div>
                 </div>
+               
+
 
 			</div><!-- /content -->                     
 

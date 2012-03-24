@@ -18,29 +18,28 @@ var hollabackViewModels = {
    	mapPageViewModel: function(usersLocation,hollabackChapters){  	
     	var self = this;
     	self.usersLocation = usersLocation; 
-    	self.hasLocation = ko.computed(function(){return self.usersLocation.hasLocation();},this);	
+    	self.hasLocation = ko.observable(false);	
         self.isLoadingMap = ko.observable(false);      
        	
         self.selectedHollabackLocation = ko.observable();
-        self.selectedHollabackLocation.subscribe(function(newValue){
-        	 console.log("User selected location" + newValue);   	
-        	 self.usersLocation.setHollabackLocation(newValue);
-        	 loadMap(42.74701217318067,-77.783203125); //todo this needs to pass through the hollaback locations   
-        	 hasLocation(self.usersLocation.hasLocation());   	
+        self.selectedHollabackLocation.subscribe(function(newValue){ 	
+        	self.hasLocation(true);
+			console.log("selected " + newValue.latitude +"," +newValue.longitude);  
+			alert(self.hasLocation());	
+        	loadMap(newValue.latitude,newValue.longitude);   	
         });
+        
+        self.resetMap= function(){
+        	self.hasLocation = ko.observable(self.usersLocation.hasLocation());	
+        };
  
     	self.availableLocations = ko.observableArray();	
     	
     	if(!self.hasLocation())
-    	{
-    		hollabackChapters.getAllChapters(function(chapters){
-    				
-    				for(key in chapters) {
-						self.availableLocations.push(new user.location(key));
-					}
-    				
-    		});
-    		
+    	{  		
+    		 hollabackChapters.getAllChapters(function(chapters){
+    			self.availableLocations(chapters)
+    		});		
     	}
     	else
     	{

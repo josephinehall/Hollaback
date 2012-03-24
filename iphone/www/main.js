@@ -59,10 +59,13 @@ $('#shareStoryPage').live('pageinit', function(event, ui){
 });
 
 $('#mapPage').live('pageinit',function(event,ui){
-		var userLocation = hollabackApplication.bootstrapper.getUserLocation();
-		var hollbackchapters = hollabackApplication.bootstrapper.getHollabackChapers();
-		var mapPageViewModel =new hollabackViewModels.mapPageViewModel(userLocation,hollbackchapters);	
+		var mapPageViewModel =  hollabackApplication.bootstrapper.getHollabackMapViewModel();	
 		ko.applyBindings(mapPageViewModel, this);
+});
+
+$('#mapPage').live('pagebeforeshow',function(event,ui){
+		var mapPageViewModel =  hollabackApplication.bootstrapper.getHollabackMapViewModel();	
+		mapPageViewModel.resetMap();
 });
 
 var hollabackApplication ={
@@ -79,6 +82,7 @@ var hollabackApplication ={
 		var menuPageViewModel;
 		var hollabackChapters;
 		var userLocation;
+		var hollabackMapViewModel;
 		
 		function isRunning(){
             return running;
@@ -92,6 +96,8 @@ var hollabackApplication ={
 			userLoginViewModel = new userViewModels.loginViewModel(userInformation);
 			menuPageViewModel =	new hollabackViewModels.menuPageViewModel(userInformation);
 			hollabackChapters = new hollabackLocation.hollabackChapters(urlConfig);
+			hollabackMapViewModel = new hollabackViewModels.mapPageViewModel(userLocation,hollabackChapters);
+			
 			if(userInformation.isSignedIn())
 			{
 				$.mobile.changePage("#menuPage");
@@ -137,6 +143,10 @@ var hollabackApplication ={
 			
 			getUserLocation: function(){
 				return userLocation;
+			},
+			
+			getHollabackMapViewModel: function(){
+				return hollabackMapViewModel;
 			},
 		}
 		})(),
