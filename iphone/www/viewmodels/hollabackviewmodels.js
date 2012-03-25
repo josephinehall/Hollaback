@@ -25,7 +25,6 @@ var hollabackViewModels = {
         self.selectedHollabackLocation.subscribe(function(newValue){ 	
         	self.hasLocation(true);
 			console.log("selected " + newValue.latitude +"," +newValue.longitude);  
-			alert(self.hasLocation());	
         	loadMap(newValue.latitude,newValue.longitude);   	
         });
         
@@ -34,18 +33,14 @@ var hollabackViewModels = {
         };
  
     	self.availableLocations = ko.observableArray();	
-    	
-    	if(!self.hasLocation())
-    	{  		
-    		 hollabackChapters.getAllChapters(function(chapters){
-    			self.availableLocations(chapters)
-    		});		
-    	}
-    	else
-    	{
-    		var gps = self.usersLocation.bestAvailableLocation();
-    		loadMap(gps.lat,gps.long);
-    	}
+    	hollabackChapters.getAllChapters(function(chapters){
+    		self.availableLocations(chapters)
+    		self.availableLocations.push(new hollabackLocation.hollabackLocation("","","gps","Current Location"));
+    	});		
+    
+    //	var gps = self.usersLocation.bestAvailableLocation();
+    //	loadMap(gps.lat,gps.long); //wrap in option binding...
+    
     	
     	function loadMap(lat,long){
     	 	self.isLoadingMap(true);

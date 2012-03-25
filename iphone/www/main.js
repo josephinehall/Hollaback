@@ -1,7 +1,11 @@
 
-function hollabackStartup(){    		
-	hollabackApplication.bootstrapper.run();
+document.addEventListener("deviceready", hollabackStartup, false);
+
+function hollabackStartup() {
+    hollabackApplication.bootstrapper.run();
 };
+
+
 
 
 $('#indexPage').live('pageinit',function(event,ui){
@@ -14,7 +18,6 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
-		
 		hollabackStartup();	 	 	
 		var loginViewModel = hollabackApplication.bootstrapper.getLoginViewModel();	
 	 	ko.applyBindings(loginViewModel,this);
