@@ -91,10 +91,7 @@ var hollabackLocation = {
 			 self.allows = false;
 			 self.lastTimeQueried = new Date();
 			 console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-		};
-		
-		self.updateLocation();
-		
+		};		
 	},
 	
 	

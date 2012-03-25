@@ -1,7 +1,11 @@
 
-function hollabackStartup(){    		
-	hollabackApplication.bootstrapper.run();
+document.addEventListener("deviceready", hollabackStartup, false);
+
+function hollabackStartup() {
+    hollabackApplication.bootstrapper.run();
 };
+
+
 
 
 $('#indexPage').live('pageinit',function(event,ui){
@@ -14,7 +18,6 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
-		
 		hollabackStartup();	 	 	
 		var loginViewModel = hollabackApplication.bootstrapper.getLoginViewModel();	
 	 	ko.applyBindings(loginViewModel,this);
@@ -60,10 +63,13 @@ $("#forgotPasswordPage").live("pageinit",function(event){
 });
 
 $('#mapPage').live('pageinit',function(event,ui){
-		var userLocation = hollabackApplication.bootstrapper.getUserLocation();
-		var hollbackchapters = hollabackApplication.bootstrapper.getHollabackChapers();
-		var mapPageViewModel =new hollabackViewModels.mapPageViewModel(userLocation,hollbackchapters);	
+		var mapPageViewModel =  hollabackApplication.bootstrapper.getHollabackMapViewModel();	
 		ko.applyBindings(mapPageViewModel, this);
+});
+
+$('#mapPage').live('pagebeforeshow',function(event,ui){
+		var mapPageViewModel =  hollabackApplication.bootstrapper.getHollabackMapViewModel();	
+		mapPageViewModel.resetMap();
 });
 
 var hollabackApplication ={
@@ -81,6 +87,7 @@ var hollabackApplication ={
 		var storyInformation;
 		var hollabackChapters;
 		var userLocation;
+		var hollabackMapViewModel;
 		
 		function isRunning(){
             return running;
@@ -95,6 +102,8 @@ var hollabackApplication ={
 			menuPageViewModel =	new hollabackViewModels.menuPageViewModel(userInformation);
 			storyInformation = new story.storyInformation(urlConfig,userInformation);
 			hollabackChapters = new hollabackLocation.hollabackChapters(urlConfig);
+			hollabackMapViewModel = new hollabackViewModels.mapPageViewModel(userLocation,hollabackChapters);
+			
 			if(userInformation.isSignedIn())
 			{
 				$.mobile.changePage("#menuPage");
@@ -145,6 +154,10 @@ var hollabackApplication ={
 			
 			getUserLocation: function(){
 				return userLocation;
+			},
+			
+			getHollabackMapViewModel: function(){
+				return hollabackMapViewModel;
 			},
 		}
 		})(),
