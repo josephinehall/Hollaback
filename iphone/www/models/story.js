@@ -1,7 +1,7 @@
-var story{
+var story ={
 
 	storyInformation: function(configuration, userInformation){
-		var self this;
+		var self = this;
 		var urlConfig = configuration; 
 		var bystanderStorageKey = "bystanderStorageKey";
 		var harassmentTypesStorageKey = "harassmentTypesStorageKey";
@@ -47,29 +47,59 @@ var story{
 		};
 				
 		
-		self.submitStory = function(bystanderToSet, harassmentTypesToSet, locationToSet, photoToSet, textToSet, callback){		
+		self.submitStory = function(bystanderToSet, harassmentTypesToSet, manualLocationToSet, latitudeToSet, longitudeToSet, photoToSet, textToSet, callback){		
 			
-			var storyMessage = new Object();			
-      		storyMessage.bystander = bystanderToSet;
-      		storyMessage.harassmentTypes = harassmenTypesToSet;
-      		storyMessage.location = locationToSet;
-      		storyMessage.photo = photoToSet;
-      		storyMessage.text = textToSet;
+			var storyMessage = new Object();	
+			
+			storyMessage.header = generateStoryHeader();
+			
+			storyMessage.message = new Object();
+			
+			if (bystanderToSet == "bystander"){
+				storyMessage.message.bystander = bystanderToSet;
+			}		
       		
-      		var hollaback = new Object();
-      		hollaback.header = generateStoryHeader();
-      		hollaback.message = storyMessage;
+      		if(harassmentTypesToSet){
+      			storyMessage.message.category = harassmentTypesToSet;
+      		}
+      		
+      		storyMessage.message.gps = new Object();
+      		storyMessage.message.gps.longitude = new Object();
+      		
+      		if (longitudeToSet){
+      			storyMessage.message.gps.longitude.degrees = longitudeToSet;
+      		}      		   
+      		
+      		storyMessage.message.gps.latitude = new Object();
+      		   		
+      		if (latitudeToSet){
+      			storyMessage.message.gps.latitude.degrees = latitudeToSet;
+      		}
+      		      		
+      		if (manualLocationToSet){
+      			storyMessage.message.stringlocation = manualLocationToSet;
+      		}
+    
+    		if (textToSet){
+	      		storyMessage.message.description = textToSet;
+    		}
+    		
+      		if (photoToSet){
+      			storyMessage.message.images = photoToSet;
+      		}
+      		
+    
+      	
       		
 			$.ajax({
 			         type: 'POST',
 			         url: urlConfig.getStoryUrl(),
-			         data: jQuery.param(hollaback),
+			         data: jQuery.param(storyMessage),
 			         processData: false,
-       				 contentType: false,
+       				 contentType: "text",
 			         success: function(response){	
 								 if(response == 'OK')
 								 {
-								  	showConfirmation();
 								  	callback("Story Submission Successful");
 								 }
 								 else
@@ -81,20 +111,29 @@ var story{
 			         });
 		};
 		
-		function showConfirmation(){
-		//redirect to the confrimation page?
-		//dispose of the message object if we need to?
-		};
+
 		
 		function generateStoryHeader(){
 			var storyHeader = new Object();
 			
-			storyHeader.username = self.userInformation.userName;
-			storyHeader.password = self.userInformation.password;
+			storyHeader.header = new Object();
+			
+			storyHeader.header.username = self.userInformation.userName;
+			storyHeader.header.password = self.userInformation.password;
+			
+			storyHeader.header.source = new Object();
+			
+			storyHeader.header.source.iphone_unique_id = device.uuid;
+			storyHeader.header.source.iphone_model = "";
+			storyHeader.header.source.iphone_system_name = device.platform;
+			storyHeader.header.source.iphone_system_version = device.version;
+			storyHeader.header.source.iphone_device_name = device.name;
+			
+			return storyHeader.header;
 			
 		};
 	
 		self.read();
 	
-	}//end Story Information
+	},//end Story Information
 };

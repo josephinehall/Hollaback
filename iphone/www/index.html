@@ -15,6 +15,7 @@
     <script src="scripts/knockout.validation.js" type="text/javascript"></script>     
     <script src="models/config.js" charset="utf-8" type="text/javascript"></script>
     <script src="models/user.js" charset="utf-8" type="text/javascript"></script>
+    <script src="models/story.js" charset="utf-8" type="text/javascript"></script>
     <script src="viewmodels/userviewmodels.js" charset="utf-8" type="text/javascript"></script>  
     <script src="viewmodels/hollabackviewmodels.js" charset="utf-8" type="text/javascript"></script>  
     <script src="viewmodels/shareviewmodel.js" charset="utf-8" type="text/javascript"></script>  
@@ -233,6 +234,7 @@
 						<input type="checkbox" name="other" id="other" class="custom" value="other" data-bind="checked: harassmentTypes"  />
 						<label for="other">Other</label>
 				    </fieldset>
+				    
 				</div>
 				
 				<div data-role="fieldcontain">
@@ -261,6 +263,7 @@
 				 </div>   
 				    
 				 	<a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b" data-bind="click: submit">Submit</a>   
+				 	<p data-bind="text: responseText"></p>
 			</div>
          
           </div><!-- /content -->

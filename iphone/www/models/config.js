@@ -10,7 +10,7 @@ var config = {
 		};
 		
         this.getLoginUrl = function(){
-            return backendPrefix + "authenticate/";
+            return backendPrefix + "authenticatev2/";
         };
         
 		this.getSignupContentType = function(){
@@ -31,7 +31,7 @@ var config = {
         
                 
         this.getStoryUrl = function(){
-            return backendPrefix + "incoming/";
+            return backendPrefix + "incomingv2/";
         };
         
         this.getStoryContentType = function(){

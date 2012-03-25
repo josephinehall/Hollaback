@@ -99,7 +99,6 @@ var user = {
         };
         
         self.sendPasswordResetRequest = function(){
-            alert("sdf");
         	var emailBody = "mailto:password@ihollaback.org?&subject=Doh!%20I%20forgot%20my%20Hollaback!%20password.&body=Dear%20Hollaback!%0a%0aUsername:%20(replace%20with%20username)%0a%0aI'm%20sending%20you%20this%20email%20because%20I%20forgot%20my%20password.%20I%20heard%20that%20you%20guys%20don't%20have%20a%20password%20retrieval%20function%20automated%20yet%20so%20you'll%20have%20to%20retrieve%20my%20password%20by%20hand.%20Sorry%20about%20that.%20To%20make%20it%20easy%20on%20you,%20I'm%20sending%20this%20from%20the%20email%20account%20that%20is%20registered%20with%20Hollaback!.%0a%0aThanks%0ame";
         	window.open(emailBody);
         };
