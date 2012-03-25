@@ -1,27 +1,52 @@
 var userViewModels = {
 
-	//Sets up the location options
-    userLocationViewModel: function(userInformation) {   
+    userLocationViewModel: function(userInformation, hollabackChapters) {   
     	var self = this;
-    	var userInformation = userInformation;
-    	self.availableLocations = ko.observableArray();
-    	$.ajax({
-    		url: 'http://testbackend.ihollaback.com/localiPhone/',
-			dataType: 'jsonp',
-			success: function(data){
-				var jsonText = JSON.stringify(data);
-				var array = jQuery.parseJSON(jsonText);
-				for(key in array) {
-					self.availableLocations.push(new user.location(key));
-				}
-				}
+    	self.userInformation = userInformation;  
+        self.selectedLocation = ko.observable().extend({required: { message: 'Please select your local hollaback.' }});        
+    	self.availableLocations = ko.observableArray();	
+    	self.errors = ko.validation.group(self);
+    	
+    	hollabackChapters.getAllChapters(function(chapters){
+    		self.availableLocations(chapters)
     	});
     	
-        self.selectedLocation = ko.observable(); // Nothing selected by default
+        self.setLocation = function(){
+        	var isValid = modelIsValid();
+        	if(isValid)
+        	{      		
+        		userInformation.setLocation(self.selectedLocation());
+        		$.mobile.changePage("#signupPage");
+        	}else
+        	{
+        		showErrors();
+        	}
+        };
         
-        self.setLocation = ko.computed(function(){
-        	userInformation.setLocation(self.selectedLocation());
-        });
+      	function modelIsValid(){
+        	return self.errors().length == 0;
+        };
+        
+        function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
+        }
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };
+
     },
     
     loginViewModel: function(userModel){
@@ -126,9 +151,42 @@ var userViewModels = {
 	signUpViewModel: function(userModel){
 		var self = this; 	
 		self.model = userModel;
-		self.userName = ko.observable(userModel.userName).extend({ required: true });
-    	self.password = ko.observable(userModel.password).extend({ required: true });
-    	self.emailAddress = ko.observable(userModel.emailAddress).extend({ required: true });
+		self.userName = ko.observable(userModel.userName).extend({required: { message: 'Please supply your user name.' }})
+														 .extend({validation: {
+														        validator: function (val, min) {
+														            return val.length >= min;
+														        },
+														        message: 'User name must be at least 5 characters.',
+														        params: 5
+														    	}
+															})
+														  .extend({validation: {
+														        validator: function (val, max) {
+														            return val.length < max;
+														        },
+														        message: 'User name must be less than 15 characters.',
+														        params: 15
+														    	}
+															});
+    	self.password = ko.observable(userModel.password).extend({required: { message: 'Please supply your password.' }})
+														 .extend({validation: {
+														        validator: function (val, min) {
+														            return val.length >= min;
+														        },
+														        message: 'Password must be at least 6 characters.',
+														        params: 6
+														    	}
+															});
+		self.confirmPassword = ko.observable().extend({validation: { 
+													   validator: function (val, other) {return val == other();},
+													   message: 'Passwords do not match.',
+													   params: self.password }});
+													   
+    	self.emailAddress = ko.observable(userModel.emailAddress).extend({required: { message: 'Please supply your email address.' }})
+    	self.confirmEmail = ko.observable().extend({validation: { 
+													   validator: function (val, other) {return val == other();},
+													   message: 'Emails do not match.',
+													   params: self.emailAddress }});
         self.responseText = ko.observable();    
     	self.errors = ko.validation.group(self);
 		
@@ -139,10 +197,6 @@ var userViewModels = {
 		        self.model.signUp(self.userName(),self.password(), self.emailAddress(),function(message){userSignedIn(message)});
             }
         };
-      
-        self.signout = function() {
-            self.model.removeCredentials();
-        };
         
         function userSignedIn(message){
         	self.responseText(message);
@@ -150,19 +204,40 @@ var userViewModels = {
         	if(self.model.isSignedIn()){
 				$.mobile.changePage("#menuPage");
         	}
-        }   
+        }; 
         
         function validateLoginCredentials(){     	
         	var isValid = modelIsValid();
         	if (!isValid) {    		 
-            	self.errors.showAllMessages();
+            	showErrors();
         	}
 			return isValid;
-        }
-        
+        };
+      
         function modelIsValid(){
         	return self.errors().length == 0;
-        }
+        };
+        
+          function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
+        };
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };
+
 		
 	},
 	

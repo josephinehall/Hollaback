@@ -6,20 +6,20 @@ var user = {
     	var userNameStorageKey = "userNameKey";
         var passwordStorageKey = "passwordKey";
         var emailStorageKey = "emailKey";
-        var locationStorageKey = "locationKey";
+        var localHollabackStorageKey = "locationKey";
         var hasAuthenticatedStorageKey = "isAuthenticatedKey";
         
         self.userName;
     	self.password;
     	self.emailAddress;
-    	self.selectedLocation;
+    	self.localHollaback;
     	self.hasAuthenticated;	
 			
 		self.read = function(){      			  
 			self.userName = window.localStorage.getItem(userNameStorageKey);			
 			self.password = window.localStorage.getItem(passwordStorageKey);			
 			self.emailAddress = window.localStorage.getItem(emailStorageKey);		
-			self.userLocation = window.localStorage.getItem(locationStorageKey);
+			self.localHollaback = window.localStorage.getItem(localHollabackStorageKey);
 			self.hasAuthenticated = window.localStorage.getItem(hasAuthenticatedStorageKey);
 		};
     
@@ -27,14 +27,18 @@ var user = {
             window.localStorage.setItem(userNameStorageKey, self.userName);
             window.localStorage.setItem(passwordStorageKey, self.password);
             window.localStorage.setItem(emailStorageKey, self.emailAddress);
-            window.localStorage.setItem(locationStorageKey, self.selectedLocation); 
             window.localStorage.setItem(hasAuthenticatedStorageKey,self.hasAuthenticated);          
+            window.localStorage.setItem(localHollabackStorageKey, self.localHollaback);           
 		};
 		
-		self.setLocation = function(locationName){
-			self.selectedLocation = locationName;
-			window.localStorage.setItem(locationStorageKey, self.selectedLocation);
-		}
+		self.setLocation = function(location){
+			self.localHollaback = location;
+			window.localStorage.setItem(localHollabackStorageKey, self.localHollaback);
+		};
+		
+		self.hasLocation = function(){
+			return self.localHollaback != undefined && self.localHollaback;
+		};
 		
 		self.isSignedIn = function(){
             return self.hasAuthenticated != undefined && self.hasAuthenticated;           

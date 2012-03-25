@@ -6,29 +6,16 @@ var config = {
 		self.boundary ="boundary=0xKhTmLbOuNdArY";
 	
 		this.getSignupUrl = function(){		
-			return backendPrefix +"signup/";         
+			return backendPrefix +"signupv2/";         
 		};
 		
         this.getLoginUrl = function(){
             return backendPrefix + "authenticatev2/";
         };
         
-		this.getSignupContentType = function(){
-			return "multipart/form-data; " + boundary;
-		};	
-        
-        this.getLogInContentType = function(){
-            return "multipart/form-data; " + boundary;
+        this.getHollabackChaptersUrl = function(){
+        	return backendPrefix + "localiPhone/";
         };
-        
-        this.getLoginStartRequestBoundary = function(){
-            return "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n"
-        };
-        
-        this.getLoginEndRequestBoundary = function(){
-            return "\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
-        };
-        
                 
         this.getStoryUrl = function(){
             return backendPrefix + "incomingv2/";

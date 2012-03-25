@@ -14,6 +14,7 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
+		
 		hollabackStartup();	 	 	
 		var loginViewModel = hollabackApplication.bootstrapper.getLoginViewModel();	
 	 	ko.applyBindings(loginViewModel,this);
@@ -25,8 +26,9 @@ $('#indexPage').live('pagebeforeshow',function(event,ui){
 });
 
 $('#locationPage').live('pageinit', function(event, ui){
-       var userInformation = hollabackApplication.bootstrapper.getUserInformation();
-       var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation);
+       var userInformation = hollabackApplication.bootstrapper.getUserInformation();  
+	   var hollbackchapters = hollabackApplication.bootstrapper.getHollabackChapers();
+       var locationPageViewModel = new userViewModels.userLocationViewModel(userInformation,hollbackchapters);
        ko.applyBindings(locationPageViewModel,this);
 });
 
@@ -51,12 +53,18 @@ $("#forgotPasswordPage").live("pageinit",function(event){
 		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
+
  $('#shareStoryPage').live('pageinit', function(event, ui){
 		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
  		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
- 		ko.applyBindings(shareStoryViewModel, this);
- });
+});
 
+$('#mapPage').live('pageinit',function(event,ui){
+		var userLocation = hollabackApplication.bootstrapper.getUserLocation();
+		var hollbackchapters = hollabackApplication.bootstrapper.getHollabackChapers();
+		var mapPageViewModel =new hollabackViewModels.mapPageViewModel(userLocation,hollbackchapters);	
+		ko.applyBindings(mapPageViewModel, this);
+});
 
 var hollabackApplication ={
 		
@@ -71,6 +79,8 @@ var hollabackApplication ={
 		var userLoginViewModel;
 		var menuPageViewModel;
 		var storyInformation;
+		var hollabackChapters;
+		var userLocation;
 		
 		function isRunning(){
             return running;
@@ -78,15 +88,16 @@ var hollabackApplication ={
 		
 		function run(){
 			running = true;
-			pageNavigator = new hollabackApplication.pageNavigator();	
 			var urlConfig = new config.urlConfiguration();
+			userLocation = new hollabackLocation.usersLocation();
 			userInformation = new user.userInformation(urlConfig);
 			userLoginViewModel = new userViewModels.loginViewModel(userInformation);
 			menuPageViewModel =	new hollabackViewModels.menuPageViewModel(userInformation);
 			storyInformation = new story.storyInformation(urlConfig,userInformation);
+			hollabackChapters = new hollabackLocation.hollabackChapters(urlConfig);
 			if(userInformation.isSignedIn())
 			{
-				pageNavigator.navigateToMainMenu();
+				$.mobile.changePage("#menuPage");
 			}
 		}
 		
@@ -119,7 +130,6 @@ var hollabackApplication ={
 				return menuPageViewModel;
 			},
 
-			
 			resetMenuPageViewModel:function(){
 				menuPageViewModel.reset();
 			},
@@ -127,31 +137,18 @@ var hollabackApplication ={
 			getStoryInformation:function(){
 				storyInformation.read();
 				return storyInformation;
+			},	
+			
+			getHollabackChapers: function(){
+				return hollabackChapters;
+			},
+			
+			getUserLocation: function(){
+				return userLocation;
 			},
 		}
 		})(),
-	
 
-
-	pageNavigator: function(){	
-		var self = this; 
-		
-		self.navigateToLocationSignUp = function(){
-			$.mobile.changePage("views/location.html");
-		};
-				
-		self.navigateToSignupPage = function(){			
-			$.mobile.changePage("views/signup.html");
-		};
-		
-		self.navigateToMainMenu = function(){
-			$.mobile.changePage("views/menu.html");
-		};
-		
-		self.navigateToMap = function(){
-			$.mobile.changePage("views/map.html");
-		};		
-	},
 };
 
 
