@@ -21,14 +21,28 @@ var shareViewModels = {
         self.gpsAddress = ko.observable();
         self.verifyAddress = ko.observable();
         
-        self.uploadPhoto = ko.observable();
+        self.uploadPhoto = function(){
+        	alert("hi");
+        	capturePhoto();
+        };
+        
         self.story = ko.observable();
         
         self.responseText = ko.observable();
         
         self.submit = function(){
-        	self.storyInformation.submitStory(self.bystander(), self.harassmentTypes(), self.manualAddress(), "40", "42", "photo", self.story(), function(message){storySubmissionSuccessful(message)} )
+            alert("submitting");
+        	
+			self.storyInformation.submitStory(
+        	self.bystander(), 
+        	self.harassmentTypes(), 
+        	self.manualAddress(), 
+        	"40", "42", "photo", 
+        	self.story(), 
+        	function(message){storySubmissionSuccessful(message)} )
+
         };
+
         
         
        
@@ -38,7 +52,12 @@ var shareViewModels = {
         	//reset the object maybe?
 		};  
 
-       
+        // A button will call this function
+		//
+		function capturePhoto() {
+		  // Take picture using device camera and retrieve image as base64-encoded string
+		  navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+		}
         
 	 },
 	 

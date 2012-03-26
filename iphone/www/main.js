@@ -60,6 +60,7 @@ $("#forgotPasswordPage").live("pageinit",function(event){
  $('#shareStoryPage').live('pageinit', function(event, ui){
 		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
  		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
+ 		ko.applyBindings(shareStoryViewModel, this);
 });
 
 $('#mapPage').live('pageinit',function(event,ui){
