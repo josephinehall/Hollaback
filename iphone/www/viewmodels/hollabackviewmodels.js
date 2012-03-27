@@ -17,15 +17,19 @@ var hollabackViewModels = {
     
    	mapPageViewModel: function(usersLocation,hollabackChapters){  	
     	var self = this;
+    	var currentLocationLabel ="Current Location";
     	self.usersLocation = usersLocation; 
-    	self.hasLocation = ko.observable(false);	
-        self.isLoadingMap = ko.observable(false);      
-       	
+    	self.hasLocation =  ko.observable(true);	  
+        
         self.selectedHollabackLocation = ko.observable();
         self.selectedHollabackLocation.subscribe(function(newValue){ 	
-        	self.hasLocation(true);
-			console.log("selected " + newValue.latitude +"," +newValue.longitude);  
-        	loadMap(newValue.latitude,newValue.longitude);   	
+        	if(newValue.name == currentLocationLabel){
+        		showCurrentLocation(newValue)
+            }
+            else
+            {                               
+        	    loadMap(newValue.gpsCoordinates);  
+            }
         });
         
         self.resetMap= function(){
@@ -33,18 +37,27 @@ var hollabackViewModels = {
         };
  
     	self.availableLocations = ko.observableArray();	
-    	hollabackChapters.getAllChapters(function(chapters){
-    		self.availableLocations(chapters)
-    		self.availableLocations.push(new hollabackLocation.hollabackLocation("","","gps","Current Location"));
+ 
+    	hollabackChapters.getAllChapters(function(chapters){		
+    		self.availableLocations(chapters);	
+    		self.availableLocations.unshift(new hollabackLocation.hollabackLocation("","","gps",currentLocationLabel));
     	});		
     
-    //	var gps = self.usersLocation.bestAvailableLocation();
-    //	loadMap(gps.lat,gps.long); //wrap in option binding...
-    
-    	
-    	function loadMap(lat,long){
-    	 	self.isLoadingMap(true);
-    		var myLatlng = new google.maps.LatLng(lat,long);					
+       
+       	function showCurrentLocation(currentLocation){
+       		self.usersLocation.bestAvailableLocation(function(gps){
+                                                        if(gps){
+                                                     console.log("loading map to current location: " + gps.latitude+"," +gps.longitude);
+                                                            loadMap(gps);
+                                                        }else{
+                                                            $("#map_canvas").hide('slow');
+                                                        }
+                                                     });
+        };
+	    	
+    	function loadMap(gpsCoordinates){
+            $("#map_canvas").show('slow');
+    		var myLatlng = new google.maps.LatLng(gpsCoordinates.latitude,gpsCoordinates.longitude);					
 			var mapElement = document.getElementById('map_canvas');			
 			var map = new google.maps.Map(mapElement, {
 				center: myLatlng, 
@@ -57,8 +70,7 @@ var hollabackViewModels = {
 						
 			 var tableid = 426994;
 			 var layer = new google.maps.FusionTablesLayer(tableid);
-			 layer.setMap(map);						 
-        	 self.isLoadingMap(false);
+			 layer.setMap(map);			
     	};
     	
     	    	

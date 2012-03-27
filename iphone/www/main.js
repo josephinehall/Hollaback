@@ -18,7 +18,7 @@ $('#indexPage').live('pageinit',function(event,ui){
 			parseInputAttributes: true,
 			messageTemplate: null
 		});
-		hollabackStartup();	 	 	
+		hollabackStartup();	 	 
 		var loginViewModel = hollabackApplication.bootstrapper.getLoginViewModel();	
 	 	ko.applyBindings(loginViewModel,this);
 	 		 
