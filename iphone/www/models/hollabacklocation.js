@@ -30,31 +30,50 @@ var hollabackLocation = {
 		
 	},	
 	
-	hollabackLocation: function(latitude,longitude,subdomain,name){
-		var self = this;
+    gpsCoordinates: function(latitude,longitude){
+        var self = this;
 		self.latitude = latitude;
 		self.longitude = longitude;
+        
+        self.isAvailable= function(){
+            return self.latitude != undefined && self.longitude != undefined;
+        }
+        
+        self.getLatLong = function(){
+			return self.latitude + "," + self.longitude;
+		};
+        
+    },
+    
+	hollabackLocation: function(latitude,longitude,subdomain,name){
+		var self = this;
+		self.gpsCoordinates = new hollabackLocation.gpsCoordinates(latitude,longitude);
 		self.subdomain = subdomain;
 		self.name = name;
 	},
 	
 	usersLocation: function(){
 		var self = this;
-		self.hollabackLocation;
+		self.hollabackLocation = new hollabackLocation.hollabackLocation();
 		self.gps = new hollabackLocation.gpsLocation();
 			
-		self.bestAvailableLocation = function(){
-			self.gps.updateLocation()
-			if(self.gps.allows)
-			{
-				return self.gps;
-			}
-			else
-			{
-				return self.hollabackLocation;
-			}
-		};
-			
+		self.bestAvailableLocation = function(callback){
+           
+            self.gps.updateLocation(function(gpsLocation){
+                                        if(gpsLocation)
+                                        {
+                                            console.log("Best location is gps" + gpsLocation.getLatLong());
+                                            self.gps = gpsLocation;
+                                            callback(gpsLocation);
+                                        }
+                                        else
+                                        {                                    
+                                            console.log("Best location is local hollaback " + self.hollabackLocation.name);
+                                            callback(self.hollabackLocation.gpsCoordinates);
+                                        }
+                                    });
+        };
+            
 		self.hasLocation = function(){	
 			return self.gps.allows || (self.hollabackLocation != undefined);
 		};
@@ -66,32 +85,31 @@ var hollabackLocation = {
 	
 	gpsLocation: function(){
 		var self = this;
-		self.long;
-		self.lat;
-		self.allows = false;
+        self.gpsCoordinates = new hollabackLocation.gpsCoordinates();
 		self.lastTimeQueried;
 		
-		self.updateLocation = function(){		
-			navigator.geolocation.getCurrentPosition(onSuccess,onError);		
+		self.updateLocation = function(callback){
+			navigator.geolocation.getCurrentPosition(function(position){
+                                                        var gps = new hollabackLocation.gpsCoordinates(position.coords.latitude,position.coords.longitude);
+                                                        self.lastTimeQueried = new Date();
+                                                        self.gpsCoordinates = gps;
+                                                        console.log(self.getLatLong());
+                                                        navigator.geolocation.stop();
+                                                        callback(gps);
+                                                     },function(error){
+                                                        self.allows = false;
+                                                        self.lastTimeQueried = new Date();
+                                                        console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+                                                     
+                                                        navigator.geolocation.stop();
+                                                        callback();
+                                                     },options);		
 		};
 		
 		self.getLatLong = function(){
-			return self.lat + "," + self.long;
-		}
-		
-		function onSuccess(position){
-			 self.long = position.coords.longitude;		 
-			 self.lat = position.coords.latitude;
-			 self.allows = true;
-			 self.lastTimeQueried = new Date();
-			 console.log(self.getLatLong());
+			return self.gpsCoordinates.latitude + "," + self.gpsCoordinates.longitude;
 		};
-		
-		function onError(error){
-			 self.allows = false;
-			 self.lastTimeQueried = new Date();
-			 console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-		};		
+
 	},
 	
 	
