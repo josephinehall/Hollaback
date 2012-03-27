@@ -16,21 +16,13 @@ var config = {
         this.getHollabackChaptersUrl = function(){
         	return backendPrefix + "localiPhone/";
         };
-        
-		this.getSignupContentType = function(){
-			return "multipart/form-data; " + boundary;
-		};	
-        
-        this.getLogInContentType = function(){
-            return "multipart/form-data; " + boundary;
+                
+        this.getStoryUrl = function(){
+            return backendPrefix + "incomingv2/";
         };
         
-        this.getLoginStartRequestBoundary = function(){
-            return "--0xKhTmLbOuNdArY\nContent-Disposition: form-data; name=\"hollabackposting\"; filename=\"file.bin\"\r\n\r\n \n"
-        };
-        
-        this.getLoginEndRequestBoundary = function(){
-            return "\n--0xKhTmLbOuNdArY--\r\n--%@--\r\n";
+        this.getStoryContentType = function(){
+        	return "multipart/form-data" + boundary;
         };
 	},
 

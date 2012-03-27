@@ -17,6 +17,7 @@
     <script src="models/config.js" charset="utf-8" type="text/javascript"></script> 
     <script src="models/hollabacklocation.js" charset="utf-8" type="text/javascript"></script>
     <script src="models/user.js" charset="utf-8" type="text/javascript"></script>
+    <script src="models/story.js" charset="utf-8" type="text/javascript"></script>
     <script src="viewmodels/userviewmodels.js" charset="utf-8" type="text/javascript"></script>  
     <script src="viewmodels/hollabackviewmodels.js" charset="utf-8" type="text/javascript"></script>  
     <script src="viewmodels/shareviewmodel.js" charset="utf-8" type="text/javascript"></script>  
@@ -213,6 +214,7 @@
 						<input type="checkbox" name="other" id="other" class="custom" value="other" data-bind="checked: harassmentTypes"  />
 						<label for="other">Other</label>
 				    </fieldset>
+				    
 				</div>
 				
 				<div data-role="fieldcontain">
@@ -227,7 +229,7 @@
 						
 						<div data-bind="visible: manualLocation">
 							<label for="name">Or Enter Manually</label>
-	    					<input type="text" name="address" id="address" value="addres" data-bind="value: manualAddress"  />
+	    					<input type="text" name="address" id="address" data-bind="value: manualAddress"  />
 	    					
 							<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
 				    	</div>
@@ -241,6 +243,7 @@
 				 </div>   
 				    
 				 	<a href="" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" data-theme="b" data-bind="click: submit">Submit</a>   
+				 	<p data-bind="text: responseText"></p>
 			</div>
          
           </div><!-- /content -->

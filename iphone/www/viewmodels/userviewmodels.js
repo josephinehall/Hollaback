@@ -129,7 +129,7 @@ var userViewModels = {
         function showErrors(){
         	try
 			{			
-        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok let's try again");
 			}
 			catch(err)
 			{
