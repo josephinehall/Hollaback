@@ -55,7 +55,12 @@ var shareViewModels = {
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
-		  navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 		  
+		  //navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
+	        navigator.camera.getPicture(onPhotoURISuccess, onFail, { 
+	        quality: 50, 
+	        allowEdit:true,
+    		destinationType: destinationType.FILE_URI,
+   			sourceType: source });		  
 		}
 		
 		
