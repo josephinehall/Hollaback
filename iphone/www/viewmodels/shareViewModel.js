@@ -52,11 +52,26 @@ var shareViewModels = {
         	//reset the object maybe?
 		};  
 
-        // A button will call this function
-		//
+
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
-		  navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+		  navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 		  
+		}
+		
+		
+
+		function onSuccess(imageData) {
+			var image = document.getElementById('myImage');
+			image.src = "data:image/jpeg;base64," + imageData;
+			
+			var smallImage = document.getElementById('smallImage');
+	        smallImage.style.display = 'block';
+	        
+	        smallImage.src = "data:image/jpeg;base64," + imageData;
+		}
+		
+		function onFail(message) {
+			alert('Failed because: ' + message);
 		}
         
 	 },
