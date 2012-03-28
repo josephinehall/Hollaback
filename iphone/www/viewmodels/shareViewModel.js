@@ -3,9 +3,10 @@ var shareViewModels = {
 	shareStoryViewModel: function(storyInformation){
 		var self = this;    
    		self.storyInformation = storyInformation;
-		 
-        self.bystander = ko.observable("bystander");
-        self.harassmentTypes = ko.observableArray();        
+        self.storyType = ko.observable();
+        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
+        
+        self.harassmentTypes = ko.observableArray(new story.harassmentTypes());        
         self.useGPS = ko.observable(false);
         
         self.gpsLocation = ko.computed(function() {
@@ -16,7 +17,6 @@ var shareViewModels = {
 			return !self.useGPS();   	
    		}, self);
 
-        
         self.manualAddress = ko.observable();
         self.gpsAddress = ko.observable();
         self.verifyAddress = ko.observable();
@@ -34,7 +34,7 @@ var shareViewModels = {
             alert("submitting");
         	
 			self.storyInformation.submitStory(
-        	self.bystander(), 
+        	self.storyType(), 
         	self.harassmentTypes(), 
         	self.manualAddress(), 
         	"40", "42", "photo", 
@@ -42,9 +42,6 @@ var shareViewModels = {
         	function(message){storySubmissionSuccessful(message)} )
 
         };
-
-        
-        
        
         function storySubmissionSuccessful(message){
      		self.responseText(message);
