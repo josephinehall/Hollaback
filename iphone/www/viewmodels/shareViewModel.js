@@ -1,7 +1,8 @@
 var shareViewModels = {
 
 	shareStoryViewModel: function(storyInformation){
-		var self = this;    
+		var self = this;   
+        var storyMaxCharacters = 300;
    		self.storyInformation = storyInformation;
         self.storyType = ko.observable();
         self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
@@ -22,25 +23,46 @@ var shareViewModels = {
         self.verifyAddress = ko.observable();
         
         self.uploadPhoto = function(){
-        	alert("hi");
         	capturePhoto();
         };
         
-        self.story = ko.observable();
+        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
+                                    .extend({validation: {
+                                                validator: function (val, max) {
+                                                    return val.length < max;
+                                                },
+                                                message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
+                                                params: 300
+                                                }
+                                            });
+        
+        self.characterCount = ko.computed(function(){
+                                          var currentCount = 0;
+                                          if(self.story() != undefined){
+                                            currentCount = self.story().length;
+                                          }
+                                          return currentCount + "/"+ storyMaxCharacters;
+                                          },this);
         
         self.responseText = ko.observable();
         
+    	self.errors = ko.validation.group(self);
+        
         self.submit = function(){
-            alert("submitting ");
-            alert(self.harassmentTypes());
+            
+            var isValid = validateStory();
+            if(isValid){
+                alert("submitting ");
+                alert(self.harassmentTypes());
         	
-			self.storyInformation.submitStory(
-        	self.storyType(), 
-        	self.harassmentTypes(), 
-        	self.manualAddress(), 
-        	"40", "42", "photo", 
-        	self.story(), 
-        	function(message){storySubmissionSuccessful(message)} )
+                self.storyInformation.submitStory(
+                                                  self.storyType(), 
+                                                  self.harassmentTypes(), 
+                                                  self.manualAddress(), 
+                                                  "40", "42", "photo", 
+                                                  self.story(), 
+                                                  function(message){storySubmissionSuccessful(message)} );
+            }
 
         };
        
@@ -76,6 +98,38 @@ var shareViewModels = {
 		function onFail(message) {
 			alert('Failed because: ' + message);
 		}
+        
+        function validateStory(){     	
+        	var isValid = modelIsValid();
+        	if (!isValid) {    		 
+            	showErrors();
+        	}
+			return isValid;
+        };
+        
+        function modelIsValid(){
+        	return self.errors().length == 0;
+        };
+        
+        function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
+        };
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };
         
 	 },
 	 
