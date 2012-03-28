@@ -6,10 +6,6 @@ var story ={
         self.value = value;
     },
 
-    harassmentTypes: function(){
-        return ["Verbal","Stalking","Homophobic","Transphobic","Assault","Groping","Racist","Other"];
-    },
-    
 	storyInformation: function(configuration, userInformation){
 		var self = this;
 		var urlConfig = configuration; 

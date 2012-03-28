@@ -6,7 +6,7 @@ var shareViewModels = {
         self.storyType = ko.observable();
         self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
         
-        self.harassmentTypes = ko.observableArray(new story.harassmentTypes());        
+        self.harassmentTypes = ko.observableArray();        
         self.useGPS = ko.observable(false);
         
         self.gpsLocation = ko.computed(function() {
@@ -31,7 +31,8 @@ var shareViewModels = {
         self.responseText = ko.observable();
         
         self.submit = function(){
-            alert("submitting");
+            alert("submitting ");
+            alert(self.harassmentTypes());
         	
 			self.storyInformation.submitStory(
         	self.storyType(), 
