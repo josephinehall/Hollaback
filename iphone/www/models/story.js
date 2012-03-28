@@ -83,8 +83,7 @@ var story ={
     		if (textToSet){
 	      		storyMessage.message.description = textToSet;
     		}
-    		
-      		if (photoToSet){
+       		if (photoToSet){
       			storyMessage.message.images = photoToSet;
       		}
       		

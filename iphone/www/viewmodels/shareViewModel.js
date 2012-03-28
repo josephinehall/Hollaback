@@ -1,6 +1,8 @@
 var shareViewModels = {
 
 	shareStoryViewModel: function(storyInformation){
+	
+		var photoData = "";
 		var self = this;    
    		self.storyInformation = storyInformation;
 		 
@@ -22,7 +24,6 @@ var shareViewModels = {
         self.verifyAddress = ko.observable();
         
         self.uploadPhoto = function(){
-        	alert("hi");
         	capturePhoto();
         };
         
@@ -30,14 +31,14 @@ var shareViewModels = {
         
         self.responseText = ko.observable();
         
-        self.submit = function(){
-            alert("submitting");
-        	
+        self.submit = function(){        	
 			self.storyInformation.submitStory(
         	self.bystander(), 
         	self.harassmentTypes(), 
         	self.manualAddress(), 
-        	"40", "42", "photo", 
+        	"40",
+        	"42",
+        	photoData, 
         	self.story(), 
         	function(message){storySubmissionSuccessful(message)} )
 
@@ -55,30 +56,48 @@ var shareViewModels = {
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
-		  //navigator.camera.getPicture(onSuccess, onFail, { quality: 20, allowEdit: true }); 
-	        navigator.camera.getPicture(onPhotoURISuccess, onFail, { 
-	        quality: 50, 
-	        allowEdit:true,
-    		destinationType: destinationType.FILE_URI,
-   			sourceType: source });		  
-		}
-		
-		
-
-		function onSuccess(imageData) {
-			var image = document.getElementById('myImage');
-			image.src = "data:image/jpeg;base64," + imageData;
-			
-			var smallImage = document.getElementById('smallImage');
-	        smallImage.style.display = 'block';
-	        
-	        smallImage.src = "data:image/jpeg;base64," + imageData;
-		}
+			navigator.camera.getPicture(onSuccess, onFail, 
+				{ 
+					quality: 20,
+					targetWidth: 300,
+					targetHeight: 300,
+					allowEdit: true,
+					sourceType : Camera.PictureSourceType.PHOTOLIBRARY
+				}
+			);   
+		};
 		
 		function onFail(message) {
-			alert('Failed because: ' + message);
-		}
-        
+			alert("Failed because: " + message);
+		};
+
+		function onSuccess(imageData) {
+			var smallImage = document.getElementById("smallImage");
+	        smallImage.style.display = 'block';     
+	        smallImage.src = imageData;
+	        
+	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, fsFail); 
+
+		};
+
+		function gotFileEntry(fileEntry) { 			
+			readDataUrl(fileEntry.fullPath);
+		}; 
+		
+		function fsFail(error) { 
+		    console.log("failed with error code: " + error.code); 
+		};
+
+
+    	function readDataUrl(file) {
+	        var reader = new FileReader();
+	        reader.onloadend = function(evt) {
+/* 	            console.log(evt.target.result); */
+	            photoData = evt.target.result;
+	        };
+	        reader.readAsDataURL(file);
+    	};
+		   
 	 },
 	 
 	 
