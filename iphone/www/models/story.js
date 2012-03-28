@@ -1,4 +1,10 @@
 var story ={
+    
+    storyType: function(name, value){
+        var self = this;
+        self.name = name;
+        self.value = value;
+    },
 
 	storyInformation: function(configuration, userInformation){
 		var self = this;

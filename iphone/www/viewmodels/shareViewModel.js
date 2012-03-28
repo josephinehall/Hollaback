@@ -1,12 +1,13 @@
 var shareViewModels = {
 
 	shareStoryViewModel: function(storyInformation){
-	
 		var photoData = "";
-		var self = this;    
+		var self = this;       
+        var storyMaxCharacters = 300;
    		self.storyInformation = storyInformation;
-		 
-        self.bystander = ko.observable("bystander");
+        self.storyType = ko.observable();
+        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
+        
         self.harassmentTypes = ko.observableArray();        
         self.useGPS = ko.observable(false);
         
@@ -18,7 +19,6 @@ var shareViewModels = {
 			return !self.useGPS();   	
    		}, self);
 
-        
         self.manualAddress = ko.observable();
         self.gpsAddress = ko.observable();
         self.verifyAddress = ko.observable();
@@ -27,25 +27,44 @@ var shareViewModels = {
         	capturePhoto();
         };
         
-        self.story = ko.observable();
+        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
+                                    .extend({validation: {
+                                                validator: function (val, max) {
+                                                    return val.length < max;
+                                                },
+                                                message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
+                                                params: 300
+                                                }
+                                            });
+        
+        self.characterCount = ko.computed(function(){
+                                          var currentCount = 0;
+                                          if(self.story() != undefined){
+                                            currentCount = self.story().length;
+                                          }
+                                          return currentCount + "/"+ storyMaxCharacters;
+                                          },this);
         
         self.responseText = ko.observable();
         
-        self.submit = function(){        	
-			self.storyInformation.submitStory(
-        	self.bystander(), 
-        	self.harassmentTypes(), 
-        	self.manualAddress(), 
-        	"40",
-        	"42",
-        	photoData, 
-        	self.story(), 
-        	function(message){storySubmissionSuccessful(message)} )
-
+    	self.errors = ko.validation.group(self);
+        
+        self.submit = function(){
+            
+            var isValid = validateStory();
+            if(isValid){
+                alert("submitting ");
+                alert(self.harassmentTypes());
+        	
+                self.storyInformation.submitStory(
+                                                  self.storyType(), 
+                                                  self.harassmentTypes(), 
+                                                  self.manualAddress(), 
+                                                  "40", "42", photoData, 
+                                                  self.story(), 
+                                                  function(message){storySubmissionSuccessful(message)} );
+            }
         };
-
-        
-        
        
         function storySubmissionSuccessful(message){
      		self.responseText(message);
@@ -76,18 +95,13 @@ var shareViewModels = {
 	        smallImage.style.display = 'block';     
 	        smallImage.src = imageData;
 	        
-	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, fsFail); 
+	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
 
 		};
 
 		function gotFileEntry(fileEntry) { 			
 			readDataUrl(fileEntry.fullPath);
 		}; 
-		
-		function fsFail(error) { 
-		    console.log("failed with error code: " + error.code); 
-		};
-
 
     	function readDataUrl(file) {
 	        var reader = new FileReader();
@@ -98,6 +112,41 @@ var shareViewModels = {
 	        reader.readAsDataURL(file);
     	};
 		   
+		function onFail(message) {
+			alert('Failed because: ' + message);
+		}
+        
+        function validateStory(){     	
+        	var isValid = modelIsValid();
+        	if (!isValid) {    		 
+            	showErrors();
+        	}
+			return isValid;
+        };
+        
+        function modelIsValid(){
+        	return self.errors().length == 0;
+        };
+        
+        function showErrors(){
+        	try
+			{			
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+			}
+			catch(err)
+			{
+				alert(getErrorMessage());
+			}
+        };
+        
+        function getErrorMessage(){
+        	var message = "";
+        	for (i=0;i < self.errors().length;i++)
+			{
+				message += self.errors()[i] + "\n";
+			}
+			return message;
+        };        
 	 },
 	 
 	 
