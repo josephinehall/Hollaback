@@ -59,11 +59,8 @@ $("#forgotPasswordPage").live("pageinit",function(event){
 
  $('#shareStoryPage').live('pageinit', function(event, ui){ 		
 		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
-		alert("storyInformation");
  		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
- 		alert("shareStoryViewModel");
  		ko.applyBindings(shareStoryViewModel, this);
- 		alert("applied bindings");
 });
 
 $('#mapPage').live('pageinit',function(event,ui){
