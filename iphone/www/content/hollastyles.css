@@ -53,10 +53,17 @@
 	background: url("images/pin_green.png") no-repeat !important;
 }
 
+.ui-icon-camera {
+	background: url("images/camera_green.png") no-repeat !important;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 	.ui-icon-locationpin {
 		background-image: url("images/pin_green@2x.png");
 		background-size: 18px 18px;
 	}
-	...more HD icon rules go here...
+    .ui-icon-camera {
+		background-image: url("images/camera_green@2x.png");
+		background-size: 18px 18px;
+	}
 }
