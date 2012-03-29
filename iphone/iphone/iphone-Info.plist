@@ -17,7 +17,7 @@
 		<string>icon-72.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>2X79BDQ6U7.Hollaback.iphone</string>
+	<string>com.rightrides.hollaback</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -37,7 +37,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

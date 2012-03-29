@@ -3,7 +3,7 @@
   <head>
   <title></title>
       
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
     
     <link rel="stylesheet" href="content/hollastyles.css" /> 
     <link rel="stylesheet" href="content/hollatheme.css" /> 
@@ -41,7 +41,7 @@
 		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
 				<input data-bind='value: password' required placeholder="Password" type="password"/>
 			
-				<a data-bind='click: forgotPassword'class="ui-link-b">Forgot Password</a>
+				<a data-bind='click: forgotPassword' class="ui-link-b">Forgot Password</a>
 				<div class="loginButtonBox">
 					<a data-bind='click: signup' data-inline="true" class="signupLink">Sign Up</a>
 					<a data-bind='click: login' data-role="button" data-mini="true" data-inline="true" 
@@ -202,7 +202,7 @@
                 
                 <div class="ui-grid-b">
                     <div class="ui-block-a">
-                        <img src="content/images/pin_green.png"/>
+                        <img src="content/images/pin_green.png" />
                         <input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
                     </div>
                     <div class="ui-block-b">
@@ -211,28 +211,10 @@
                     </div>
                 </div>
                 
-                  
+            <p data-bind="text: responseText"></p>      
             </div>
-              
-			<!--	<div>
-				 	<fieldset data-role="controlgroup">
-						<legend>Location</legend>
-						<label for="gps">Use GPS</label>
-						<input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
-					</fieldset>	
-						<div data-bind="visible: gpsLocation">
-							<p>Your current location is: <span data-bind="text: gpsAddress"></span></p> 
-						</div>
-						
-						<div data-bind="visible: manualLocation">
-							<label for="name">Or Enter Manually</label>
-	    					<input type="text" name="address" id="address" data-bind="value: manualAddress"  />
-	    					
-							<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
-				    	</div>
-				</div>    -->
-				 	<p data-bind="text: responseText"></p>
-			</div>
+			
+
          
           </div><!-- /content -->
           

@@ -140,5 +140,5 @@ var story ={
 	
 		self.read();
 	
-	},//end Story Information
+	}//end Story Information
 };

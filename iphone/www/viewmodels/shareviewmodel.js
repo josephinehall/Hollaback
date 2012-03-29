@@ -1,16 +1,18 @@
 var shareViewModels = {
 
 	shareStoryViewModel: function(storyInformation){
-		var photoData = "";
-		var self = this;       
-        var storyMaxCharacters = 300;
+		var self, photoData, storyMaxCharacters;
+		self = this;  
+		photoData = "";     
+        storyMaxCharacters = 300;
+   		
    		self.storyInformation = storyInformation;
         self.storyType = ko.observable();
         self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
         
         self.harassmentTypes = ko.observableArray();        
         self.useGPS = ko.observable(false);
-        
+                
         self.gpsLocation = ko.computed(function() {
 			return self.useGPS();
    		}, self);   		
@@ -27,7 +29,8 @@ var shareViewModels = {
         	capturePhoto();
         };
         
-        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
+        self.story = ko.observable().extend(
+        	{required: { message: 'Please supply your story.' }})
                                     .extend({validation: {
                                                 validator: function (val, max) {
                                                     return val.length < max;
@@ -62,7 +65,7 @@ var shareViewModels = {
                                                   self.manualAddress(), 
                                                   "40", "42", photoData, 
                                                   self.story(), 
-                                                  function(message){storySubmissionSuccessful(message)} );
+                                                  function(message){storySubmissionSuccessful(message);});
             }
         };
        
@@ -70,11 +73,12 @@ var shareViewModels = {
      		self.responseText(message);
 			$.mobile.loadPage("#congratsPage");
         	//reset the object maybe?
-		};  
+		}
 
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
+
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
 					quality: 20,
@@ -84,11 +88,13 @@ var shareViewModels = {
 					sourceType : Camera.PictureSourceType.PHOTOLIBRARY
 				}
 			);   
-		};
+
+		}
+		
 		
 		function onFail(message) {
 			alert("Failed because: " + message);
-		};
+		}
 
 		function onSuccess(imageData) {
 			var smallImage = document.getElementById("smallImage");
@@ -97,36 +103,39 @@ var shareViewModels = {
 	        
 	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
 
-		};
+		}
 
 		function gotFileEntry(fileEntry) { 			
 			readDataUrl(fileEntry.fullPath);
-		}; 
+		}
 
     	function readDataUrl(file) {
 	        var reader = new FileReader();
 	        reader.onloadend = function(evt) {
-/* 	            console.log(evt.target.result); */
 	            photoData = evt.target.result;
 	        };
 	        reader.readAsDataURL(file);
-    	};
+    	}
 		   
 		function onFail(message) {
 			alert('Failed because: ' + message);
 		}
+
         
-        function validateStory(){     	
+        function validateStory(){
+
         	var isValid = modelIsValid();
         	if (!isValid) {    		 
             	showErrors();
         	}
 			return isValid;
-        };
+
+        }
         
+
         function modelIsValid(){
-        	return self.errors().length == 0;
-        };
+        	return self.errors().length === 0;
+        }
         
         function showErrors(){
         	try
@@ -137,19 +146,18 @@ var shareViewModels = {
 			{
 				alert(getErrorMessage());
 			}
-        };
+        }
         
         function getErrorMessage(){
         	var message = "";
-        	for (i=0;i < self.errors().length;i++)
+        	var i;
+        	for (i=0; i < self.errors().length; i++)
 			{
 				message += self.errors()[i] + "\n";
 			}
 			return message;
-        };        
-	 },
-	 
-	 
+        }              
+	 }
 }
      
    
