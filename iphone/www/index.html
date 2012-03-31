@@ -183,18 +183,19 @@
                         
               <div class="storyblock">
  
-                  <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..."></textarea>
+                  <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
+                  <div class="storyCharacterCounter">
+                      <p data-bind="text: characterCount"></p>
+                  </div>
   
                   <div class="storycontrols">
                       <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
                       <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>    
-                      <p data-bind="text: characterCount"></p>
                   </div>
               </div> <!-- /storypanel -->
             
-            <div>
-           <!--    <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>-->
-                  
+            <div class="storymeta">
+              <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>                  
                 <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
                       <option>Harassment Types</option>
                       <option value="Verbal">Verbal</option>

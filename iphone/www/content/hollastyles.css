@@ -50,15 +50,30 @@
 }
 
 .storyblock{
-    height:50%;
+    height:150px;
 }
 
-.storyinput{
-    height:100px !important;
+.storyblock .storyinput{
+    height:130px !important;
+    float:left;
+    width:240px;
+}
+
+.storyblock .storyCharacterCounter{
+    margin-right:5px;
+    position: absolute;
+    color:#8CC63F;
+    top: 160px;
+    left: 210px;
+    z-index: 998;
 }
 
 .storycontrols{
     float:left;
+}
+
+.storymeta{
+    height:50%;
 }
 
 

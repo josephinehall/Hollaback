@@ -25,16 +25,17 @@ var shareViewModels = {
         self.uploadPhoto = function(){
         	capturePhoto();
         };
-        
+            
         self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
                                     .extend({validation: {
-                                                validator: function (val, max) {
-                                                    return val.length < max;
-                                                },
-                                                message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
-                                                params: 300
-                                                }
-                                            });
+                                            validator: function (val, max) {
+                                                return val.length < max;
+                                            },
+                                            message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
+                                            params: 300
+                                            }
+                });
+
         
         self.characterCount = ko.computed(function(){
                                           var currentCount = 0;
