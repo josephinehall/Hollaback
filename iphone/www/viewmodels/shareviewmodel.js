@@ -68,11 +68,14 @@ var shareViewModels = {
                                                   function(message){storySubmissionSuccessful(message);});
             }
         };
+        
+        self.reset = function(){
+    		self.storyInformation.clearStory();
+    	};
        
         function storySubmissionSuccessful(message){
      		self.responseText(message);
-			$.mobile.loadPage("#congratsPage");
-        	//reset the object maybe?
+			$.mobile.changePage("#congratsPage");
 		}
 
 
@@ -140,7 +143,7 @@ var shareViewModels = {
         function showErrors(){
         	try
 			{			
-        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok lets try again");
+        		navigator.notification.alert(getErrorMessage(), function(){}, "Ooops","Ok let's try again");
 			}
 			catch(err)
 			{

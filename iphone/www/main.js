@@ -73,6 +73,10 @@ $('#mapPage').live('pagebeforeshow',function(event,ui){
 		mapPageViewModel.resetMap();
 });
 
+$('#congratsPage').live('pageinit',function(event,ui){
+       	hollabackApplication.bootstrapper.resetShareViewModel();			 
+});
+
 var hollabackApplication ={
 		
 		bootstrapper: (function(){
@@ -159,6 +163,10 @@ var hollabackApplication ={
 			
 			getHollabackMapViewModel: function(){
 				return hollabackMapViewModel;
+			},
+			
+			resetShareViewModel: function (){
+				storyInformation.clearStory();
 			},
 		}
 		})(),

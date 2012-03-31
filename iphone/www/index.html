@@ -174,7 +174,7 @@
       <div data-role="page" id="shareStoryPage">
           
           <div data-role="header" data-theme="c">
-              <a href="#menuPage" data-theme="b">Close</a>
+              <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
               <h1>New Story</h1>
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
           </div><!-- /header  -->
@@ -223,9 +223,9 @@
        
       <div data-role="page" id="aboutPage">
           
-          <div data-role="header">
+          <div data-role="header" data-theme="c">
               <h1>About</h1>
-              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
+              <a href="#menuPage" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-theme="b">Back</a>
           </div><!-- /header -->
           
           <div data-role="content">	
@@ -246,15 +246,15 @@
 
       <div data-role="page" id="congratsPage">
           
-          <div data-role="header">
+          <div data-role="header" data-theme="c">
               <h1>Congrats!</h1>
-              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Menu</a>
+              <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
           </div><!-- /header -->
           
           <div data-role="content">	
            	<h2>Thanks!</h2> 
            	<img src="content/images/congrats.png" />
-           	<p>Now we are one step closer to ending street harassment. An email will be sent to you so you can tell us the rest of the story.  If you are not online, your hollaback will be sent the next time you are.</p>        
+           	<p>You Hollaback'ed! Now we are one step closer to ending street harassment. If you are not online, your hollaback will be sent the next time you are.</p>        
           </div><!-- /content -->
           
       </div><!-- /Congrats page -->
