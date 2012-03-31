@@ -160,7 +160,7 @@
 			
 			<div data-role="content">
                 <div>
-                     <select data-mini="true"  data-bind="options: availableLocations, optionsText: 'name', value: selectedHollabackLocation,optionsCaption: 'Choose...'"></select>
+                     <select data-bind="options: availableLocations, optionsText: 'name', value: selectedHollabackLocation,optionsCaption: 'Choose...'"></select>
                         <div id="map_canvas"></div>
                 </div>
                
@@ -180,11 +180,21 @@
           </div><!-- /header  -->
           
           <div data-role="content">	
-          
-		    <div>
-                
-                <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>
-				
+                        
+              <div class="storyblock">
+ 
+                  <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..."></textarea>
+  
+                  <div class="storycontrols">
+                      <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
+                      <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>    
+                      <p data-bind="text: characterCount"></p>
+                  </div>
+              </div> <!-- /storypanel -->
+            
+            <div>
+           <!--    <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>-->
+                  
                 <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
                       <option>Harassment Types</option>
                       <option value="Verbal">Verbal</option>
@@ -195,42 +205,11 @@
                       <option value="Groping">Groping</option>
                       <option value="Racist">Racist</option>
                       <option value="Other">Other</option>                      
-                 </select>
-                
-                <textarea cols="40" rows="10" name="textarea" id="textarea" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..."></textarea>
-                <p data-bind="text: characterCount"></p>
-                
-                <div class="ui-grid-b">
-                    <div class="ui-block-a">
-                        <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>                       
-                    </div>
-                    <div class="ui-block-b">
-                        <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>     
-                    </div>
-                </div>
-                
-                  
-            </div>
-              
-			<!--	<div>
-				 	<fieldset data-role="controlgroup">
-						<legend>Location</legend>
-						<label for="gps">Use GPS</label>
-						<input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
-					</fieldset>	
-						<div data-bind="visible: gpsLocation">
-							<p>Your current location is: <span data-bind="text: gpsAddress"></span></p> 
-						</div>
-						
-						<div data-bind="visible: manualLocation">
-							<label for="name">Or Enter Manually</label>
-	    					<input type="text" name="address" id="address" data-bind="value: manualAddress"  />
-	    					
-							<a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: verifyAddress">Verify Address</a>
-				    	</div>
-				</div>    -->
-				 	<p data-bind="text: responseText"></p>
-			</div>
+                </select> 
+            </div> 
+
+        
+            <p data-bind="text: responseText"></p>
          
           </div><!-- /content -->
           

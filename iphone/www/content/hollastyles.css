@@ -49,6 +49,19 @@
   margin: 0;
 }
 
+.storyblock{
+    height:50%;
+}
+
+.storyinput{
+    height:100px !important;
+}
+
+.storycontrols{
+    float:left;
+}
+
+
 .ui-icon-locationpin {
 	background: url("images/pin_green.png") no-repeat !important;
 }
