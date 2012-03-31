@@ -48,3 +48,15 @@
   padding:-10px;
   margin: 0;
 }
+
+.ui-icon-locationpin {
+	background: url("images/pin_green.png") no-repeat !important;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-locationpin {
+		background-image: url("images/pin_green@2x.png");
+		background-size: 18px 18px;
+	}
+	...more HD icon rules go here...
+}
