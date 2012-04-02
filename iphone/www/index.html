@@ -3,7 +3,7 @@
   <head>
   <title></title>
       
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
     
     <link rel="stylesheet" href="content/hollastyles.css" /> 
     <link rel="stylesheet" href="content/hollatheme.css" /> 
@@ -41,7 +41,7 @@
 		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
 				<input data-bind='value: password' required placeholder="Password" type="password"/>
 			
-				<a data-bind='click: forgotPassword'class="ui-link-b">Forgot Password</a>
+				<a data-bind='click: forgotPassword' class="ui-link-b">Forgot Password</a>
 				<div class="loginButtonBox">
 					<a data-bind='click: signup' data-inline="true" class="signupLink">Sign Up</a>
 					<a data-bind='click: login' data-role="button" data-mini="true" data-inline="true" 
@@ -174,11 +174,12 @@
       <div data-role="page" id="shareStoryPage">
           
           <div data-role="header" data-theme="c">
-              <a href="#menuPage" data-theme="b">Close</a>
+              <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
               <h1>New Story</h1>
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
           </div><!-- /header  -->
           
+<<<<<<< HEAD
           <div data-role="content" class="hollabacklogobackground">	
             <div class="storycontentbox">	            
                   <div class="storyblock">
@@ -211,6 +212,47 @@
         
             <p data-bind="text: responseText"></p>
             </div>
+=======
+          <div data-role="content">	
+          
+		    <div>
+                
+                <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>
+				
+                <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
+                      <option>Harassment Types</option>
+                      <option value="Verbal">Verbal</option>
+                      <option value="Stalking">Stalking</option>
+                      <option value="Homophobic">Homophobic</option>
+                      <option value="Transphobic">Transphobic</option>
+                      <option value="Assault">Assault</option>
+                      <option value="Groping">Groping</option>
+                      <option value="Racist">Racist</option>
+                      <option value="Other">Other</option>                      
+                 </select>
+                
+                <textarea cols="40" rows="10" name="textarea" id="textarea" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..."></textarea>
+                <p data-bind="text: characterCount"></p>
+                
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                    
+                        <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="locationpin">Custom Icon</a>                       
+
+                        <input type="checkbox" name="gps" id="gps" class="custom" data-bind="checked: useGPS" />
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="" data-role="button" data-inline="true" data-theme="b" data-bind="click: uploadPhoto">Upload Photo</a>     
+                        <img style="display:none;width:60px;height:60px;" id="smallImage" src="" /> 
+                    </div>
+                </div>
+                
+            <p data-bind="text: responseText"></p>      
+            </div>
+			
+
+         
+>>>>>>> 2bd4ac9b3e099bbed4c6b39a09789d56ec546f7d
           </div><!-- /content -->
           
       </div><!-- /share story page -->
@@ -218,9 +260,9 @@
        
       <div data-role="page" id="aboutPage">
           
-          <div data-role="header">
+          <div data-role="header" data-theme="c">
               <h1>About</h1>
-              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Back</a>
+              <a href="#menuPage" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-theme="b">Back</a>
           </div><!-- /header -->
           
           <div data-role="content">	
@@ -241,15 +283,15 @@
 
       <div data-role="page" id="congratsPage">
           
-          <div data-role="header">
+          <div data-role="header" data-theme="c">
               <h1>Congrats!</h1>
-              <a href="#menuPage" data-icon="arrow-l" data-theme="b" class="ui-btn-right">Menu</a>
+              <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
           </div><!-- /header -->
           
           <div data-role="content">	
            	<h2>Thanks!</h2> 
            	<img src="content/images/congrats.png" />
-           	<p>Now we are one step closer to ending street harassment. An email will be sent to you so you can tell us the rest of the story.  If you are not online, your hollaback will be sent the next time you are.</p>        
+           	<p>You Hollaback'ed! Now we are one step closer to ending street harassment. If you are not online, your hollaback will be sent the next time you are.</p>        
           </div><!-- /content -->
           
       </div><!-- /Congrats page -->

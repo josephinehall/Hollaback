@@ -57,41 +57,40 @@ var story ={
 			
 			var storyMessage = new Object();	
 			
-			storyMessage.header = generateStoryHeader();
+			storyMessage.username = self.userInformation.userName;
+			storyMessage.password = self.userInformation.password;
 			
-			storyMessage.message = new Object();
+			storyMessage.iphone_unique_id = device.uuid;
+			storyMessage.iphone_model = "";
+			storyMessage.iphone_system_name = device.platform;
+			storyMessage.iphone_system_version = device.version;
+			storyMessage.iphone_device_name = device.name;
 			
-			if (bystanderToSet == "bystander"){
-				storyMessage.message.bystander = bystanderToSet;
+			if (bystanderToSet){
+				storyMessage.bystander = bystanderToSet.value;
 			}		
       		
       		if(harassmentTypesToSet){
-      			storyMessage.message.category = harassmentTypesToSet;
+      			storyMessage.category = harassmentTypesToSet;
       		}
-      		
-      		storyMessage.message.gps = new Object();
-      		storyMessage.message.gps.longitude = new Object();
-      		
+      		      		
       		if (longitudeToSet){
-      			storyMessage.message.gps.longitude.degrees = longitudeToSet;
+      			storyMessage.longitude = longitudeToSet;
       		}      		   
-      		
-      		storyMessage.message.gps.latitude = new Object();
       		   		
       		if (latitudeToSet){
-      			storyMessage.message.gps.latitude.degrees = latitudeToSet;
+      			storyMessage.latitude = latitudeToSet;
       		}
       		      		
       		if (manualLocationToSet){
-      			storyMessage.message.stringlocation = manualLocationToSet;
+      			storyMessage.stringlocation = manualLocationToSet;
       		}
     
     		if (textToSet){
-	      		storyMessage.message.description = textToSet;
+	      		storyMessage.description = textToSet;
     		}
-    		
-      		if (photoToSet){
-      			storyMessage.message.images = photoToSet;
+       		if (photoToSet){
+      			storyMessage.images = photoToSet;
       		}
       		
     
@@ -106,7 +105,7 @@ var story ={
 			         success: function(response){	
 								 if(response == 'OK')
 								 {
-								  	callback("Story Submission Successful");
+								  	callback("Story Submission Successful");								  	
 								 }
 								 else
 								 {
@@ -117,29 +116,8 @@ var story ={
 			         });
 		};
 		
-
-		
-		function generateStoryHeader(){
-			var storyHeader = new Object();
-			
-			storyHeader.header = new Object();
-			
-			storyHeader.header.username = self.userInformation.userName;
-			storyHeader.header.password = self.userInformation.password;
-			
-			storyHeader.header.source = new Object();
-			
-			storyHeader.header.source.iphone_unique_id = device.uuid;
-			storyHeader.header.source.iphone_model = "";
-			storyHeader.header.source.iphone_system_name = device.platform;
-			storyHeader.header.source.iphone_system_version = device.version;
-			storyHeader.header.source.iphone_device_name = device.name;
-			
-			return storyHeader.header;
-			
-		};
 	
 		self.read();
 	
-	},//end Story Information
+	}//end Story Information
 };
