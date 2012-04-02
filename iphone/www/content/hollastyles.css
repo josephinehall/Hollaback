@@ -1,12 +1,14 @@
 .hollabacklogobackground{
-	background: url('images/logo-medium.png') no-repeat right top;
-
-	
+	background: url('images/logo-medium.png') no-repeat right top;	
 }
 
 .contentbox{
 	padding-top: 80px;
 	margin: 10px;
+}
+
+.storycontentbox{
+    padding-top: 140px;
 }
 
 .contentbox input{
@@ -60,10 +62,10 @@
 }
 
 .storyblock .storyCharacterCounter{
-    margin-right:5px;
+    padding-right:5px;
     position: absolute;
     color:#8CC63F;
-    top: 160px;
+    top: 300px;
     left: 210px;
     z-index: 998;
 }

@@ -34,7 +34,17 @@ var shareViewModels = {
                                             message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
                                             params: 300
                                             }
-                });
+        });
+        
+        self.story.subscribe(function(newValue){
+                             var last = newValue.charAt(newValue.length -1);
+                            
+                             if(last != '\n'){
+                                console.log(last != '\n');
+                                newValue = newValue + '\n';
+                             }
+                             
+        });
 
         
         self.characterCount = ko.computed(function(){

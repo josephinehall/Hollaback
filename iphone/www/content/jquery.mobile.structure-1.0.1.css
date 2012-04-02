@@ -461,7 +461,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .ui-navbar-expanded .ui-btn-icon-bottom .ui-icon { bottom: 15px; }
 .ui-navbar-expanded li .ui-btn .ui-btn-inner { min-height: 2.5em; }
 .ui-navbar-expanded .ui-navbar-noicons .ui-btn .ui-btn-inner { padding-top: 1.8em; padding-bottom: 1.9em; }
-.ui-btn { display: block; text-align: center; cursor:pointer;  position: relative; margin: .5em 5px; padding: 0; }
+.ui-btn { display: block; text-align: center; cursor:pointer;  position: relative; margin: .5em 0px; padding: 0; }
 .ui-header .ui-btn, .ui-footer .ui-btn, .ui-bar .ui-btn { display: inline-block; font-size: 13px; margin: 0; }
 .ui-btn-inline { display: inline-block; }
 .ui-btn-inner { padding: .6em 25px; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
