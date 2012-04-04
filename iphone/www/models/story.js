@@ -40,11 +40,11 @@ var story ={
 			storyMessage.username = self.userInformation.userName;
 			storyMessage.password = self.userInformation.password;
 			
-			storyMessage.iphone_unique_id = device.uuid;
+			storyMessage.iphone_unique_id = "";//device.uuid;
 			storyMessage.iphone_model = "";
-			storyMessage.iphone_system_name = device.platform;
-			storyMessage.iphone_system_version = device.version;
-			storyMessage.iphone_device_name = device.name;
+			storyMessage.iphone_system_name = "";//device.platform;
+			storyMessage.iphone_system_version = "";//device.version;
+			storyMessage.iphone_device_name = "";//device.name;
 			
 			if (bystanderToSet){
 				storyMessage.bystander = bystanderToSet.value;
@@ -71,6 +71,7 @@ var story ={
 	      		storyMessage.description = textToSet;
     		}
        		if (photoToSet){
+       			alert(photoToSet);
       			storyMessage.images = photoToSet;
       		}
       		

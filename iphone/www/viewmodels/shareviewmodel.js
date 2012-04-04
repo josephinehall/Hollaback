@@ -67,6 +67,7 @@ var shareViewModels = {
             var isValid = validateStory();
             if(isValid){
                 alert("submitting ");
+                alert(photoData);
                 alert(self.harassmentTypes());
         	
                 self.storyInformation.submitStory(
@@ -82,9 +83,9 @@ var shareViewModels = {
         self.reset = function(){
     		//for each property on the page, set it back to be nothin
     		self.storyType();
-    		
-        
-        	self.harassmentTypes();
+    		self.harassmentTypes();
+    		self.story();
+        	//photoData = "";
     	};
        
         function storySubmissionSuccessful(message){
