@@ -80,7 +80,11 @@ var shareViewModels = {
         };
         
         self.reset = function(){
-    		self.storyInformation.clearStory();
+    		//for each property on the page, set it back to be nothin
+    		self.storyType();
+    		
+        
+        	self.harassmentTypes();
     	};
        
         function storySubmissionSuccessful(message){
