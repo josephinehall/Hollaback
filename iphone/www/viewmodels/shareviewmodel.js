@@ -1,12 +1,13 @@
 var shareViewModels = {
 
-	shareStoryViewModel: function(storyInformation){
+	shareStoryViewModel: function(storyInformation,usersLocation){
 		var self, photoData, storyMaxCharacters;
 		self = this;  
 		photoData = "";     
         storyMaxCharacters = 300;
    		
    		self.storyInformation = storyInformation;
+        self.usersLocation = usersLocation;
         self.storyType = ko.observable();
         self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
         
@@ -79,6 +80,15 @@ var shareViewModels = {
             }
         };
         
+        self.address = ko.observable("Sydney, NSW");
+        
+        self.geocode = function(){
+            alert(self.address());
+            self.usersLocation.getAddressAsLocation(self.address(),function(gpsResult){
+                                                    
+                                                    });
+        };
+        
         self.reset = function(){
     		self.storyInformation.clearStory();
     	};
@@ -87,7 +97,6 @@ var shareViewModels = {
      		self.responseText(message);
 			$.mobile.changePage("#congratsPage");
 		}
-
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string

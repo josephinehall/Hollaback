@@ -180,7 +180,7 @@
           </div><!-- /header  -->
           
           <div data-role="content" class="hollabacklogobackground">	
-            <div class="storycontentbox">	            
+              <div class="storycontentbox">	            
                   <div class="storyblock">
      
                       <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
@@ -189,7 +189,7 @@
                       </div>
       
                       <div class="storycontrols">
-                          <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
+                          <a data-role="button" href="#locationDialog" data-rel="dialog" data-transition="slidedown" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
                           <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>    
                       </div>
                   </div> <!-- /storypanel -->
@@ -253,6 +253,17 @@
           </div><!-- /content -->
           
       </div><!-- /Congrats page -->
+      
+      <div data-role="page" id="locationDialog">
+          <div data-role="header" data-theme="c">
+              <h1>Location</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">	
+              <input data-bind='value: address' type="textbox">
+              <input type="button" value="Geocode" data-bind="click: geocode">      
+          </div><!-- /content -->
+      </div>    
 
   </body>
 </html>

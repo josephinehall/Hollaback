@@ -52,15 +52,19 @@ $("#forgotPasswordPage").live("pageinit",function(event){
        	ko.applyBindings(menuPageViewModel,this);
 });
 
- $('#menuPage').live('pagebeforeshow', function(event, ui){  
+$('#menuPage').live('pagebeforeshow', function(event, ui){  
 		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
-
- $('#shareStoryPage').live('pageinit', function(event, ui){ 		
+$('#shareStoryPage').live('pageinit', function(event, ui){ 		
 		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
- 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
+        var usersLocation = hollabackApplication.bootstrapper.getUserLocation();                   
+ 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation,usersLocation);
  		ko.applyBindings(shareStoryViewModel, this);
+});
+
+$('#locationDialog').live('pageinit',function(event, ui){
+                        
 });
 
 $('#mapPage').live('pageinit',function(event,ui){

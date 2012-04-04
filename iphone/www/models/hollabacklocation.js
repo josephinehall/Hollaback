@@ -54,6 +54,7 @@ var hollabackLocation = {
 	
 	usersLocation: function(){
 		var self = this;
+        self.geocoder = new google.maps.Geocoder();
 		self.hollabackLocation = new hollabackLocation.hollabackLocation();
 		self.gps = new hollabackLocation.gpsLocation();
 			
@@ -81,8 +82,33 @@ var hollabackLocation = {
 		self.setHollabackLocation = function(localHollaback){
 			self.hollabackLocation = localHollaback;
 		};
+        
+        self.getAddressAsLocation = function(address, callback){
+            if(address)
+            {
+                self.geocoder.geocode( { 'address': address}, function(results, status) {
+                                 if (status == google.maps.GeocoderStatus.OK) 
+                                 {
+                                      console.log(results[0].geometry.location);
+                                      var lat = results[0].geometry.location.lat();
+                                      var long = results[0].geometry.location.lng();
+                                      callback(new hollabackLocation.gpsCoordinates(lat,long));
+                                 } 
+                                 else 
+                                 {
+                                      alert("Geocode was not successful for the following reason: " + status);
+                                      callback();
+                                 }
+                });
+            }
+            else
+            {
+                console.log("Could not resolve manually entered location as it is undefined"); 
+                callback();
+            }
+        };
 	},
-	
+    
 	gpsLocation: function(){
 		var self = this;
         self.gpsCoordinates = new hollabackLocation.gpsCoordinates();
