@@ -37,13 +37,12 @@ var story ={
 			var storyMessage = new Object();
 			
 			storyMessage.username = self.userInformation.userName;
-			storyMessage.password = self.userInformation.password;
-			
-			storyMessage.iphone_unique_id = "";//device.uuid;
+			storyMessage.password = self.userInformation.password;			
+			storyMessage.iphone_unique_id = device.uuid;
 			storyMessage.iphone_model = "";
-			storyMessage.iphone_system_name = "";//device.platform;
-			storyMessage.iphone_system_version = "";//device.version;
-			storyMessage.iphone_device_name = "";//device.name;
+			storyMessage.iphone_system_name = device.platform;
+			storyMessage.iphone_system_version = device.version;
+			storyMessage.iphone_device_name = device.name;
 			
 			if (bystanderToSet){
 				storyMessage.bystander = bystanderToSet.value;
@@ -85,11 +84,15 @@ var story ={
 	            		callback(r.response);
 	            	},
 	            	function(error) {
-	            		callback("An error has occurred: Code = " + error.code);
+	            		navigator.notification.alert(
+    							"Sorry, we couldn't submit your story. Please try again later",  // message
+    							function(){},        // callback
+   								"Oops",            // title
+    							"OK"                  // buttonName
+						);	
+	            		callback("Error");
 	            	},
-	            	options);
-
-    		
+	            	options);    		
     		}
     		else{
 
@@ -148,31 +151,31 @@ var story ={
 							  	callback("Story Submission Successful");								  	
 							 }
 							 else {
-							  	callback(response);
+							 	navigator.notification.alert(
+									"Sorry, we couldn't submit your story. Please try again later",  // message
+									function(){},        // callback
+										"Oops",            // title
+									"OK"                  // buttonName
+								);	
+							  	callback("Error");
 							 }						         		
 		         		 },
-				         error: function(xhr, status, error) {
-				         	callback("There was an error");
+				         error: function(xhr, status, error) {				         	
+				         	navigator.notification.alert(
+    							"Sorry, we couldn't submit your story. Please try again later",  // message
+    							function(){},        // callback
+   								"Oops",            // title
+    							"OK"                  // buttonName
+							);	
+
+				         	callback("Error");
 				         }
 				});
-			}	
+			}
 
+			
 		};
 		
-
-/*
-		function win(r) {
-            console.log("Code = " + r.responseCode);
-            console.log("Response = " + r.response);
-            console.log("Sent = " + r.bytesSent);
-            callback(r.response);
-        }
- 
-        function fail(error) {
-            callback("An error has occurred: Code = " = error.code);
-        }
-*/
-
 
 	
 	}//end Story Information

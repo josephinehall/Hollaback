@@ -58,30 +58,31 @@ var shareViewModels = {
                                           return currentCount + "/"+ storyMaxCharacters;
                                           },this);
         
-        self.responseText = ko.observable();
-        
     	self.errors = ko.validation.group(self);
         
         self.submit = function(){
             
             var isValid = validateStory();
-            if(isValid){
-                alert("submitting ");
-                alert("photoURI: " + photoURI);
-                alert(self.harassmentTypes());
-        	
+            if(isValid){        	
                 self.storyInformation.submitStory(
                                                   self.storyType(), 
                                                   self.harassmentTypes(), 
                                                   self.manualAddress(), 
                                                   "40", "42", photoURI, 
                                                   self.story(), 
-                                                  function(message){storySubmissionSuccessful(message);});
+                                                  function(message){
+                                                  	if (message.indexof("Error") = -1){
+                                                  		storySubmissionSuccessful(message);
+                                                  		self.reset();
+                                                  	}
+                                                  	
+                                                  }
+                                                  );
             }
         };
         
         self.reset = function(){
-    		//for each property on the page, set it back to be nothin
+    		//for each property on the page, set it back to be nothing
     		self.storyType();
     		self.harassmentTypes();
     		self.story();
@@ -89,14 +90,12 @@ var shareViewModels = {
     	};
        
         function storySubmissionSuccessful(message){
-     		self.responseText(message);
 			$.mobile.changePage("#congratsPage");
 		}
 
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
-
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
 					quality: 50,
@@ -146,13 +145,11 @@ var shareViewModels = {
 
         
         function validateStory(){
-
         	var isValid = modelIsValid();
         	if (!isValid) {    		 
             	showErrors();
         	}
 			return isValid;
-
         }
         
 
