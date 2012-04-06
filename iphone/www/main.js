@@ -6,8 +6,6 @@ function hollabackStartup() {
 };
 
 
-
-
 $('#indexPage').live('pageinit',function(event,ui){
 
 	ko.validation.rules.pattern.message = 'Invalid.';
@@ -52,12 +50,12 @@ $("#forgotPasswordPage").live("pageinit",function(event){
        	ko.applyBindings(menuPageViewModel,this);
 });
 
- $('#menuPage').live('pagebeforeshow', function(event, ui){  
+$('#menuPage').live('pagebeforeshow', function(event, ui){  
 		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
 
- $('#shareStoryPage').live('pageinit', function(event, ui){ 		
+$('#shareStoryPage').live('pageinit', function(event, ui){ 		
  		var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
  		ko.applyBindings(shareStoryViewModel, this);
 });
@@ -65,6 +63,11 @@ $("#forgotPasswordPage").live("pageinit",function(event){
  $('#shareStoryPage').live('pagebeforeshow', function(event, ui){ 		
 		var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
 		shareStoryViewModel.reset();
+});
+
+$('#locationDialog').live('pageinit',function(event, ui){
+        var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
+        ko.applyBindings(shareStoryViewModel, this);                
 });
 
 
@@ -114,7 +117,7 @@ var hollabackApplication ={
 			storyInformation = new story.storyInformation(urlConfig,userInformation);
 			hollabackChapters = new hollabackLocation.hollabackChapters(urlConfig);
 			hollabackMapViewModel = new hollabackViewModels.mapPageViewModel(userLocation,hollabackChapters);
-			storyPageViewModel = new shareViewModels.shareStoryViewModel(storyInformation);
+			storyPageViewModel = new shareViewModels.shareStoryViewModel(storyInformation,userLocation);
 			
 			if(userInformation.isSignedIn())
 			{

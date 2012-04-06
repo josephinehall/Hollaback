@@ -37,10 +37,14 @@ var hollabackLocation = {
         
         self.isAvailable= function(){
             return self.latitude != undefined && self.longitude != undefined;
-        }
+        };
         
         self.getLatLong = function(){
-			return self.latitude + "," + self.longitude;
+            
+            var lat = Math.floor(self.latitude*1000+0.5)/1000; 
+            var long = Math.floor(self.longitude*1000+0.5)/1000;
+
+			return lat + "," + long ;
 		};
         
     },
@@ -54,6 +58,7 @@ var hollabackLocation = {
 	
 	usersLocation: function(){
 		var self = this;
+        self.geocoder = new google.maps.Geocoder();
 		self.hollabackLocation = new hollabackLocation.hollabackLocation();
 		self.gps = new hollabackLocation.gpsLocation();
 			
@@ -81,8 +86,35 @@ var hollabackLocation = {
 		self.setHollabackLocation = function(localHollaback){
 			self.hollabackLocation = localHollaback;
 		};
+        
+        self.getAddressAsLocation = function(address, callback){
+            
+            if(address)
+            {
+                console.log("geo coding " + address);
+                self.geocoder.geocode( { 'address': address}, function(results, status) {
+                                 if (status == google.maps.GeocoderStatus.OK) 
+                                 {
+                                      console.log(results[0].geometry.location);
+                                      var lat = results[0].geometry.location.lat();
+                                      var long = results[0].geometry.location.lng();
+                                      callback(new hollabackLocation.gpsCoordinates(lat,long));
+                                 } 
+                                 else 
+                                 {
+                                      alert("Geocode was not successful for the following reason: " + status);
+                                      callback();
+                                 }
+                });
+            }
+            else
+            {
+                console.log("Could not resolve manually entered location as it is undefined"); 
+                callback();
+            }
+        };
 	},
-	
+    
 	gpsLocation: function(){
 		var self = this;
         self.gpsCoordinates = new hollabackLocation.gpsCoordinates();
@@ -90,24 +122,40 @@ var hollabackLocation = {
 		
 		self.updateLocation = function(callback){
 			navigator.geolocation.getCurrentPosition(function(position){
-                                                        var gps = new hollabackLocation.gpsCoordinates(position.coords.latitude,position.coords.longitude);
-                                                        self.lastTimeQueried = new Date();
-                                                        self.gpsCoordinates = gps;
-                                                        console.log(self.getLatLong());
-                                                        navigator.geolocation.stop();
-                                                        callback(gps);
-                                                     },function(error){
-                                                        self.allows = false;
-                                                        self.lastTimeQueried = new Date();
-                                                        console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-                                                     
-                                                        navigator.geolocation.stop();
-                                                        callback();
+                                                     try
+                                                     {
+                                                     var gps = new hollabackLocation.gpsCoordinates(position.coords.latitude,position.coords.longitude);
+                                                     self.lastTimeQueried = new Date();
+                                                     self.gpsCoordinates = gps;
+                                                     console.log(self.getLatLong());
+                                                     navigator.geolocation.stop();
+                                                     callback(gps);
+                                                     }
+                                                     catch(e)
+                                                     {
+                                                     callback();
+                                                     }
+
+                                                    },function(error){
+                                                     try
+                                                     {
+                                                     self.allows = false;
+                                                     self.lastTimeQueried = new Date();
+                                                     console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+                                                     navigator.geolocation.stop();
+                                                     callback();
+                                                     }
+                                                     catch(e)
+                                                     {
+                                                     callback();
+                                                     }
+
                                                      },options);		
 		};
-		
+
+        
 		self.getLatLong = function(){
-			return self.gpsCoordinates.latitude + "," + self.gpsCoordinates.longitude;
+            return self.gpsCoordinates.getLatLong();
 		};
 
 	},

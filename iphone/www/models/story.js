@@ -27,7 +27,7 @@ var story ={
 		};
 		
 		self.clearStory = function (){
-			window.localStorage
+			//window.localStorage
 		};
 				
 		
@@ -173,7 +173,6 @@ var story ={
 				});
 			}
 
-			
 		};
 		
 

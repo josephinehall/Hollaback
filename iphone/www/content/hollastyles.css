@@ -3,12 +3,12 @@
 }
 
 .contentbox{
-	padding-top: 80px;
+	padding-top: 60px;
 	margin: 10px;
 }
 
 .storycontentbox{
-    padding-top: 140px;
+    padding-top: 80px;
 }
 
 .contentbox input{
@@ -51,50 +51,40 @@
   margin: 0;
 }
 
-.storyblock{
-    height:150px;
-}
-
-.storyblock .storyinput{
+.storyinput{
     height:130px !important;
-    float:left;
-    width:240px;
-}
-
-.storyblock .storyCharacterCounter{
-    padding-right:5px;
-    position: absolute;
-    color:#8CC63F;
-    top: 300px;
-    left: 210px;
-    z-index: 998;
 }
 
 .storycontrols{
+    color:#8CC63F;
+    height:35px;
+}
+
+.storycontrols .count{
+    float:right;
+}
+
+.storycontrols .location{
+    margin-left:5px;
+}
+
+.storycontrols .rightchild{
+    float:right;
+}
+
+.storycontrols .leftchild{
     float:left;
-    margin-right:5px;
 }
-
-.storymeta{
-    height:50%;
-}
-
 
 .ui-icon-locationpin {
-	background: url("images/pin_green.png") no-repeat !important;
+	background: url("images/map-marker.png") no-repeat !important;
+    height:35px !important;
+    width:40px !important;
 }
 
 .ui-icon-camera {
-	background: url("images/camera_green.png") no-repeat !important;
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-	.ui-icon-locationpin {
-		background-image: url("images/pin_green@2x.png");
-		background-size: 18px 18px;
-	}
-    .ui-icon-camera {
-		background-image: url("images/camera_green@2x.png");
-		background-size: 18px 18px;
-	}
+	background: url("images/camera.png") no-repeat !important;
+    height:35px !important;
+    width: 40px !important;
+    padding: 5px 1px 2px 5px !important;    
 }

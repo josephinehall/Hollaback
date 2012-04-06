@@ -7,27 +7,70 @@ var shareViewModels = {
         storyMaxCharacters = 300;
    		
    		self.storyInformation = storyInformation;
+        self.usersLocation = usersLocation;
         self.storyType = ko.observable();
-        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);
-        
+        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);     
         self.harassmentTypes = ko.observableArray();        
-        self.useGPS = ko.observable(false);
-                
-        self.gpsLocation = ko.computed(function() {
-			return self.useGPS();
-   		}, self);   		
-        
-		self.manualLocation = ko.computed(function() {
-			return !self.useGPS();   	
-   		}, self);
+        self.useGPS = ko.observable(); 
+        self.enableGpsSlider = ko.observable(true);
+        self.getLocation = function(){
+            self.gpsText("Calculating Address...."); 
+            self.usersLocation.bestAvailableLocation(function(gpsResult){
+                                     
+                                     if(gpsResult.isAvailable())
+                                     {
+                                        self.gpsAddress(gpsResult);
+                                        self.gpsText(gpsResult.getLatLong());
+                                    
+                                     }
+                                     else
+                                     {
+                                        console.log("Could not get current location");      
+                                        $.mobile.changePage('#locationDialog', {transition: 'pop', role: 'dialog'});  
+                                     }                                                     
+            });
 
-        self.manualAddress = ko.observable();
-        self.gpsAddress = ko.observable();
-        self.verifyAddress = ko.observable();
         
-        self.uploadPhoto = function(){
-        	capturePhoto();
         };
+        
+        self.useGPS.subscribe(function(newValue){
+            if(newValue == 'true'){                
+                 $("#locationSwitch").hide();             
+                         
+                                                                
+                              
+            }
+        });
+        
+        self.showLocationType = function(type) {
+       		return type === self.useGPS();   
+    	};
+
+        self.gpsAddress = ko.observable();
+        self.gpsText = ko.observable();
+        self.addressIsValid = ko.observable();       
+		self.manualAddress = ko.observable("Sydney, NSW");
+        
+        self.geocode = function(){
+            self.closeDialog();
+            self.gpsAddress("Calculating Address....");
+            self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
+                                    if(gpsResult)
+                                    {
+                                        self.gpsAddress(gpsResult);  
+                                        self.gpsText(gpsResult.getLatLong());              
+                                    }
+                                    else
+                                    {                                              
+                                        self.gpsText("Could not find location");   
+                                    }
+                                                    
+                                });
+        };
+        
+        self.closeDialog = function(){            
+            $("#locationDialog").dialog('close'); 
+        }
 
         self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
                                     .extend({validation: {
@@ -48,6 +91,10 @@ var shareViewModels = {
                              }
                              
         });
+        
+        self.uploadPhoto = function(){
+        	capturePhoto();
+        };
 
         
         self.characterCount = ko.computed(function(){
@@ -81,6 +128,7 @@ var shareViewModels = {
             }
         };
         
+
         self.reset = function(){
     		//for each property on the page, set it back to be nothing
     		self.storyType();
@@ -92,7 +140,6 @@ var shareViewModels = {
         function storySubmissionSuccessful(message){
 			$.mobile.changePage("#congratsPage");
 		}
-
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
