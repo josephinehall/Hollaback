@@ -1,9 +1,9 @@
 var shareViewModels = {
 
-	shareStoryViewModel: function(storyInformation,usersLocation){
-		var self, photoData, storyMaxCharacters;
+	shareStoryViewModel: function(storyInformation){
+		var self, photoURI, storyMaxCharacters;
 		self = this;  
-		photoData = "";     
+		photoURI;     
         storyMaxCharacters = 300;
    		
    		self.storyInformation = storyInformation;
@@ -105,50 +105,49 @@ var shareViewModels = {
                                           return currentCount + "/"+ storyMaxCharacters;
                                           },this);
         
-        self.responseText = ko.observable();
-        
     	self.errors = ko.validation.group(self);
         
         self.submit = function(){
             
             var isValid = validateStory();
-            if(isValid){
-                alert("submitting ");
-                alert(photoData);
-                alert(self.harassmentTypes());
-        	
+            if(isValid){        	
                 self.storyInformation.submitStory(
                                                   self.storyType(), 
                                                   self.harassmentTypes(), 
                                                   self.manualAddress(), 
-                                                  "40", "42", photoData, 
+                                                  "40", "42", photoURI, 
                                                   self.story(), 
-                                                  function(message){storySubmissionSuccessful(message);});
+                                                  function(message){
+                                                  	if (message.indexof("Error") = -1){
+                                                  		storySubmissionSuccessful(message);
+                                                  		self.reset();
+                                                  	}
+                                                  	
+                                                  }
+                                                  );
             }
         };
         
 
         self.reset = function(){
-    		//for each property on the page, set it back to be nothin
+    		//for each property on the page, set it back to be nothing
     		self.storyType();
     		self.harassmentTypes();
     		self.story();
-        	//photoData = "";
+        	photoURI = undefined;
     	};
        
         function storySubmissionSuccessful(message){
-     		self.responseText(message);
 			$.mobile.changePage("#congratsPage");
 		}
 
 		function capturePhoto() {
 		  // Take picture using device camera and retrieve image as base64-encoded string
-
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
-					quality: 20,
-					targetWidth: 300,
-					targetHeight: 300,
+					quality: 50,
+					targetWidth: 250,
+					targetHeight: 250,
 					allowEdit: true,
 					sourceType : Camera.PictureSourceType.PHOTOLIBRARY
 				}
@@ -161,40 +160,43 @@ var shareViewModels = {
 			alert("Failed because: " + message);
 		}
 
-		function onSuccess(imageData) {
-			var smallImage = document.getElementById("smallImage");
-	        smallImage.style.display = 'block';     
-	        smallImage.src = imageData;
-	        
-	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
-
+		function onSuccess(imageData) {	        
+	        //window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
+	        photoURI = imageData;
 		}
 
+		
+/*
 		function gotFileEntry(fileEntry) { 			
 			readDataUrl(fileEntry.fullPath);
 		}
 
     	function readDataUrl(file) {
-	        var reader = new FileReader();
-	        reader.onloadend = function(evt) {
-	            photoData = evt.target.result;
-	        };
-	        reader.readAsDataURL(file);
+	        photoData = file;
+	        
+	        //var reader = new FileReader();
+	        //reader.onloadend = function(evt) {
+	            //photoURI = evt.target.result;
+	            //remove the headers from photoData??
+	            //var j = photoData.split("data:image/jpeg;base64,").pop();
+	            //photoData = j;
+	        //};
+	        //reader.readAsDataURL(file);
     	}
 		   
 		function onFail(message) {
-			alert('Failed because: ' + message);
+			alert("Failed because: " + message);
 		}
+*/
+
 
         
         function validateStory(){
-
         	var isValid = modelIsValid();
         	if (!isValid) {    		 
             	showErrors();
         	}
 			return isValid;
-
         }
         
 
