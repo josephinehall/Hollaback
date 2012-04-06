@@ -95,6 +95,42 @@ var story ={
 	            	options);    		
     		}
     		else{
+    		
+				$.ajax({
+				         type: 'POST',
+				         url: urlConfig.getStoryUrl(),
+				         data: storyMessage,
+				         contentType: false,
+	       				 cache: false,
+				         success: function(response) {	
+							 if(response == 'OK') {
+							  	callback("Story Submission Successful");								  	
+							 }
+							 else {
+							 	navigator.notification.alert(
+									"Sorry, we couldn't submit your story. Please try again later",  // message
+									function(){},        // callback
+										"Oops",            // title
+									"OK"                  // buttonName
+								);	
+							  	callback("Error");
+							 }						         		
+		         		 },
+				         error: function(xhr, status, error) {				         	
+				         	navigator.notification.alert(
+    							"Sorry, we couldn't submit your story. Please try again later",  // message
+    							function(){},        // callback
+   								"Oops",            // title
+    							"OK"                  // buttonName
+							);	
+
+				         	callback("Error");
+				         }
+				});
+			}
+
+		};
+		
 
     		
     		//JQUERY AJAX FORMDATA OBJECT
@@ -139,43 +175,6 @@ var story ={
     			data.append("hollabackposting", decoded);
     		}
 */
-    		
-				$.ajax({
-				         type: 'POST',
-				         url: urlConfig.getStoryUrl(),
-				         data: storyMessage,
-				         contentType: false,
-	       				 cache: false,
-				         success: function(response) {	
-							 if(response == 'OK') {
-							  	callback("Story Submission Successful");								  	
-							 }
-							 else {
-							 	navigator.notification.alert(
-									"Sorry, we couldn't submit your story. Please try again later",  // message
-									function(){},        // callback
-										"Oops",            // title
-									"OK"                  // buttonName
-								);	
-							  	callback("Error");
-							 }						         		
-		         		 },
-				         error: function(xhr, status, error) {				         	
-				         	navigator.notification.alert(
-    							"Sorry, we couldn't submit your story. Please try again later",  // message
-    							function(){},        // callback
-   								"Oops",            // title
-    							"OK"                  // buttonName
-							);	
-
-				         	callback("Error");
-				         }
-				});
-			}
-
-		};
-		
-
 	
 	}//end Story Information
 };
