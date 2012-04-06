@@ -179,23 +179,28 @@
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
           </div><!-- /header  -->          
           <div data-role="content" class="hollabacklogobackground">	
+              
               <div class="storycontentbox">	            
-                  <div class="storyblock">
-     
-                      <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
-                      <div class="storyCharacterCounter">
-                          <p data-bind="text: characterCount"></p>
-                          <p data-bind="text: gpsText"></p> 
-                      </div>
-                      <div class="storycontrols">
-                          <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
-                          <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>    
-                      </div>
-                  </div> <!-- /storypanel -->
-                
+
+                 <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
+
+                <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
+                    <div class="leftchild">
+                     <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
+                              data-icon="locationpin"></a>
+                     <a data-role="button" data-bind="click: uploadPhoto" data-iconpos="notext" 
+                              data-icon="camera"></a>
+                        
+                     <span data-bind="text: gpsText" class="location" ></span>
+                     </div>
+                     <div class="rightchild"> 
+                      <span data-bind="text: characterCount" class="count"></span>
+                     </div>
+                </div>
+
                 <div class="storymeta">
-                  <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>                  
-                    <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
+                      <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>                  
+                      <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
                           <option>Harassment Types</option>
                           <option value="Verbal">Verbal</option>
                           <option value="Stalking">Stalking</option>
@@ -205,10 +210,10 @@
                           <option value="Groping">Groping</option>
                           <option value="Racist">Racist</option>
                           <option value="Other">Other</option>                      
-                    </select> 
-                </div> 
-        
-            <p data-bind="text: responseText"></p>
+                      </select> 
+                  </div> 
+                  
+
             </div>
           </div><!-- /content -->
           
@@ -262,8 +267,9 @@
 
 			  <div>
 			  	<h3>Where are you?</h3>
+                <p>You do not allow hollback access to your current location. Please tell us where you are.</p>
                 <input data-bind='value: manualAddress' required placeholder="Your Location" error-invalid="Enter a location"/>	
-              	<input type="button" value="Geocode" data-bind="click: geocode">  
+              	<input type="button" value="Done" data-bind="click: geocode">  
 			  </div>
 				
                   

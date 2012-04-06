@@ -40,7 +40,11 @@ var hollabackLocation = {
         };
         
         self.getLatLong = function(){
-			return self.latitude + "," + self.longitude;
+            
+            var lat = Math.floor(self.latitude*1000+0.5)/1000; 
+            var long = Math.floor(self.longitude*1000+0.5)/1000;
+
+			return lat + "," + long ;
 		};
         
     },
@@ -151,7 +155,7 @@ var hollabackLocation = {
 
         
 		self.getLatLong = function(){
-			return self.gpsCoordinates.latitude + "," + self.gpsCoordinates.longitude;
+            return self.gpsCoordinates.getLatLong();
 		};
 
 	},

@@ -1,12 +1,12 @@
 /*
-* jQuery Mobile Framework 1.0.1
-* http://jquerymobile.com
-*
-* Copyright 2011-2012 (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*
-*/
+ * jQuery Mobile Framework 1.0.1
+ * http://jquerymobile.com
+ *
+ * Copyright 2011-2012 (c) jQuery Project
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ */
 /* some unsets - more probably needed */
 .ui-mobile, .ui-mobile body { height: 100%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
@@ -27,10 +27,10 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /*orientations from js are available */
 @media screen and (orientation: portrait){
-.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+    .ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
 }
 @media screen and (orientation: landscape){
-.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+    .ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
 }
 
 /* native overflow scrolling */
@@ -161,8 +161,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 
 /* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
-Built by David Kaneda and maintained by Jonathan Stark.
-*/
+ Built by David Kaneda and maintained by Jonathan Stark.
+ */
 .in, .out {
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: 350ms;
@@ -549,9 +549,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px;  }
 /* conflicts with listview..
-.ui-controlgroup .ui-btn-icon-notext { width: 30px; height: 30px; text-indent: -9999px; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner {  padding: 5px 6px 5px 5px; }
-*/
+ .ui-controlgroup .ui-btn-icon-notext { width: 30px; height: 30px; text-indent: -9999px; }
+ .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner {  padding: 5px 6px 5px 5px; }
+ */
 
 @media all and (min-width: 450px){
 	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0;  }
@@ -686,7 +686,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 
 .ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
 @media all and (min-width: 480px){
-	 .ui-li-aside { width: 45%; }
+    .ui-li-aside { width: 45%; }
 }	 
 .ui-li-divider { cursor: default; }
 .ui-li-has-alt .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt { padding-right: 95px; }
