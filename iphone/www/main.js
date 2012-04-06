@@ -6,8 +6,6 @@ function hollabackStartup() {
 };
 
 
-
-
 $('#indexPage').live('pageinit',function(event,ui){
 
 	ko.validation.rules.pattern.message = 'Invalid.';
@@ -56,16 +54,22 @@ $('#menuPage').live('pagebeforeshow', function(event, ui){
 		hollabackApplication.bootstrapper.resetMenuPageViewModel();
 });
 
+
 $('#shareStoryPage').live('pageinit', function(event, ui){ 		
-		var storyInformation = hollabackApplication.bootstrapper.getStoryInformation();
-        var usersLocation = hollabackApplication.bootstrapper.getUserLocation();                   
- 		var shareStoryViewModel = new shareViewModels.shareStoryViewModel(storyInformation,usersLocation);
+ 		var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
  		ko.applyBindings(shareStoryViewModel, this);
 });
 
-$('#locationDialog').live('pageinit',function(event, ui){
-                        
+ $('#shareStoryPage').live('pagebeforeshow', function(event, ui){ 		
+		var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
+		shareStoryViewModel.reset();
 });
+
+$('#locationDialog').live('pageinit',function(event, ui){
+        var shareStoryViewModel = hollabackApplication.bootstrapper.getShareStoryViewModel();
+        ko.applyBindings(shareStoryViewModel, this);                
+});
+
 
 $('#mapPage').live('pageinit',function(event,ui){
 		var mapPageViewModel =  hollabackApplication.bootstrapper.getHollabackMapViewModel();	
@@ -97,6 +101,7 @@ var hollabackApplication ={
 		var hollabackChapters;
 		var userLocation;
 		var hollabackMapViewModel;
+		var storyPageViewModel;
 		
 		function isRunning(){
             return running;
@@ -112,6 +117,7 @@ var hollabackApplication ={
 			storyInformation = new story.storyInformation(urlConfig,userInformation);
 			hollabackChapters = new hollabackLocation.hollabackChapters(urlConfig);
 			hollabackMapViewModel = new hollabackViewModels.mapPageViewModel(userLocation,hollabackChapters);
+			storyPageViewModel = new shareViewModels.shareStoryViewModel(storyInformation,userLocation);
 			
 			if(userInformation.isSignedIn())
 			{
@@ -171,6 +177,10 @@ var hollabackApplication ={
 			
 			resetShareViewModel: function (){
 				storyInformation.clearStory();
+			},
+			
+			getShareStoryViewModel: function(){
+				return storyPageViewModel;
 			},
 		}
 		})(),

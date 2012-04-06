@@ -37,7 +37,7 @@ var hollabackLocation = {
         
         self.isAvailable= function(){
             return self.latitude != undefined && self.longitude != undefined;
-        }
+        };
         
         self.getLatLong = function(){
 			return self.latitude + "," + self.longitude;
@@ -84,8 +84,10 @@ var hollabackLocation = {
 		};
         
         self.getAddressAsLocation = function(address, callback){
+            
             if(address)
             {
+                console.log("geo coding " + address);
                 self.geocoder.geocode( { 'address': address}, function(results, status) {
                                  if (status == google.maps.GeocoderStatus.OK) 
                                  {
@@ -116,22 +118,38 @@ var hollabackLocation = {
 		
 		self.updateLocation = function(callback){
 			navigator.geolocation.getCurrentPosition(function(position){
-                                                        var gps = new hollabackLocation.gpsCoordinates(position.coords.latitude,position.coords.longitude);
-                                                        self.lastTimeQueried = new Date();
-                                                        self.gpsCoordinates = gps;
-                                                        console.log(self.getLatLong());
-                                                        navigator.geolocation.stop();
-                                                        callback(gps);
-                                                     },function(error){
-                                                        self.allows = false;
-                                                        self.lastTimeQueried = new Date();
-                                                        console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
-                                                     
-                                                        navigator.geolocation.stop();
-                                                        callback();
+                                                     try
+                                                     {
+                                                     var gps = new hollabackLocation.gpsCoordinates(position.coords.latitude,position.coords.longitude);
+                                                     self.lastTimeQueried = new Date();
+                                                     self.gpsCoordinates = gps;
+                                                     console.log(self.getLatLong());
+                                                     navigator.geolocation.stop();
+                                                     callback(gps);
+                                                     }
+                                                     catch(e)
+                                                     {
+                                                     callback();
+                                                     }
+
+                                                    },function(error){
+                                                     try
+                                                     {
+                                                     self.allows = false;
+                                                     self.lastTimeQueried = new Date();
+                                                     console.log('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+                                                     navigator.geolocation.stop();
+                                                     callback();
+                                                     }
+                                                     catch(e)
+                                                     {
+                                                     callback();
+                                                     }
+
                                                      },options);		
 		};
-		
+
+        
 		self.getLatLong = function(){
 			return self.gpsCoordinates.latitude + "," + self.gpsCoordinates.longitude;
 		};

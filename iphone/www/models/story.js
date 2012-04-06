@@ -9,11 +9,6 @@ var story ={
 	storyInformation: function(configuration, userInformation){
 		var self = this;
 		var urlConfig = configuration; 
-		var bystanderStorageKey = "bystanderStorageKey";
-		var harassmentTypesStorageKey = "harassmentTypesStorageKey";
-		var locationStorageKey = "locationStorageKey";
-		var photoStorageKey = "photoStorageKey";
-		var textStorageKey = "textStorageKey";
 		
 		self.userInformation = userInformation;
 		self.bystander;
@@ -22,22 +17,7 @@ var story ={
 		self.photo;
 		self.text;
 		
-		self.read = function(){
-			self.userInformation.read();
-			self.bystander = window.localStorage.getItem(bystanderStorageKey);
-			self.harassmentTypes = window.localStorage.getItem(harassmentTypesStorageKey);
-			self.location = window.localStorage.getItem(locationStorageKey);
-			self.photo = window.localStorage.getItem(photoStorageKey);
-			self.text = window.localStorage.getItem(textStorageKey);
-		}; 
-		
-		self.save = function(){
-            window.localStorage.setItem(bystanderStorageKey, self.bystander);
-            window.localStorage.setItem(harassmentTypesStorageKey, self.harassmentTypes);
-            window.localStorage.setItem(locationStorageKey, self.location);
-            window.localStorage.setItem(photoStorageKey, self.photo);
-            window.localStorage.setItem(textStorageKey, self.text);              
-		};
+
 		
 		self.getGpsLocation = function(location){
 			//phonegap geolocations
@@ -49,7 +29,7 @@ var story ={
 		};
 		
 		self.clearStory = function (){
-			window.localStorage.clear();
+			//window.localStorage
 		};
 				
 		
@@ -60,18 +40,19 @@ var story ={
 			storyMessage.username = self.userInformation.userName;
 			storyMessage.password = self.userInformation.password;
 			
-			storyMessage.iphone_unique_id = device.uuid;
+			storyMessage.iphone_unique_id = "";//device.uuid;
 			storyMessage.iphone_model = "";
-			storyMessage.iphone_system_name = device.platform;
-			storyMessage.iphone_system_version = device.version;
-			storyMessage.iphone_device_name = device.name;
+			storyMessage.iphone_system_name = "";//device.platform;
+			storyMessage.iphone_system_version = "";//device.version;
+			storyMessage.iphone_device_name = "";//device.name;
 			
 			if (bystanderToSet){
 				storyMessage.bystander = bystanderToSet.value;
 			}		
       		
       		if(harassmentTypesToSet){
-      			storyMessage.category = harassmentTypesToSet;
+      		    var harassmentstring = harassmentTypesToSet.join(", ");
+      			storyMessage.category = harassmentstring;
       		}
       		      		
       		if (longitudeToSet){
@@ -90,12 +71,11 @@ var story ={
 	      		storyMessage.description = textToSet;
     		}
        		if (photoToSet){
+       			alert(photoToSet);
       			storyMessage.images = photoToSet;
       		}
       		
     
-      	
-      		
 			$.ajax({
 			         type: 'POST',
 			         url: urlConfig.getStoryUrl(),
@@ -116,8 +96,7 @@ var story ={
 			         });
 		};
 		
-	
-		self.read();
+
 	
 	}//end Story Information
 };

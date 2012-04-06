@@ -3,12 +3,12 @@
 }
 
 .contentbox{
-	padding-top: 80px;
+	padding-top: 60px;
 	margin: 10px;
 }
 
 .storycontentbox{
-    padding-top: 140px;
+    padding-top: 100px;
 }
 
 .contentbox input{
@@ -50,6 +50,21 @@
   padding:-10px;
   margin: 0;
 }
+
+.overlay {
+    z-index:1000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#000;
+    opacity:0.45;
+    -moz-opacity:0.45;
+    filter:alpha(opacity=45);
+    visibility:hidden;
+}
+
 
 .storyblock{
     height:150px;

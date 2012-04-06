@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
     
     <link rel="stylesheet" href="content/hollastyles.css" /> 
-    <link rel="stylesheet" href="content/hollatheme.css" /> 
+    <link rel="stylesheet" href="content/defaultstyle.css" /> 
     <link rel="stylesheet" href="content/jquery.mobile.structure-1.0.1.css"/>
        
     <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
@@ -177,8 +177,7 @@
               <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
               <h1>New Story</h1>
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
-          </div><!-- /header  -->
-          
+          </div><!-- /header  -->          
           <div data-role="content" class="hollabacklogobackground">	
               <div class="storycontentbox">	            
                   <div class="storyblock">
@@ -186,10 +185,10 @@
                       <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
                       <div class="storyCharacterCounter">
                           <p data-bind="text: characterCount"></p>
+                          <p data-bind="text: gpsText"></p> 
                       </div>
-      
                       <div class="storycontrols">
-                          <a data-role="button" href="#locationDialog" data-rel="dialog" data-transition="slidedown" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
+                          <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" data-iconpos="right" data-icon="locationpin"></a>   
                           <a data-role="button" data-iconpos="notext" data-iconpos="right" data-icon="camera" data-bind="click: uploadPhoto"></a>    
                       </div>
                   </div> <!-- /storypanel -->
@@ -256,12 +255,18 @@
       
       <div data-role="page" id="locationDialog">
           <div data-role="header" data-theme="c">
-              <h1>Location</h1>
+              <h2>Location</h2>
           </div><!-- /header -->
           
           <div data-role="content">	
-              <input data-bind='value: address' type="textbox">
-              <input type="button" value="Geocode" data-bind="click: geocode">      
+
+			  <div>
+			  	<h3>Where are you?</h3>
+                <input data-bind='value: manualAddress' required placeholder="Your Location" error-invalid="Enter a location"/>	
+              	<input type="button" value="Geocode" data-bind="click: geocode">  
+			  </div>
+				
+                  
           </div><!-- /content -->
       </div>    
 
