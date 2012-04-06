@@ -531,7 +531,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
-.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0 1em; }
+.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: 1em 0 1em; }
 .ui-bar .ui-controlgroup { margin: 0 .3em; }
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; }
 .ui-controlgroup-controls { display: block; width: 100%;}
