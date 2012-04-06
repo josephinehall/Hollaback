@@ -17,8 +17,6 @@ var story ={
 		self.photo;
 		self.text;
 		
-
-		
 		self.getGpsLocation = function(location){
 			//phonegap geolocations
 		};
@@ -33,9 +31,10 @@ var story ={
 		};
 				
 		
-		self.submitStory = function(bystanderToSet, harassmentTypesToSet, manualLocationToSet, latitudeToSet, longitudeToSet, photoToSet, textToSet, callback){		
+		self.submitStory = function(bystanderToSet, harassmentTypesToSet, manualLocationToSet, latitudeToSet, longitudeToSet, photoURI, textToSet, callback){		
 			
-			var storyMessage = new Object();	
+			
+			var storyMessage = new Object();
 			
 			storyMessage.username = self.userInformation.userName;
 			storyMessage.password = self.userInformation.password;
@@ -70,34 +69,110 @@ var story ={
     		if (textToSet){
 	      		storyMessage.description = textToSet;
     		}
-       		if (photoToSet){
-       			alert(photoToSet);
-      			storyMessage.images = photoToSet;
-      		}
-      		
-    
-      	
-      		
-			$.ajax({
-			         type: 'POST',
-			         url: urlConfig.getStoryUrl(),
-			         data: jQuery.param(storyMessage),
-			         processData: false,
-       				 contentType: "text",
-			         success: function(response){	
-								 if(response == 'OK')
-								 {
-								  	callback("Story Submission Successful");								  	
-								 }
-								 else
-								 {
-								  	callback(response);
-								 }						         		
-			         		},
-			         error: function(xhr, status, error){callback("There was an error");},
-			         });
+    		
+    		if (photoURI) {
+    			var options = new FileUploadOptions();
+	            options.fileKey = "hollabackposting";
+	            options.fileName = photoURI.substr(photoURI.lastIndexOf('/')+1);
+	            options.mimeType = "image/jpeg";
+	 
+	            options.params = storyMessage;
+	            options.chunkedMode = false;
+	 
+	            var ft = new FileTransfer();
+	            ft.upload(photoURI, urlConfig.getStoryUrl(), 
+	            	function(r) {
+	            		callback(r.response);
+	            	},
+	            	function(error) {
+	            		callback("An error has occurred: Code = " + error.code);
+	            	},
+	            	options);
+
+    		
+    		}
+    		else{
+
+    		
+    		//JQUERY AJAX FORMDATA OBJECT
+    		
+    		/*
+			var data = new FormData();
+    		
+    		data.append("username", self.userInformation.userName);
+    		data.append("password", self.userInformation.password);
+    		data.append("iphone_unique_id", "");
+    		data.append("iphone_model", "");
+    		data.append("iphone_system_name", "");
+    		data.append("iphone_system_version", "");
+    		data.append("iphone_device_name", "");
+    		
+    		if (bystanderToSet){
+    			data.append("bystander", bystanderToSet.value);	
+			}		      		
+      		if(harassmentTypesToSet){
+      		    var harassmentstring = harassmentTypesToSet.join(", ");
+      			data.append("category", harassmentstring);
+      		}     		      		
+      		if (longitudeToSet){
+      			data.append("longitude", longitudeToSet);
+      		}      		         		   		
+      		if (latitudeToSet){
+      			data.append("latitude", latitudeToSet);
+      		}     		      		
+      		if (manualLocationToSet){
+      			data.append("stringlocation", manualLocationToSet);
+      		}    
+    		if (textToSet){
+	      		data.append("description", textToSet);
+    		}
+
+    		
+    		
+    		if (photoData) {
+      			//this would be easier if we could send it as base64
+      			var decoded = window.atob(photoData);
+      			alert(decoded);
+    			data.append("hollabackposting", decoded);
+    		}
+*/
+    		
+				$.ajax({
+				         type: 'POST',
+				         url: urlConfig.getStoryUrl(),
+				         data: storyMessage,
+				         contentType: false,
+	       				 cache: false,
+				         success: function(response) {	
+							 if(response == 'OK') {
+							  	callback("Story Submission Successful");								  	
+							 }
+							 else {
+							  	callback(response);
+							 }						         		
+		         		 },
+				         error: function(xhr, status, error) {
+				         	callback("There was an error");
+				         }
+				});
+			}	
+
 		};
 		
+
+/*
+		function win(r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
+            callback(r.response);
+        }
+ 
+        function fail(error) {
+            callback("An error has occurred: Code = " = error.code);
+        }
+*/
+
 
 	
 	}//end Story Information

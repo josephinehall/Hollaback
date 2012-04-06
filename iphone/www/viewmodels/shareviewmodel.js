@@ -1,9 +1,9 @@
 var shareViewModels = {
 
 	shareStoryViewModel: function(storyInformation){
-		var self, photoData, storyMaxCharacters;
+		var self, photoURI, storyMaxCharacters;
 		self = this;  
-		photoData = "";     
+		photoURI;     
         storyMaxCharacters = 300;
    		
    		self.storyInformation = storyInformation;
@@ -67,14 +67,14 @@ var shareViewModels = {
             var isValid = validateStory();
             if(isValid){
                 alert("submitting ");
-                alert(photoData);
+                alert("photoURI: " + photoURI);
                 alert(self.harassmentTypes());
         	
                 self.storyInformation.submitStory(
                                                   self.storyType(), 
                                                   self.harassmentTypes(), 
                                                   self.manualAddress(), 
-                                                  "40", "42", photoData, 
+                                                  "40", "42", photoURI, 
                                                   self.story(), 
                                                   function(message){storySubmissionSuccessful(message);});
             }
@@ -85,7 +85,7 @@ var shareViewModels = {
     		self.storyType();
     		self.harassmentTypes();
     		self.story();
-        	//photoData = "";
+        	photoURI = undefined;
     	};
        
         function storySubmissionSuccessful(message){
@@ -99,9 +99,9 @@ var shareViewModels = {
 
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
-					quality: 20,
-					targetWidth: 300,
-					targetHeight: 300,
+					quality: 50,
+					targetWidth: 250,
+					targetHeight: 250,
 					allowEdit: true,
 					sourceType : Camera.PictureSourceType.PHOTOLIBRARY
 				}
@@ -114,30 +114,35 @@ var shareViewModels = {
 			alert("Failed because: " + message);
 		}
 
-		function onSuccess(imageData) {
-			var smallImage = document.getElementById("smallImage");
-	        smallImage.style.display = 'block';     
-	        smallImage.src = imageData;
-	        
-	        window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
-
+		function onSuccess(imageData) {	        
+	        //window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
+	        photoURI = imageData;
 		}
 
+		
+/*
 		function gotFileEntry(fileEntry) { 			
 			readDataUrl(fileEntry.fullPath);
 		}
 
     	function readDataUrl(file) {
-	        var reader = new FileReader();
-	        reader.onloadend = function(evt) {
-	            photoData = evt.target.result;
-	        };
-	        reader.readAsDataURL(file);
+	        photoData = file;
+	        
+	        //var reader = new FileReader();
+	        //reader.onloadend = function(evt) {
+	            //photoURI = evt.target.result;
+	            //remove the headers from photoData??
+	            //var j = photoData.split("data:image/jpeg;base64,").pop();
+	            //photoData = j;
+	        //};
+	        //reader.readAsDataURL(file);
     	}
 		   
 		function onFail(message) {
-			alert('Failed because: ' + message);
+			alert("Failed because: " + message);
 		}
+*/
+
 
         
         function validateStory(){
