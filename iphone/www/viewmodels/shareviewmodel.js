@@ -1,6 +1,6 @@
 var shareViewModels = {
 
-	shareStoryViewModel: function(storyInformation){
+	shareStoryViewModel: function(storyInformation,usersLocation){
 		var self, photoURI, storyMaxCharacters;
 		self = this;  
 		photoURI;     
