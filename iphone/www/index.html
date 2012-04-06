@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
     
     <link rel="stylesheet" href="content/hollastyles.css" /> 
-    <link rel="stylesheet" href="content/defaultstyle.css" /> 
+    <link rel="stylesheet" href="content/hollatheme.css" /> 
     <link rel="stylesheet" href="content/jquery.mobile.structure-1.0.1.css"/>
        
     <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>         
@@ -30,11 +30,11 @@
   
 
   	<div data-role="page" id="indexPage" >
-      <div data-role="header" data-theme="c">
+      <div data-role="header" data-theme="b">
       		<h1> </h1>
       </div><!-- /header -->
       
-      <div data-role="content" class="hollabacklogobackground">	
+      <div data-role="content" data-theme="a">	
 		<div>
 		  	<div class="contentbox">
 		  		<h2>Log In</h2>
@@ -58,13 +58,13 @@
 
      <div data-role="page" id="locationPage">
         
-          <div data-role="header"  data-theme="c">          
-			<a data-rel="back" data-role="button" data-direction="reverse" data-mini="true" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>	
+          <div data-role="header"  data-theme="b">          
+			<a data-rel="back" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>	
             <h1>Choose Location</h1>
 		    <a data-bind="click: setLocation" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Next</a>
         </div><!-- /header -->
         
-        <div data-role="content" class="hollabacklogobackground">	
+        <div data-role="content" data-theme="a">	
 			<div class="contentbox">
 			
 				<h2>Your local Hollaback:</h2>
@@ -79,12 +79,12 @@
           
       <div data-role="page" id="signupPage">
 			
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
           	<a href="#locationPage" data-role="button" data-direction="reverse" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
               <h1>Sign Up</h1>
           </div><!-- /header -->
           
-        <div data-role="content" class="hollabacklogobackground">	
+        <div data-role="content" data-theme="a">	
 			<div class="contentbox">
 			
 				<input data-bind='value: userName' required placeholder="User Name" error-invalid="Enter a user name"/>					              
@@ -103,15 +103,15 @@
      
       <div data-role="page" id="forgotPasswordPage">
         
-        <div data-role="header"  data-theme="c">
+        <div data-role="header"  data-theme="b">
         	<a data-role="button" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
-            <h1>Forgot password?</h1>
+            <h1>Comming Soon</h1>
         </div><!-- /header -->
         
-        <div data-role="content" class="hollabacklogobackground">	
+        <div data-role="content" data-theme="a">	
 			<div class="contentbox">
 			
-				<h2>Coming soon</h2>
+				<h2>Forgot Your Password?</h2>
 				<p>
 					We are sorry, but we don't have the ability to reset passwords right now.
 					<br/>
@@ -129,11 +129,11 @@
      
      <div data-role="page" id="menuPage" >
           
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
               <h1>Hollaback!</h1>
           </div><!-- /header -->
           
-          <div data-role="content" class="hollabacklogobackground">	
+          <div data-role="content" data-theme="a">	
           	<div class="contentbox">		
 		
               <h3>Welcome <span data-bind="text: loggedInUserName"></span></h3>
@@ -153,12 +153,12 @@
       
      <div data-role="page" id="mapPage">
           
-		    <div data-role="header" data-theme="c">	    
+		    <div data-role="header" data-theme="b">	    
 				<a href="#menuPage" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-theme="b">Back</a>
                 <h1>Hollamaps</h1>
 			</div><!-- /header -->
 			
-			<div data-role="content">
+			<div data-role="content" data-theme="a">
                 <div>
                      <select data-bind="options: availableLocations, optionsText: 'name', value: selectedHollabackLocation,optionsCaption: 'Choose...'"></select>
                         <div id="map_canvas"></div>
@@ -173,12 +173,12 @@
       
       <div data-role="page" id="shareStoryPage">
           
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
               <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
               <h1>New Story</h1>
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
           </div><!-- /header  -->          
-          <div data-role="content" class="hollabacklogobackground">	
+          <div data-role="content" data-theme="a">	
               
               <div class="storycontentbox">	            
 
@@ -222,13 +222,12 @@
        
       <div data-role="page" id="aboutPage">
           
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
               <h1>About</h1>
               <a href="#menuPage" data-rel="back" data-direction="reverse" data-icon="arrow-l" data-theme="b">Back</a>
           </div><!-- /header -->
           
-          <div data-role="content">	
-           	<h2>About Hollaback!</h2> 
+          <div data-role="content" data-theme="a">	
            	<p>Hollaback is a movement to end street harassment.  We believe that everyone has the right to feel safe, confident, and sexy when they walk down the street.</p>
 
 			<p>By holla'ing back, you bring attention to street harassment and make a powerful case for why it must end.  When the time comes to hollaback, you will have a choice to hollaback with or without a picture.  The picture helps to tell a story, and can include anything from the turd himself, to your shoes or the street scene. If you don't feel safe, don't take one. The next step is to identify from a list the type of harassment. Set your location and enter your story details. Then, viola! Your hollaback has been submitted. If you hollaback'ed when you were not online, your hollaback will be queued up to be sent when your connection goes back up.</p> 
@@ -245,12 +244,12 @@
 
       <div data-role="page" id="congratsPage">
           
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
               <h1>Congrats!</h1>
               <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
           </div><!-- /header -->
           
-          <div data-role="content">	
+          <div data-role="content" data-theme="a">	
            	<h2>Thanks!</h2> 
            	<img src="content/images/congrats.png" />
            	<p>You Hollaback'ed! Now we are one step closer to ending street harassment. If you are not online, your hollaback will be sent the next time you are.</p>        
@@ -259,11 +258,11 @@
       </div><!-- /Congrats page -->
       
       <div data-role="page" id="locationDialog">
-          <div data-role="header" data-theme="c">
+          <div data-role="header" data-theme="b">
               <h2>Location</h2>
           </div><!-- /header -->
           
-          <div data-role="content">	
+          <div data-role="content" data-theme="a">	
 
 			  <div>
 			  	<h3>Where are you?</h3>
