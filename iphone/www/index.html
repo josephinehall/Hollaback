@@ -188,38 +188,7 @@
               
               <div class="storycontentbox">	            
 
-                 <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
-
-<!--                <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
-                    <div class="leftchild">
-
-                     <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
-                              data-icon="locationpin"></a>
-                     <a data-role="button" data-bind="click: uploadPhoto" data-iconpos="notext" 
-                              data-icon="camera"></a>
-                        
-                        <img style="display:none;width:35px;height:35px;" id="smallImage" src="" />   
-                     <span data-bind="text: gpsText" class="location" ></span>
-                     </div>
-                     <div class="rightchild"> 
-                      <span data-bind="text: characterCount" class="count"></span>
-                     </div>
-                </div>
-                  
-                <div class="ui-grid-b" data-type="horizontal" class="storycontrols">
-                      <div class="ui-block-a">
-                          <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
-                              data-icon="locationpin"></a>
-                          <a data-role="button" data-bind="click: uploadPhoto" data-iconpos="notext" 
-                              data-icon="camera"></a>
-                      </div>
-                    
-                      <div class="ui-block-b">
-                          
-                          <img style="display:none;width:35px;height:35px;" id="smallImage" src="" />   
-                      </div>
-                  </div><!-- /grid-b -->
-
+                <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
                 <div class="ui-grid-story-a">
                      <div class="ui-block-story-a">  
                           <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
@@ -233,9 +202,9 @@
                     <div class="ui-block-story-b">
                         <div id="storymetadata">
                             <div data-role="controlgroup" data-type="horizontal" class="storycontrols" >
-                                <div class="leftchild">
+                                <div class="leftchild" id="meta-images">
+                                    <img class="gps-icon" id="gpsResult" src="" />  
                                     <img class="share-photo" id="smallImage" src="" />   
-                                    <span data-bind="text: gpsText" class="location" ></span>
                                 </div>
                                 <div class="rightchild"> 
                                     <span data-bind="text: characterCount" class="count"></span>

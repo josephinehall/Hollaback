@@ -19,7 +19,12 @@ var shareViewModels = {
                                      if(gpsResult.isAvailable())
                                      {
                                         self.gpsAddress(gpsResult);
-                                        self.gpsText(gpsResult.getLatLong());
+                                        animateStoryMetadata(function(){
+                                              var smallImage = document.getElementById("gpsResult");
+                                              smallImage.style.display = 'block';     
+                                              smallImage.src = 'content/images/has_location.png';
+                                              
+                                        });
                                     
                                      }
                                      else
@@ -38,7 +43,6 @@ var shareViewModels = {
     	};
 
         self.gpsAddress = ko.observable();
-        self.gpsText = ko.observable();
         self.addressIsValid = ko.observable();       
 		self.manualAddress = ko.observable("");
         
@@ -49,11 +53,21 @@ var shareViewModels = {
                                     if(gpsResult)
                                     {
                                         self.gpsAddress(gpsResult);  
-                                        self.gpsText(gpsResult.getLatLong());              
+                                        animateStoryMetadata(function(){
+                                                             var smallImage = document.getElementById("gpsResult");
+                                                             smallImage.style.display = 'block';     
+                                                             smallImage.src = 'content/images/has_location.png';
+                                                             
+                                        });
                                     }
                                     else
                                     {                                              
-                                        self.gpsText("Could not find location");   
+                                        animateStoryMetadata(function(){
+                                             var smallImage = document.getElementById("gpsResult");
+                                             smallImage.style.display = 'block';     
+                                             smallImage.src = 'content/images/location_error.png';
+                                                                         
+                                       });
                                     }
                                                     
                                 });
@@ -158,20 +172,27 @@ var shareViewModels = {
 
 		function onSuccess(imageData) {	 
             
-            $('#storymetadata').animate({
-                              "margin-left": "+=500px"
-                               }, 1000, function() {
-                                        
-                                    var smallImage = document.getElementById("smallImage");
-                                        
-                                    smallImage.style.display = 'block';     
-                                    smallImage.src = imageData;
-                                    $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
-                               });
-          
+            animateStoryMetadata(function(){
+                                 var smallImage = document.getElementById("smallImage");
+                                 
+                                 smallImage.style.display = 'block';     
+                                 smallImage.src = imageData;
+
+                                 });
 	        
 	        photoURI = imageData;
 		}
+        
+        function animateStoryMetadata(callback){
+            $("#storymetadata").animate({
+                                        "margin-left": "+=500px"
+                                        }, 1000, function() {
+                                        callback();
+                                        $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
+                                        });
+
+        
+        }
         
         function validateStory(){
         	var isValid = modelIsValid();
