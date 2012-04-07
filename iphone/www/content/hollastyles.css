@@ -65,6 +65,7 @@
 
 .storyinput{
     height:125px !important;
+    margin-bottom: 10px;
 }
 
 .storycontrols{
@@ -107,8 +108,8 @@
 
 .share-photo{
     display:none;
-    width:30px;
-    height:30px;
+    width:25px;
+    height:25px;
     float:left;
     border: 1px solid gray;
 }
@@ -122,6 +123,10 @@
 
 }
 
+.storymeta{
+    margin-top:-5px;
+}
+
 .ui-icon-locationpin{
 	background: url("images/map-marker.png") no-repeat !important;
     height:35px !important;
@@ -131,7 +136,7 @@
 
 .ui-icon-camera {
 	background: url("images/camera.png") no-repeat !important;
-    height:35px !important;
+    height:20px !important;
     width: 40px !important;
     margin-left: 2px !important;
     margin-top: 2px;
