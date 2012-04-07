@@ -180,7 +180,7 @@
       <div data-role="page" id="shareStoryPage">
           
           <div data-role="header" data-theme="b">
-              <a href="#menuPage" data-direction="reverse" data-theme="b">Close</a>
+              <a href="#menuPage" data-direction="reverse" data-theme="b" data-bind="click: close">Close</a>
               <h1>New Story</h1>
               <a data-role="button" data-theme="b" data-bind="click: submit">Share</a> 
           </div><!-- /header  -->          
@@ -190,9 +190,15 @@
 
                  <textarea class="storyinput" data-bind="value: story, valueUpdate: 'afterkeydown'" placeholder="Your story..." maxlength="300"></textarea>
 
-                <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
+<!--                <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
                     <div class="leftchild">
-                                            
+
+                     <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
+                              data-icon="locationpin"></a>
+                     <a data-role="button" data-bind="click: uploadPhoto" data-iconpos="notext" 
+                              data-icon="camera"></a>
+                        
+                        <img style="display:none;width:35px;height:35px;" id="smallImage" src="" />   
                      <span data-bind="text: gpsText" class="location" ></span>
                      </div>
                      <div class="rightchild"> 
@@ -200,7 +206,7 @@
                      </div>
                 </div>
                   
-                <div class="ui-grid-b" data-role="controlgroup" data-type="horizontal" class="storycontrols">
+                <div class="ui-grid-b" data-type="horizontal" class="storycontrols">
                       <div class="ui-block-a">
                           <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
                               data-icon="locationpin"></a>
@@ -208,9 +214,37 @@
                               data-icon="camera"></a>
                       </div>
                     
-                      <div class="ui-block-b">Block B</div>
+                      <div class="ui-block-b">
+                          
+                          <img style="display:none;width:35px;height:35px;" id="smallImage" src="" />   
+                      </div>
                   </div><!-- /grid-b -->
 
+                <div class="ui-grid-story-a">
+                     <div class="ui-block-story-a">  
+                          <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
+                              <a data-role="button" data-bind="click: getLocation" data-iconpos="notext" 
+                                  data-icon="locationpin"></a>
+                              <a data-role="button" data-bind="click: uploadPhoto" data-iconpos="notext" 
+                                  data-icon="camera"></a>
+                          </div>
+                     </div>
+                    
+                    <div class="ui-block-story-b">
+                        <div data-role="controlgroup" data-type="horizontal" class="storycontrols">
+                            <div class="leftchild">
+                                <img style="display:none;width:30px;height:30px; float:left;" id="smallImage" src="" />   
+                                <span data-bind="text: gpsText" class="location" style="float:left; margin-left:8px;" ></span>
+                            </div>
+                            <div class="rightchild"> 
+                                <span data-bind="text: characterCount" class="count"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                  
+                  
                 <div class="storymeta">
                       <select data-bind="options: storyTypes, optionsText: 'name' ,value: storyType"></select>                  
                       <select data-bind="selectedOptions: harassmentTypes" multiple="multiple">
@@ -241,9 +275,9 @@
           <div data-role="content" data-theme="a">	
            	<p>Hollaback is a movement to end street harassment.  We believe that everyone has the right to feel safe, confident, and sexy when they walk down the street.</p>
 
-			<p>By holla'ing back, you bring attention to street harassment and make a powerful case for why it must end.  When the time comes to hollaback, you will have a choice to hollaback with or without a picture.  The picture helps to tell a story, and can include anything from the turd himself, to your shoes or the street scene. If you don't feel safe, don't take one. The next step is to identify from a list the type of harassment. Set your location and enter your story details. Then, viola! Your hollaback has been submitted. If you hollaback'ed when you were not online, your hollaback will be queued up to be sent when your connection goes back up.</p> 
+			<p>By holla'ing back, you bring attention to street harassment and make a powerful case for why it must end.  When the time comes to hollaback, you will have a choice to hollaback with or without a picture.  The picture helps to tell a story, and can include anything from the turd himself, to your shoes or the street scene. If you don't feel safe, don't take one. The next step is to identify from a list the type of harassment. Set your location and enter your story details. Then, viola! Your hollaback has been submitted.</p> 
 
-			<p>Once submitted you will receive an email asking you to tell the rest of your story.  If you submitted your hollaback in error, this is the time to tell us. Your full story will be reviewed and mapped on our site (ihollaback.org), where it will inspire the world to take action and end street harassment.</p>
+			<p>Once submitted you will receive an email asking you to tell the rest of your story.  If you submitted your hollaback in error, this is the time to tell us. Your full story will be reviewed and mapped on your local hollaback site, where it will inspire the world to take action and end street harassment.</p>
 
 			<p>Don't just walk on... Hollaback!</p>
                         
@@ -264,7 +298,8 @@
             <div class="contentbox">	
                 
                 <img src="content/images/congrats.png" />
-                <p>You Hollaback'ed! Now we are one step closer to ending street harassment. If you are not online, your hollaback will be sent the next time you are.</p> 
+                <p>You Hollaback'ed! Now we are one step closer to ending street harassment.</p> 
+                <p>Noticed something funny? Email <a href="mailto:info@ihollaback.org">info@ihollaback.org</a></p>
 
             </div>
           </div><!-- /content -->
@@ -280,7 +315,7 @@
 
 			  <div>
 			  	<h3>Where are you?</h3>
-                <p>You do not allow hollback access to your current location. Please tell us where you are.</p>
+                <p>You do not allow Hollaback! to access to your current location. Please tell us where you are.</p>
                 <input data-bind='value: manualAddress' required placeholder="Your Location" error-invalid="Enter a location"/>	
               	<input type="button" value="Done" data-bind="click: geocode" data-theme="a">  
 			  </div>

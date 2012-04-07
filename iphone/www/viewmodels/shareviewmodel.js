@@ -109,7 +109,7 @@ var shareViewModels = {
                                                   "40", "42", photoURI, 
                                                   self.story(), 
                                                   function(message){
-                                                  	if (message.indexof("Error") = -1){
+                                                  	if (message.indexOf("Error") == -1){
                                                   		storySubmissionSuccessful(message);
                                                   		self.reset();
                                                   	}
@@ -117,6 +117,11 @@ var shareViewModels = {
                                                   }
                                                   );
             }
+        };
+        
+        self.close = function(){
+        	alert("Calling reset");
+        	self.reset();
         };
         
 
@@ -152,35 +157,13 @@ var shareViewModels = {
 		}
 
 		function onSuccess(imageData) {	        
-	        //window.resolveLocalFileSystemURI(imageData, gotFileEntry, onFail); 
+	        var smallImage = document.getElementById("smallImage");
+            
+	        smallImage.style.display = 'block';     
+	        smallImage.src = imageData;
+	        
 	        photoURI = imageData;
 		}
-
-		
-/*
-		function gotFileEntry(fileEntry) { 			
-			readDataUrl(fileEntry.fullPath);
-		}
-
-    	function readDataUrl(file) {
-	        photoData = file;
-	        
-	        //var reader = new FileReader();
-	        //reader.onloadend = function(evt) {
-	            //photoURI = evt.target.result;
-	            //remove the headers from photoData??
-	            //var j = photoData.split("data:image/jpeg;base64,").pop();
-	            //photoData = j;
-	        //};
-	        //reader.readAsDataURL(file);
-    	}
-		   
-		function onFail(message) {
-			alert("Failed because: " + message);
-		}
-*/
-
-
         
         function validateStory(){
         	var isValid = modelIsValid();

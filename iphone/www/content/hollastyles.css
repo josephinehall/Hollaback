@@ -71,20 +71,26 @@
 }
 
 .storycontrols .location{
-    margin-left:5px;
+    margin-left:2px;
+    margin-right:4px;
 }
 
 .storycontrols .rightchild{
     float:right;
+    width:30%;
 }
 
 .storycontrols .leftchild{
     float:left;
+    width:70%;
 }
 
 .storycontrols .ui-btn-icon-notext {
     width: 35px;
     height: 30px;
+}
+.storycontrols .leftchild span, .storycontrols .rightchild span{
+    margin-top:4px;
 }
 
 .storycontrols .ui-icon{
@@ -105,5 +111,9 @@
     margin-left: 2px !important;
     margin-top: 2px;
 }
+
+.ui-grid-story-a {width:100%; height: 65px;}
+.ui-grid-story-a .ui-block-story-a {width: 27%; float:left; }
+.ui-grid-story-a .ui-block-story-b { width: 73%; float:left;}
 
 
