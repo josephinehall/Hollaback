@@ -14,7 +14,6 @@ var shareViewModels = {
         self.useGPS = ko.observable(); 
         self.enableGpsSlider = ko.observable(true);
         self.getLocation = function(){
-            self.gpsText("Calculating Address...."); 
             self.usersLocation.bestAvailableLocation(function(gpsResult){
                                      
                                      if(gpsResult.isAvailable())
@@ -26,21 +25,13 @@ var shareViewModels = {
                                      else
                                      {
                                         console.log("Could not get current location");      
-                                        $.mobile.changePage('#locationDialog', {transition: 'pop', role: 'dialog'});  
+                                        $.mobile.changePage('#locationDialog', {transition: 'slidedown', role: 'dialog'});  
                                      }                                                     
             });
 
         
         };
-        
-        self.useGPS.subscribe(function(newValue){
-            if(newValue == 'true'){                
-                 $("#locationSwitch").hide();             
-                         
-                                                                
-                              
-            }
-        });
+
         
         self.showLocationType = function(type) {
        		return type === self.useGPS();   
@@ -49,11 +40,11 @@ var shareViewModels = {
         self.gpsAddress = ko.observable();
         self.gpsText = ko.observable();
         self.addressIsValid = ko.observable();       
-		self.manualAddress = ko.observable("Sydney, NSW");
+		self.manualAddress = ko.observable("");
         
         self.geocode = function(){
             self.closeDialog();
-            self.gpsAddress("Calculating Address....");
+            self.gpsAddress("");
             self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
                                     if(gpsResult)
                                     {
