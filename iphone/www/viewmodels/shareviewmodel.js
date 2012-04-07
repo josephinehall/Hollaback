@@ -99,14 +99,18 @@ var shareViewModels = {
     	self.errors = ko.validation.group(self);
         
         self.submit = function(){
-            
+        	//alert(self.gpsAddress());
+            alert(self.gpsAddress.longitude);
+            alert(self.gpsAddress.latitude);
             var isValid = validateStory();
             if(isValid){        	
                 self.storyInformation.submitStory(
                                                   self.storyType(), 
                                                   self.harassmentTypes(), 
                                                   self.manualAddress(), 
-                                                  "40", "42", photoURI, 
+                                                  self.gpsAddress.latitude(), 
+                                                  self.gpsAddress.longitude(),
+                                                  photoURI, 
                                                   self.story(), 
                                                   function(message){
                                                   	if (message.indexOf("Error") == -1){

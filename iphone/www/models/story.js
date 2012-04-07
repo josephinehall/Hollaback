@@ -54,10 +54,12 @@ var story ={
       		}
       		      		
       		if (longitudeToSet){
+      			alert(longitudeToSet);
       			storyMessage.longitude = longitudeToSet;
       		}      		   
       		   		
       		if (latitudeToSet){
+      			alert(latitudeToSet);
       			storyMessage.latitude = latitudeToSet;
       		}
       		      		
@@ -131,50 +133,6 @@ var story ={
 
 		};
 		
-
-    		
-    		//JQUERY AJAX FORMDATA OBJECT
-    		
-    		/*
-			var data = new FormData();
-    		
-    		data.append("username", self.userInformation.userName);
-    		data.append("password", self.userInformation.password);
-    		data.append("iphone_unique_id", "");
-    		data.append("iphone_model", "");
-    		data.append("iphone_system_name", "");
-    		data.append("iphone_system_version", "");
-    		data.append("iphone_device_name", "");
-    		
-    		if (bystanderToSet){
-    			data.append("bystander", bystanderToSet.value);	
-			}		      		
-      		if(harassmentTypesToSet){
-      		    var harassmentstring = harassmentTypesToSet.join(", ");
-      			data.append("category", harassmentstring);
-      		}     		      		
-      		if (longitudeToSet){
-      			data.append("longitude", longitudeToSet);
-      		}      		         		   		
-      		if (latitudeToSet){
-      			data.append("latitude", latitudeToSet);
-      		}     		      		
-      		if (manualLocationToSet){
-      			data.append("stringlocation", manualLocationToSet);
-      		}    
-    		if (textToSet){
-	      		data.append("description", textToSet);
-    		}
-
-    		
-    		
-    		if (photoData) {
-      			//this would be easier if we could send it as base64
-      			var decoded = window.atob(photoData);
-      			alert(decoded);
-    			data.append("hollabackposting", decoded);
-    		}
-*/
 	
 	}//end Story Information
 };
