@@ -40,16 +40,24 @@
 		  		<h2>Log In</h2>
 		  		<input data-bind='value: userName' required placeholder="User Name"/>					              
 				<input data-bind='value: password' required placeholder="Password" type="password"/>
-			
-				<a data-bind='click: forgotPassword' class="ui-link-b">Forgot Password</a>
-				<div class="loginButtonBox">
-					<a data-theme="a" data-bind='click: signup' data-inline="true" class="signupLink">Sign Up</a>
-					<a data-bind='click: login' data-role="button" data-mini="true" data-inline="true" 
-					   data-icon="arrow-r" data-iconpos="right" class="loginButton">
-						Log In
-					</a>
-				</div>
-				<p data-bind="text: statusText"></p>	
+                <p data-bind="text: statusText"></p>	
+                
+                <div class="login-controls">
+                    <div class="misc-login-controls">
+                    
+                        <a data-bind='click: forgotPassword' class="ui-link-b">Forgot Password</a>
+                        <h2 class="signupLink"><a data-theme="a" data-bind='click: signup' data-inline="true">SIGN UP</a></h2>
+                    </div>
+                    
+                    <div class="login-button">
+                        <h3><a data-bind='click: login' data-role="button" data-inline="true" 
+                            data-icon="arrow-r" data-iconpos="right" class="loginButton">
+                           LOG IN
+                        </a></h3>
+                    </div>
+                    
+                </div>  
+                    
 		    </div>
 		</div>
 	  </div>

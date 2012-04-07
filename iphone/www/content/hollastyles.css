@@ -20,17 +20,24 @@
 	margin-bottom: 5px;
 }
 
-.loginButtonBox{
-	height: 50px;
+
+.login-controls{
+    height:50px;       
+}
+
+.login-controls .misc-login-controls{
+    float:left;
+    width:140px;
+    padding-top:10px;  
+}
+
+.login-controls .login-button{
+    float:right;
+    margin-top:-10px;
 }
 
 .signupLink{	
-	margin-top: 10px;
-}
-
-
-.loginButton{
-	float: right;
+	margin-top: 8px;
 }
 
 .nextButton{
