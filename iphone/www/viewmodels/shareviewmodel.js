@@ -4,106 +4,113 @@ var shareViewModels = {
 		var self, photoURI, storyMaxCharacters;
 		self = this;  
 		photoURI;     
-	    storyMaxCharacters = 300;
-	   		
-		self.initialize = function(){
+        storyMaxCharacters = 300;
+   		
+   		self.storyInformation = storyInformation;
+        self.usersLocation = usersLocation;
+        self.storyType = ko.observable();
+        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);     
+        self.harassmentTypes = ko.observableArray();        
+        self.useGPS = ko.observable(); 
+        self.enableGpsSlider = ko.observable(true);
+        self.getLocation = function(){
+            self.usersLocation.bestAvailableLocation(function(gpsResult){
+                                     
+                                     if(gpsResult.isAvailable())
+                                     {
+                                        self.gpsAddress(gpsResult);
+                                        animateStoryMetadata(function(){
+                                              var smallImage = document.getElementById("gpsResult");
+                                              smallImage.style.display = 'block';     
+                                              smallImage.src = 'content/images/has_location.png';
+                                              
+                                        });
+                                    
+                                     }
+                                     else
+                                     {
+                                        console.log("Could not get current location");      
+                                        $.mobile.changePage('#locationDialog', {transition: 'slidedown', role: 'dialog'});  
+                                     }                                                     
+            });
 
-	   		self.storyInformation = storyInformation;
-	        self.usersLocation = usersLocation;
-	        self.storyType = ko.observable();	        
-	        self.harassmentTypes = ko.observableArray();  	        
-	        self.gpsAddress = ko.observable();             
-			self.manualAddress = ko.observable("");
-			 
-	    };    
-	    	self.addressIsValid = ko.observable();  
-	    	self.gpsText = ko.observable();
-	    	self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);          
-	        self.useGPS = ko.observable(); 
-	        self.enableGpsSlider = ko.observable(true);
-	        self.getLocation = function(){
-	            self.usersLocation.bestAvailableLocation(function(gpsResult){
-	                                     
-	                                     if(gpsResult.isAvailable())
-	                                     {
-	                                        self.gpsAddress(gpsResult);
-	                                        self.gpsText(gpsResult.getLatLong());
-	                                    
-	                                     }
-	                                     else
-	                                     {
-	                                        console.log("Could not get current location");      
-	                                        $.mobile.changePage('#locationDialog', {transition: 'slidedown', role: 'dialog'});  
-	                                     }                                                     
-	            });
-	
-	        
-	        };
-	
-	        
-	        self.showLocationType = function(type) {
-	       		return type === self.useGPS();   
-	    	};
-	
-	        
-	        
-	        self.geocode = function(){
-	            self.closeDialog();
-	            self.gpsAddress("");
-	            self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
-	                                    if(gpsResult)
-	                                    {
-	                                        self.gpsAddress(gpsResult);  
-	                                        self.gpsText(gpsResult.getLatLong());              
-	                                    }
-	                                    else
-	                                    {                                              
-	                                        self.gpsText("Could not find location");   
-	                                    }
-	                                                    
-	                                });
-	        };
-	        
-	        self.closeDialog = function(){            
-	            $("#locationDialog").dialog('close'); 
-	        }
-	
-	        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
-	                                    .extend({validation: {
-	                                            validator: function (val, max) {
-	                                                return val.length < max;
-	                                            },
-	                                            message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
-	                                            params: 300
-	                                            }
-	        });
-	        
-	        self.story.subscribe(function(newValue){
-	                             var last = newValue.charAt(newValue.length -1);
-	                            
-	                             if(last != '\n'){
-	                                console.log(last != '\n');
-	                                newValue = newValue + '\n';
-	                             }
-	                             
-	        });
-	        
-	        self.uploadPhoto = function(){
-	        	capturePhoto();
-	        };
-	
-	        
-	        self.characterCount = ko.computed(function(){
-	                                          var currentCount = 0;
-	                                          if(self.story() != undefined){
-	                                            currentCount = self.story().length;
-	                                          }
-	                                          return currentCount + "/"+ storyMaxCharacters;
-	                                          },this);
-	        
-	    	self.errors = ko.validation.group(self);
-    	
-    	
+        
+        };
+
+        
+        self.showLocationType = function(type) {
+       		return type === self.useGPS();   
+    	};
+
+        self.gpsAddress = ko.observable();
+        self.addressIsValid = ko.observable();       
+		self.manualAddress = ko.observable("");
+        
+        self.geocode = function(){
+            self.closeDialog();
+            self.gpsAddress("");
+            self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
+                                    if(gpsResult)
+                                    {
+                                        self.gpsAddress(gpsResult);  
+                                        animateStoryMetadata(function(){
+                                                             var smallImage = document.getElementById("gpsResult");
+                                                             smallImage.style.display = 'block';     
+                                                             smallImage.src = 'content/images/has_location.png';
+                                                             
+                                        });
+                                    }
+                                    else
+                                    {                                              
+                                        animateStoryMetadata(function(){
+                                             var smallImage = document.getElementById("gpsResult");
+                                             smallImage.style.display = 'block';     
+                                             smallImage.src = 'content/images/location_error.png';
+                                                                         
+                                       });
+                                    }
+                                                    
+                                });
+        };
+        
+        self.closeDialog = function(){            
+            $("#locationDialog").dialog('close'); 
+        }
+
+        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
+                                    .extend({validation: {
+                                            validator: function (val, max) {
+                                                return val.length < max;
+                                            },
+                                            message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
+                                            params: 300
+                                            }
+        });
+        
+        self.story.subscribe(function(newValue){
+                             var last = newValue.charAt(newValue.length -1);
+                            
+                             if(last != '\n'){
+                                console.log(last != '\n');
+                                newValue = newValue + '\n';
+                             }
+                             
+        });
+        
+        self.uploadPhoto = function(){
+        	capturePhoto();
+        };
+
+        
+        self.characterCount = ko.computed(function(){
+                                          var currentCount = 0;
+                                          if(self.story() != undefined){
+                                            currentCount = self.story().length;
+                                          }
+                                          return currentCount + "/"+ storyMaxCharacters;
+                                          },this);
+        
+    	self.errors = ko.validation.group(self);
         
         self.submit = function(){
             var isValid = validateStory();
@@ -143,7 +150,6 @@ var shareViewModels = {
 		}
 
 		function capturePhoto() {
-		  // Take picture using device camera and retrieve image as base64-encoded string
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
 					quality: 50,
@@ -158,25 +164,32 @@ var shareViewModels = {
 		
 		
 		function onFail(message) {
-			alert("Failed because: " + message);
+			console.log("Failed because: " + message);
 		}
 
 		function onSuccess(imageData) {	 
             
-            $('#storymetadata').animate({
-                              "margin-left": "+=500px"
-                               }, 1000, function() {
-                                        
-                                    var smallImage = document.getElementById("smallImage");
-                                        
-                                    smallImage.style.display = 'block';     
-                                    smallImage.src = imageData;
-                                    $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
-                               });
-          
+            animateStoryMetadata(function(){
+                                 var smallImage = document.getElementById("smallImage");
+                                 
+                                 smallImage.style.display = 'block';     
+                                 smallImage.src = imageData;
+
+                                 });
 	        
 	        photoURI = imageData;
 		}
+        
+        function animateStoryMetadata(callback){
+            $("#storymetadata").animate({
+                                        "margin-left": "+=500px"
+                                        }, 1000, function() {
+                                        callback();
+                                        $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
+                                        });
+
+        
+        }
         
         function validateStory(){
         	var isValid = modelIsValid();

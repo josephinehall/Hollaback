@@ -11,8 +11,12 @@
     padding-top: 70px;
 }
 
+.mapcontentbox{
+	padding-top: 35px;
+}
+
 .aboutbox{
-	padding-top: 50px;
+	padding-top: 40px;
 	margin: 10px;
 }
 
@@ -52,7 +56,7 @@
 
 #map_canvas{
 	width:100%; 
-	height:100%; 
+	height:65%; 
 	position: absolute !important; 
 	margin-left: -15px;
 	padding: 0;
@@ -65,6 +69,7 @@
 
 .storyinput{
     height:125px !important;
+    margin-bottom: 10px;
 }
 
 .storycontrols{
@@ -107,10 +112,23 @@
 
 .share-photo{
     display:none;
+    width:25px;
+    height:25px;
+    float:left;
+    border: 1px solid gray;
+}
+
+.gps-icon{
+    display:none;
     width:30px;
     height:30px;
     float:left;
-    border: 1px solid gray;
+    margin-right:5px;
+
+}
+
+.storymeta{
+    margin-top:-5px;
 }
 
 .ui-icon-locationpin{
@@ -122,7 +140,7 @@
 
 .ui-icon-camera {
 	background: url("images/camera.png") no-repeat !important;
-    height:35px !important;
+    height:20px !important;
     width: 40px !important;
     margin-left: 2px !important;
     margin-top: 2px;
