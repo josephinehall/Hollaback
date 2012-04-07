@@ -31,16 +31,16 @@
 	color:    #ffffff    /*{a-bar-color}*/;
 }
 .ui-bar-a .ui-link {
-	color:     #7cc4e7     /*{a-bar-link-color}*/;
+	color:     #ed1e79     /*{a-bar-link-color}*/;
 	font-weight: bold;
 }
 
 .ui-bar-a .ui-link:hover {
-	color:     #2489CE     /*{a-bar-link-hover}*/;
+	color:     #9A134E     /*{a-bar-link-hover}*/;
 }
 
 .ui-bar-a .ui-link:active {
-	color:     #2489CE     /*{a-bar-link-active}*/;
+	color:    #ed1e79    /*{a-bar-link-active}*/;
 }
 
 .ui-bar-a .ui-link:visited {
@@ -66,24 +66,24 @@
 }
 
 .ui-body-a .ui-link-inherit {
-	color:     	#333333     /*{a-body-color}*/;
+    color:     	#333333     /*{a-body-color}*/;
 }
 
 .ui-body-a .ui-link {
-	color:   #8cc63f   /*{a-body-link-color}*/;
-	font-weight: bold;
+    color: #ed1e79 /*{a-body-link-color}*/;
+    font-weight: bold;
 }
 
 .ui-body-a .ui-link:hover {
-	color:   #82b045   /*{a-body-link-hover}*/;
+    color: #9A134E /*{a-body-link-hover}*/;
 }
 
 .ui-body-a .ui-link:active {
-	color:   #82b045   /*{a-body-link-active}*/;
+    color: #ed1e79 /*{a-body-link-active}*/;
 }
 
 .ui-body-a .ui-link:visited {
-    color:   #82b045   /*{a-body-link-visited}*/;
+    color: #FF228B /*{a-body-link-visited}*/;
 }
 
 .ui-btn-up-a {
