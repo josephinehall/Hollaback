@@ -25,11 +25,7 @@ var story ={
 			self.location = location;
 			window.localStorage.setItem(locationStorageKey, self.location);
 		};
-		
-		self.clearStory = function (){
-			//window.localStorage
-		};
-				
+			
 		
 		self.submitStory = function(bystanderToSet, harassmentTypesToSet, manualLocationToSet, latitudeToSet, longitudeToSet, photoURI, textToSet, callback){		
 			
@@ -38,8 +34,8 @@ var story ={
 			
 			storyMessage.username = self.userInformation.userName;
 			storyMessage.password = self.userInformation.password;			
-			storyMessage.iphone_unique_id = device.uuid;
-			storyMessage.iphone_model = "";
+			storyMessage.iphone_unique_id = "device.uuid";
+			storyMessage.iphone_model = "device.model";
 			storyMessage.iphone_system_name = device.platform;
 			storyMessage.iphone_system_version = device.version;
 			storyMessage.iphone_device_name = device.name;
@@ -54,12 +50,10 @@ var story ={
       		}
       		      		
       		if (longitudeToSet){
-      			alert(longitudeToSet);
       			storyMessage.longitude = longitudeToSet;
       		}      		   
       		   		
       		if (latitudeToSet){
-      			alert(latitudeToSet);
       			storyMessage.latitude = latitudeToSet;
       		}
       		      		

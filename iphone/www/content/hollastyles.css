@@ -76,38 +76,61 @@
 }
 
 .storycontrols .location{
-    margin-left:5px;
+    margin-left:2px;
+    margin-right:4px;
+    float:left; 
+    margin-left:8px;
+    width:100px;
 }
 
 .storycontrols .rightchild{
     float:right;
+    width:30%;
 }
 
 .storycontrols .leftchild{
     float:left;
+    width:70%;
 }
 
 .storycontrols .ui-btn-icon-notext {
     width: 35px;
     height: 30px;
 }
+.storycontrols .leftchild span, .storycontrols .rightchild span{
+    margin-top:4px;
+}
 
 .storycontrols .ui-icon{
     border-radius: 0px !important;
+}
+
+.share-photo{
+    display:none;
+    width:30px;
+    height:30px;
+    float:left;
+    border: 1px solid gray;
 }
 
 .ui-icon-locationpin{
 	background: url("images/map-marker.png") no-repeat !important;
     height:35px !important;
     width:40px !important;
+    margin-left: 7px;
 }
 
 .ui-icon-camera {
 	background: url("images/camera.png") no-repeat !important;
     height:35px !important;
     width: 40px !important;
-    padding:0px !important 
+    margin-left: 2px !important;
+    margin-top: 2px;
 }
+
+.ui-grid-story-a {width:100%; height: 65px;}
+.ui-grid-story-a .ui-block-story-a {width: 27%; float:left; }
+.ui-grid-story-a .ui-block-story-b { width: 73%; float:left;}
 
 
 

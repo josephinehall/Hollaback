@@ -41,8 +41,8 @@ var hollabackLocation = {
         
         self.getLatLong = function(){
             
-            var lat = Math.floor(self.latitude*1000+0.5)/1000; 
-            var long = Math.floor(self.longitude*1000+0.5)/1000;
+            var lat = Math.floor(self.latitude*100+0.5)/100; 
+            var long = Math.floor(self.longitude*100+0.5)/100;
 
 			return lat + "," + long ;
 		};

@@ -4,99 +4,106 @@ var shareViewModels = {
 		var self, photoURI, storyMaxCharacters;
 		self = this;  
 		photoURI;     
-        storyMaxCharacters = 300;
-   		
-   		self.storyInformation = storyInformation;
-        self.usersLocation = usersLocation;
-        self.storyType = ko.observable();
-        self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);     
-        self.harassmentTypes = ko.observableArray();        
-        self.useGPS = ko.observable(); 
-        self.enableGpsSlider = ko.observable(true);
-        self.getLocation = function(){
-            self.usersLocation.bestAvailableLocation(function(gpsResult){
-                                     
-                                     if(gpsResult.isAvailable())
-                                     {
-                                        self.gpsAddress(gpsResult);
-                                        self.gpsText(gpsResult.getLatLong());
-                                    
-                                     }
-                                     else
-                                     {
-                                        console.log("Could not get current location");      
-                                        $.mobile.changePage('#locationDialog', {transition: 'slidedown', role: 'dialog'});  
-                                     }                                                     
-            });
+	    storyMaxCharacters = 300;
+	   		
+		self.initialize = function(){
 
-        
-        };
-
-        
-        self.showLocationType = function(type) {
-       		return type === self.useGPS();   
-    	};
-
-        self.gpsAddress = ko.observable();
-        self.gpsText = ko.observable();
-        self.addressIsValid = ko.observable();       
-		self.manualAddress = ko.observable("");
-        
-        self.geocode = function(){
-            self.closeDialog();
-            self.gpsAddress("");
-            self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
-                                    if(gpsResult)
-                                    {
-                                        self.gpsAddress(gpsResult);  
-                                        self.gpsText(gpsResult.getLatLong());              
-                                    }
-                                    else
-                                    {                                              
-                                        self.gpsText("Could not find location");   
-                                    }
-                                                    
-                                });
-        };
-        
-        self.closeDialog = function(){            
-            $("#locationDialog").dialog('close'); 
-        }
-
-        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
-                                    .extend({validation: {
-                                            validator: function (val, max) {
-                                                return val.length < max;
-                                            },
-                                            message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
-                                            params: 300
-                                            }
-        });
-        
-        self.story.subscribe(function(newValue){
-                             var last = newValue.charAt(newValue.length -1);
-                            
-                             if(last != '\n'){
-                                console.log(last != '\n');
-                                newValue = newValue + '\n';
-                             }
-                             
-        });
-        
-        self.uploadPhoto = function(){
-        	capturePhoto();
-        };
-
-        
-        self.characterCount = ko.computed(function(){
-                                          var currentCount = 0;
-                                          if(self.story() != undefined){
-                                            currentCount = self.story().length;
-                                          }
-                                          return currentCount + "/"+ storyMaxCharacters;
-                                          },this);
-        
-    	self.errors = ko.validation.group(self);
+	   		self.storyInformation = storyInformation;
+	        self.usersLocation = usersLocation;
+	        self.storyType = ko.observable();	        
+	        self.harassmentTypes = ko.observableArray();  	        
+	        self.gpsAddress = ko.observable();             
+			self.manualAddress = ko.observable("");
+			 
+	    };    
+	    	self.addressIsValid = ko.observable();  
+	    	self.gpsText = ko.observable();
+	    	self.storyTypes = ko.observableArray([new story.storyType("I saw this",1),new story.storyType("I experienced this ",0)]);          
+	        self.useGPS = ko.observable(); 
+	        self.enableGpsSlider = ko.observable(true);
+	        self.getLocation = function(){
+	            self.usersLocation.bestAvailableLocation(function(gpsResult){
+	                                     
+	                                     if(gpsResult.isAvailable())
+	                                     {
+	                                        self.gpsAddress(gpsResult);
+	                                        self.gpsText(gpsResult.getLatLong());
+	                                    
+	                                     }
+	                                     else
+	                                     {
+	                                        console.log("Could not get current location");      
+	                                        $.mobile.changePage('#locationDialog', {transition: 'slidedown', role: 'dialog'});  
+	                                     }                                                     
+	            });
+	
+	        
+	        };
+	
+	        
+	        self.showLocationType = function(type) {
+	       		return type === self.useGPS();   
+	    	};
+	
+	        
+	        
+	        self.geocode = function(){
+	            self.closeDialog();
+	            self.gpsAddress("");
+	            self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
+	                                    if(gpsResult)
+	                                    {
+	                                        self.gpsAddress(gpsResult);  
+	                                        self.gpsText(gpsResult.getLatLong());              
+	                                    }
+	                                    else
+	                                    {                                              
+	                                        self.gpsText("Could not find location");   
+	                                    }
+	                                                    
+	                                });
+	        };
+	        
+	        self.closeDialog = function(){            
+	            $("#locationDialog").dialog('close'); 
+	        }
+	
+	        self.story = ko.observable().extend({required: { message: 'Please supply your story.' }})
+	                                    .extend({validation: {
+	                                            validator: function (val, max) {
+	                                                return val.length < max;
+	                                            },
+	                                            message: 'Your story must be be less than'+ storyMaxCharacters +'characters.',
+	                                            params: 300
+	                                            }
+	        });
+	        
+	        self.story.subscribe(function(newValue){
+	                             var last = newValue.charAt(newValue.length -1);
+	                            
+	                             if(last != '\n'){
+	                                console.log(last != '\n');
+	                                newValue = newValue + '\n';
+	                             }
+	                             
+	        });
+	        
+	        self.uploadPhoto = function(){
+	        	capturePhoto();
+	        };
+	
+	        
+	        self.characterCount = ko.computed(function(){
+	                                          var currentCount = 0;
+	                                          if(self.story() != undefined){
+	                                            currentCount = self.story().length;
+	                                          }
+	                                          return currentCount + "/"+ storyMaxCharacters;
+	                                          },this);
+	        
+	    	self.errors = ko.validation.group(self);
+    	
+    	
         
         self.submit = function(){
             var isValid = validateStory();
@@ -105,8 +112,8 @@ var shareViewModels = {
                                                   self.storyType(), 
                                                   self.harassmentTypes(), 
                                                   self.manualAddress(), 
-                                                  //self.gpsAddress().latitude, 
-                                                  //self.gpsAddress().longitude,
+                                                  self.gpsAddress().latitude, 
+                                                  self.gpsAddress().longitude,
                                                   photoURI, 
                                                   self.story(), 
                                                   function(message){
@@ -121,7 +128,6 @@ var shareViewModels = {
         };
         
         self.close = function(){
-        	alert("Calling reset");
         	self.reset();
         };
         
@@ -129,10 +135,7 @@ var shareViewModels = {
         self.reset = function(){
         	alert("inside reset");
     		//for each property on the page, set it back to be nothing
-    		self.storyType();
-    		self.harassmentTypes();
-    		self.story();
-        	photoURI = undefined;
+    		self.initialize();
     	};
        
         function storySubmissionSuccessful(message){
@@ -158,10 +161,19 @@ var shareViewModels = {
 			alert("Failed because: " + message);
 		}
 
-		function onSuccess(imageData) {	        
-	        var smallImage = document.getElementById("smallImage");
-	        smallImage.style.display = 'block';     
-	        smallImage.src = imageData;
+		function onSuccess(imageData) {	 
+            
+            $('#storymetadata').animate({
+                              "margin-left": "+=500px"
+                               }, 1000, function() {
+                                        
+                                    var smallImage = document.getElementById("smallImage");
+                                        
+                                    smallImage.style.display = 'block';     
+                                    smallImage.src = imageData;
+                                    $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
+                               });
+          
 	        
 	        photoURI = imageData;
 		}

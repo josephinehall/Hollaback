@@ -175,12 +175,12 @@ var hollabackApplication ={
 				return hollabackMapViewModel;
 			},
 			
-			resetShareViewModel: function (){
-				storyInformation.clearStory();
-			},
-			
 			getShareStoryViewModel: function(){
 				return storyPageViewModel;
+			},
+			
+			resetShareStoryViewModel: function(){
+				storyPageViewModel.reset();
 			},
 		}
 		})(),
