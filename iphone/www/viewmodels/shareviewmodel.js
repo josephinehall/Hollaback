@@ -139,7 +139,6 @@ var shareViewModels = {
 		}
 
 		function capturePhoto() {
-		  // Take picture using device camera and retrieve image as base64-encoded string
 			navigator.camera.getPicture(onSuccess, onFail, 
 				{ 
 					quality: 50,
@@ -154,7 +153,7 @@ var shareViewModels = {
 		
 		
 		function onFail(message) {
-			alert("Failed because: " + message);
+			console.log("Failed because: " + message);
 		}
 
 		function onSuccess(imageData) {	 
