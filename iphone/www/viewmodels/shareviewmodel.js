@@ -156,11 +156,19 @@ var shareViewModels = {
 			alert("Failed because: " + message);
 		}
 
-		function onSuccess(imageData) {	        
-	        var smallImage = document.getElementById("smallImage");
+		function onSuccess(imageData) {	 
             
-	        smallImage.style.display = 'block';     
-	        smallImage.src = imageData;
+            $('#storymetadata').animate({
+                              "margin-left": "+=500px"
+                               }, 1000, function() {
+                                        
+                                    var smallImage = document.getElementById("smallImage");
+                                        
+                                    smallImage.style.display = 'block';     
+                                    smallImage.src = imageData;
+                                    $('#storymetadata').animate({"margin-left": "-=500px" }, 1000);
+                               });
+          
 	        
 	        photoURI = imageData;
 		}
