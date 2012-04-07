@@ -56,7 +56,6 @@
 }
 .ui-body-a,
 .ui-dialog.ui-overlay-a {
-
 }
 .ui-body-a,
 .ui-body-a input,
@@ -189,16 +188,12 @@
 }
 .ui-body-b,
 .ui-dialog.ui-overlay-b {
-	border: 1px solid     		#B3B3B3     /*{b-body-border}*/;
-	color:     	#333333     /*{b-body-color}*/;
-	text-shadow:     0     /*{b-body-shadow-x}*/     1px     /*{b-body-shadow-y}*/     0     /*{b-body-shadow-radius}*/     #fff     /*{b-body-shadow-color}*/;
-	background:     			#f0f0f0     /*{b-body-background-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(     #eee     /*{b-body-background-start}*/), to(     #ddd     /*{b-body-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(     #eee     /*{b-body-background-start}*/,     #ddd     /*{b-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(     #eee     /*{b-body-background-start}*/,     #ddd     /*{b-body-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient(     #eee     /*{b-body-background-start}*/,     #ddd     /*{b-body-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient(     #eee     /*{b-body-background-start}*/,     #ddd     /*{b-body-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient(     #eee     /*{b-body-background-start}*/,     #ddd     /*{b-body-background-end}*/);
+	border: 1px solid 		#2A2A2A /*{a-body-border}*/;
+    /*border: 1px solid     		#B3B3B3     /*{a-body-border}*/;
+	color:     	#333333     /*{a-body-color}*/;
+	text-shadow:     0     /*{a-body-shadow-x}*/     1px     /*{a-body-shadow-y}*/     0     /*{a-body-shadow-radius}*/     #fff     /*{a-body-shadow-color}*/;
+	background:     			#f0f0f0     /*{a-body-background-color}*/;
+	background-image: url('images/hollaback_background_onlyg.png');		
 }
 .ui-body-b,
 .ui-body-b input,
@@ -677,9 +672,7 @@ a.ui-link-inherit {
 	box-shadow: inset 0px 1px 4px 			rgba(0,0,0,.2);
 }
 .ui-icon-shadow {
-	-moz-box-shadow: 0px 1px 0  rgba(255,255,255,.4)  /*{global-icon-shadow}*/;
-	-webkit-box-shadow: 0px 1px 0  rgba(255,255,255,.4)  /*{global-icon-shadow}*/;
-	box-shadow: 0px 1px 0  rgba(255,255,255,.4)  /*{global-icon-shadow}*/;
+
 }
 
 /* Focus state - set here for specificity

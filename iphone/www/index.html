@@ -256,7 +256,7 @@
           
       </div><!-- /Congrats page -->
       
-      <div data-role="page" id="locationDialog">
+      <div data-role="page" id="locationDialog" data-overlay-theme="b">
           <div data-role="header" data-theme="b">
               <h2>Location</h2>
           </div><!-- /header -->
@@ -267,7 +267,7 @@
 			  	<h3>Where are you?</h3>
                 <p>You do not allow hollback access to your current location. Please tell us where you are.</p>
                 <input data-bind='value: manualAddress' required placeholder="Your Location" error-invalid="Enter a location"/>	
-              	<input type="button" value="Done" data-bind="click: geocode">  
+              	<input type="button" value="Done" data-bind="click: geocode" data-theme="a">  
 			  </div>
 				
                   
