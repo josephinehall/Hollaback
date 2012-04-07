@@ -140,9 +140,7 @@ var shareViewModels = {
         
 
         self.reset = function(){
-        	//alert("inside reset");
-    		//for each property on the page, set it back to be nothing
-    		//self.initialize();
+        
     	};
        
         function storySubmissionSuccessful(message){

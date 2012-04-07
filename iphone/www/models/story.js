@@ -36,9 +36,18 @@ var story ={
 			storyMessage.password = self.userInformation.password;			
 			storyMessage.iphone_unique_id = "device.uuid";
 			storyMessage.iphone_model = "device.model";
-			storyMessage.iphone_system_name = device.platform;
-			storyMessage.iphone_system_version = device.version;
-			storyMessage.iphone_device_name = device.name;
+            try
+            {
+                storyMessage.iphone_system_name = device.platform;
+                storyMessage.iphone_system_version = device.version;
+                storyMessage.iphone_device_name = device.name;
+            }
+            catch(e)
+            {
+                storyMessage.iphone_system_name = "device.platform";
+                storyMessage.iphone_system_version = "device.version";
+                storyMessage.iphone_device_name = "device.name";
+            }
 			
 			if (bystanderToSet){
 				storyMessage.bystander = bystanderToSet.value;
