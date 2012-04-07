@@ -193,7 +193,7 @@
 	color:     	#333333     /*{a-body-color}*/;
 	text-shadow:     0     /*{a-body-shadow-x}*/     1px     /*{a-body-shadow-y}*/     0     /*{a-body-shadow-radius}*/     #fff     /*{a-body-shadow-color}*/;
 	background:     			#f0f0f0     /*{a-body-background-color}*/;
-	background-image: url('images/hollaback_background_onlyg.png');		
+	background-image: url('images/hollaback_background_only.png');		
 }
 .ui-body-b,
 .ui-body-b input,

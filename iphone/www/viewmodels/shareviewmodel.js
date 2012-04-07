@@ -14,7 +14,6 @@ var shareViewModels = {
         self.useGPS = ko.observable(); 
         self.enableGpsSlider = ko.observable(true);
         self.getLocation = function(){
-            self.gpsText("Finding address..."); 
             self.usersLocation.bestAvailableLocation(function(gpsResult){
                                      
                                      if(gpsResult.isAvailable())
@@ -45,7 +44,7 @@ var shareViewModels = {
         
         self.geocode = function(){
             self.closeDialog();
-            self.gpsAddress("Finding address...");
+            self.gpsAddress("");
             self.usersLocation.getAddressAsLocation(self.manualAddress(),function(gpsResult){
                                     if(gpsResult)
                                     {
