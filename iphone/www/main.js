@@ -82,7 +82,7 @@ $('#mapPage').live('pagebeforeshow',function(event,ui){
 });
 
 $('#congratsPage').live('pageinit',function(event,ui){
-       	hollabackApplication.bootstrapper.resetShareViewModel();			 
+       //	hollabackApplication.bootstrapper.resetShareViewModel();			 
 });
 
 var hollabackApplication ={
