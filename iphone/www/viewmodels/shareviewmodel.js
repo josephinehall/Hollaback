@@ -118,7 +118,7 @@ var shareViewModels = {
                                                   "40", "42", photoURI, 
                                                   self.story(), 
                                                   function(message){
-                                                  	if (message.indexof("Error") = -1){
+                                                  	if (message.indexOf("Error") == -1){
                                                   		storySubmissionSuccessful(message);
                                                   		self.reset();
                                                   	}
@@ -126,6 +126,11 @@ var shareViewModels = {
                                                   }
                                                   );
             }
+        };
+        
+        self.close = function(){
+        	alert("Calling reset");
+        	self.reset();
         };
         
 

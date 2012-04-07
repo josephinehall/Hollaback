@@ -85,7 +85,7 @@ var story ={
 	            	},
 	            	function(error) {
 	            		navigator.notification.alert(
-    							"Sorry, we couldn't submit your story. Please try again later",  // message
+    							"Sorry, we couldn't submit your story. Please try again later.",  // message
     							function(){},        // callback
    								"Oops",            // title
     							"OK"                  // buttonName
@@ -108,7 +108,7 @@ var story ={
 							 }
 							 else {
 							 	navigator.notification.alert(
-									"Sorry, we couldn't submit your story. Please try again later",  // message
+									"Sorry, we couldn't submit your story. Please try again later.",  // message
 									function(){},        // callback
 										"Oops",            // title
 									"OK"                  // buttonName
@@ -118,7 +118,7 @@ var story ={
 		         		 },
 				         error: function(xhr, status, error) {				         	
 				         	navigator.notification.alert(
-    							"Sorry, we couldn't submit your story. Please try again later",  // message
+    							"Sorry, we couldn't submit your story. Please try again later.",  // message
     							function(){},        // callback
    								"Oops",            // title
     							"OK"                  // buttonName
