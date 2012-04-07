@@ -73,6 +73,8 @@
 .storycontrols .location{
     margin-left:2px;
     margin-right:4px;
+    float:left; 
+    margin-left:8px;
 }
 
 .storycontrols .rightchild{
@@ -102,6 +104,7 @@
     width:30px;
     height:30px;
     float:left;
+    border: 1px solid gray;
 }
 
 .ui-icon-locationpin{
