@@ -39,7 +39,7 @@ var hollabackViewModels = {
     	self.availableLocations = ko.observableArray();	
  
     	hollabackChapters.getAllChapters(function(chapters){		
-    		self.availableLocations(chapters.splice());	
+    		self.availableLocations(chapters.slice(0));	
     		self.availableLocations.unshift(new hollabackLocation.hollabackLocation("","","gps",currentLocationLabel));
     	});		
     
