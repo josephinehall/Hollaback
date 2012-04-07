@@ -54,10 +54,12 @@ var story ={
       		}
       		      		
       		if (longitudeToSet){
+      			alert(longitudeToSet);
       			storyMessage.longitude = longitudeToSet;
       		}      		   
       		   		
       		if (latitudeToSet){
+      			alert(latitudeToSet);
       			storyMessage.latitude = latitudeToSet;
       		}
       		      		
