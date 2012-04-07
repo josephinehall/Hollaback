@@ -98,7 +98,7 @@ var story ={
 				         data: storyMessage,
 				         contentType: false,
 	       				 cache: false,
-				         success: function(response) {	
+				         success: function(response) {    
 							 if(response == 'OK') {
 							  	callback("Story Submission Successful");								  	
 							 }

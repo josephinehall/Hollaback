@@ -126,7 +126,7 @@ var shareViewModels = {
                                                   function(message){
                                                   	if (message.indexOf("Error") == -1){
                                                   		storySubmissionSuccessful(message);
-                                                  		self.reset();
+                                                  		//self.reset();
                                                   	}
                                                   	
                                                   }
@@ -140,9 +140,9 @@ var shareViewModels = {
         
 
         self.reset = function(){
-        	alert("inside reset");
+        	//alert("inside reset");
     		//for each property on the page, set it back to be nothing
-    		self.initialize();
+    		//self.initialize();
     	};
        
         function storySubmissionSuccessful(message){
